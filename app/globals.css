@@ -1,0 +1,241 @@
+/*
+  Fuentes: la referencia (o-tacos.com) usa "Switzer" y "Puffin Display Black",
+  que son fuentes de pago/licencia propietaria. Usamos equivalentes gratuitos
+  con la misma personalidad tipográfica:
+  - Oswald (condensada, bold, mayúsculas) → sustituye a Puffin Display Black en títulos
+  - Mulish (geométrica, legible) → sustituye a Switzer en cuerpo de texto/UI
+  - Dancing Script → para el logotipo "La Firma" en cursiva
+
+  Nota: @import DEBE ir antes que @tailwind (la especificación CSS exige que
+  los @import precedan a cualquier otra regla, o el navegador los ignora).
+*/
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Oswald:wght@400;500;600;700&family=Mulish:wght@400;500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Dancing Script", cursive;
+  --font-heading: "Oswald", "Arial Narrow", sans-serif;
+  --font-body: "Mulish", "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-ink font-body;
+}
+
+/* Marcador de posición para fotos/vídeos pendientes */
+.ph-block {
+  background-image: repeating-linear-gradient(
+    135deg,
+    #f1ede8,
+    #f1ede8 14px,
+    #eae4dd 14px,
+    #eae4dd 28px
+  );
+  @apply border border-dashed border-[#d8cfc4] flex items-center justify-center text-center text-[#a3968a] font-heading text-xs tracking-wider uppercase p-3 rounded-xl2;
+}
+
+/* Ken Burns fallback para vídeos que no cargan */
+.kenburns-img {
+  animation: kenburns 12s ease-out forwards;
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.12);
+  }
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0s);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .kenburns-img,
+  .animate-tacoFloat,
+  .animate-badgePulse,
+  .animate-fabBounce,
+  .animate-marquee {
+    animation: none !important;
+  }
+}
+
+/* Swiper overrides para el hero fade slider */
+.hero-swiper .swiper-slide {
+  opacity: 0 !important;
+}
+.hero-swiper .swiper-slide-active {
+  opacity: 1 !important;
+}
+
+/* ===== Efectos visuales adicionales ===== */
+
+/* Subrayado animado en enlaces de navegación */
+.nav-underline {
+  position: relative;
+}
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.nav-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Brillo diagonal al pasar el ratón sobre botones principales */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+.btn-shine:hover::before {
+  left: 125%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-underline::after {
+    transition: none !important;
+  }
+  .btn-shine::before {
+    transition: none !important;
+    display: none;
+  }
+}
+
+/* ===== Dinamismo neón rojo (impacto visual 2026) ===== */
+
+/* Punto neón pulsante delante de los "eyebrows" rojos de cada sección */
+.eyebrow-neon {
+  position: relative;
+  padding-left: 18px;
+}
+.eyebrow-neon::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff3b30;
+  transform: translateY(-50%);
+  animation: neonDotPulse 1.8s ease-in-out infinite;
+}
+@keyframes neonDotPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 4px 1px rgba(255, 59, 48, 0.55);
+    opacity: 0.85;
+  }
+  50% {
+    box-shadow: 0 0 11px 4px rgba(255, 59, 48, 0.9);
+    opacity: 1;
+  }
+}
+
+/* Glow neón pulsante para CTAs principales (header, sticky mobile, hero) */
+.neon-cta {
+  animation: neonCtaPulse 2.4s ease-in-out infinite;
+}
+@keyframes neonCtaPulse {
+  0%,
+  100% {
+    box-shadow: 0 4px 18px rgba(211, 31, 31, 0.35), 0 0 0 rgba(255, 59, 48, 0);
+  }
+  50% {
+    box-shadow: 0 6px 26px rgba(211, 31, 31, 0.5), 0 0 24px 5px rgba(255, 59, 48, 0.5);
+  }
+}
+
+/* Glow neón más pequeño, para badges/etiquetas ("Popular", etc.) */
+.neon-badge {
+  animation: neonBadgePulse 2.2s ease-in-out infinite;
+}
+@keyframes neonBadgePulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(255, 59, 48, 0);
+  }
+  50% {
+    box-shadow: 0 0 10px 2px rgba(255, 59, 48, 0.55);
+  }
+}
+
+/* Halo ambiental rojo, decorativo, flotando detrás de secciones destacadas */
+.ambient-glow {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(255, 59, 48, 0.45), transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  animation: ambientFloat 9s ease-in-out infinite;
+}
+@keyframes ambientFloat {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(12px, -16px) scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Anillo neón al pasar el ratón sobre tarjetas destacadas */
+.neon-ring-hover {
+  transition: box-shadow 0.35s ease;
+}
+.neon-ring-hover:hover {
+  box-shadow: 0 0 0 2px rgba(255, 59, 48, 0.55), 0 14px 34px rgba(211, 31, 31, 0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow-neon::before,
+  .neon-cta,
+  .neon-badge,
+  .ambient-glow {
+    animation: none !important;
+  }
+}
