@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { siteConfig } from "@/data/siteConfig";
 import OrderButtons from "./OrderButtons";
 import Reveal from "./Reveal";
@@ -54,13 +55,19 @@ export default function PromoSection() {
                 </a>
               </div>
 
-              <div className="mt-10 inline-flex flex-wrap items-center justify-center gap-2.5 rounded-full border border-white/30 bg-white/10 px-6 py-3">
+              <Link
+                href="/valencia"
+                className="neon-ring-hover mt-10 inline-flex flex-wrap items-center justify-center gap-2.5 rounded-full border border-white/30 bg-white/10 px-6 py-3 transition-colors hover:bg-white/20"
+              >
                 <StarIcon className="h-4 w-4 text-gold shrink-0" />
                 <span className="font-heading text-xs md:text-sm font-semibold uppercase tracking-[2px] text-gold">
                   {siteConfig.expansion.status}
                 </span>
                 <span className="text-sm text-white/90">{siteConfig.expansion.message}</span>
-              </div>
+                <span className="font-heading text-xs font-bold uppercase tracking-wide text-white underline underline-offset-2">
+                  Ver más →
+                </span>
+              </Link>
             </div>
           </div>
         </Reveal>

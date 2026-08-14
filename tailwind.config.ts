@@ -82,6 +82,7 @@ const config: Config = {
         kenburns: "kenburns 12s ease-out forwards",
         fadeUp: "fadeUp 0.7s cubic-bezier(.22,.61,.36,1) forwards",
         slideInLeft: "slideInLeft 0.35s ease-out forwards",
+        progressBar: "progressBar 1.4s ease-out 0.4s forwards",
       },
     },
   },
