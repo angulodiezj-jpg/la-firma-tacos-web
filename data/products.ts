@@ -236,7 +236,7 @@ export const categories: Category[] = [
         code: "F30",
         name: "BocaTandoo",
         price: 6.5,
-        description: "Pollo tandoori y queso. + Menú patatas y bebida 2,50 €",
+        description: "Pollo tandoori. + Menú patatas y bebida 2,50 €",
         tags: ["popular"],
         image: "/images/products/f30-bocatandoo.jpg",
       },
