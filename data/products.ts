@@ -189,15 +189,6 @@ export const categories: Category[] = [
         image: "/images/products/f21-tasty-chicken.jpg",
       },
       {
-        id: "f22-giant-firma",
-        code: "F22",
-        name: "Giant Firma",
-        price: 7.9,
-        description: "Doble carne smash, queso cheddar, lechuga fresca, tomate natural, cebolla caramelizada y salsa La Firma.",
-        tags: ["menu"],
-        image: "/images/products/f22-giant-firma.jpg",
-      },
-      {
         id: "f23-big-firma",
         code: "F23",
         name: "Big Firma",
