@@ -74,6 +74,13 @@ export default function ValenciaPage() {
 
   return (
     <>
+      <link
+        rel="preload"
+        as="image"
+        href="/images/campaign/valencia-mural-hero.jpg"
+        imageSrcSet="/images/campaign/valencia-mural-hero-900.jpg 900w, /images/campaign/valencia-mural-hero-1200.jpg 1200w, /images/campaign/valencia-mural-hero.jpg 1600w"
+        imageSizes="100vw"
+      />
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger

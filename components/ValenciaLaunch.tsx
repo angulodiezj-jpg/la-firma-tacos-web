@@ -5,6 +5,8 @@ import { formatOpeningDate, getGoogleMapsUrl, valenciaLaunch } from "@/data/vale
 import Reveal from "./Reveal";
 
 const HERO_IMAGE = "/images/campaign/valencia-mural-hero.jpg";
+const HERO_SRCSET =
+  "/images/campaign/valencia-mural-hero-900.jpg 900w, /images/campaign/valencia-mural-hero-1200.jpg 1200w, /images/campaign/valencia-mural-hero.jpg 1600w";
 
 /** Ítem de texto del hero: fade + translateY escalonado al cargar (no al hacer scroll). */
 function HeroBeat({
@@ -36,10 +38,13 @@ export default function ValenciaLaunch() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={HERO_IMAGE}
+          srcSet={HERO_SRCSET}
+          sizes="100vw"
           alt="Mural de La Firma Tacos, próxima apertura en Paterna, València"
           className="animate-kenburns absolute inset-0 h-full w-full object-cover object-center"
           loading="eager"
           decoding="async"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/35" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent" />

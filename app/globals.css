@@ -77,8 +77,20 @@ body {
   .animate-tacoFloat,
   .animate-badgePulse,
   .animate-fabBounce,
-  .animate-marquee {
+  .animate-marquee,
+  .animate-kenburns {
     animation: none !important;
+  }
+  /* Textos con reveal escalonado por carga (héroe de campaña): mostrar
+     directamente en su estado final en vez de quedarse en opacity:0. */
+  .animate-fadeUp {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .animate-progressBar {
+    animation: none !important;
+    width: 100% !important;
   }
 }
 
