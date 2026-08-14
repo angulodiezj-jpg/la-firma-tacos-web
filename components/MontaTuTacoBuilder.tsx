@@ -8,8 +8,13 @@ import { HalalBadge } from "@/components/SupplementIcons";
 import { CheckIcon, DrinkIcon, FlameIcon, FriesIcon } from "@/components/ValueIcons";
 import { formatPrice, montaTuTaco } from "@/data/products";
 
-// Misma foto para las 3 tallas (petición del cliente).
-const SIZE_PHOTO = "/images/products/monta-tu-taco-plano.jpg";
+// Una foto real por talla. XL usa la foto genérica todavía (pendiente que
+// nos pasen la tercera foto real para esa talla).
+const SIZE_PHOTOS: Record<string, string> = {
+  M: "/images/products/monta-tu-taco-m.jpg",
+  L: "/images/products/monta-tu-taco-l.jpg",
+  XL: "/images/products/monta-tu-taco-plano.jpg",
+};
 
 // Reglas de la casa: cada tamaño fija cuántas carnes y salsas se pueden elegir.
 const SIZE_LIMITS: Record<string, number> = { M: 1, L: 2, XL: 3 };
@@ -87,7 +92,7 @@ export default function MontaTuTacoBuilder() {
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={SIZE_PHOTO}
+                        src={SIZE_PHOTOS[size.size]}
                         alt={`Monta Tu Taco talla ${size.size}`}
                         className="h-full w-full object-cover"
                       />

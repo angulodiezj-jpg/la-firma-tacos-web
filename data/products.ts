@@ -190,6 +190,15 @@ export const categories: Category[] = [
         image: "/images/products/f21-tasty-chicken.jpg",
       },
       {
+        id: "f22-doble-crunch",
+        code: "F22",
+        name: "Doble Crunch",
+        price: 8,
+        description: "Hamburguesa y tenders de pollo, cebolla, tomate, lechuga y salsa Tasty. + Menú patatas y bebida 2,50 €",
+        tags: ["menu"],
+        image: "/images/products/f22-doble-crunch.jpg",
+      },
+      {
         id: "f23-big-firma",
         code: "F23",
         name: "Big Firma",
