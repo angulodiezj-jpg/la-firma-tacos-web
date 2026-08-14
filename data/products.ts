@@ -98,7 +98,7 @@ export const categories: Category[] = [
         name: "Monta tu Taco — Talla M",
         price: 7.5,
         description: "Elige tu carne y tu salsa, sin coste extra.",
-        image: "/images/products/monta-tu-taco-plano.jpg",
+        image: "/images/products/monta-tu-taco-m.jpg",
       },
       {
         id: "monta-tu-taco-l",
@@ -106,14 +106,15 @@ export const categories: Category[] = [
         price: 9.5,
         description: "Elige tu carne y tu salsa, sin coste extra.",
         tags: ["popular"],
-        image: "/images/products/monta-tu-taco-plano.jpg",
+        image: "/images/products/monta-tu-taco-l.jpg",
       },
       {
         id: "monta-tu-taco-xl",
         name: "Monta tu Taco — Talla XL",
         price: 11.5,
         description: "Elige tu carne y tu salsa, sin coste extra.",
-        image: "/images/products/monta-tu-taco-plano.jpg",
+        // Misma foto que la L hasta que llegue la foto real distinta para XL.
+        image: "/images/products/monta-tu-taco-l.jpg",
       },
     ],
   },
