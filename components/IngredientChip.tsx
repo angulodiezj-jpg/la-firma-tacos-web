@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChiliIcon } from "./ValueIcons";
+import { CheckIcon, ChiliIcon, PlusIcon } from "./ValueIcons";
 
 type IngredientChipProps = {
   icon: string;
@@ -25,10 +25,22 @@ export default function IngredientChip({
   spice,
 }: IngredientChipProps) {
   const [imageFailed, setImageFailed] = useState(false);
+  const [selected, setSelected] = useState(false);
+  const disabled = tag === "proximamente";
 
   return (
-    <div className="group w-[calc(33.333%-10.667px)] text-center transition-transform hover:-translate-y-1.5 hover:scale-105 sm:w-[calc(25%-12px)]">
-      <div className="relative mx-auto mb-2 h-14 w-14 overflow-hidden rounded-full border border-line bg-[#f6f0e7] transition-colors group-hover:border-red">
+    <button
+      type="button"
+      disabled={disabled}
+      aria-pressed={selected}
+      onClick={() => setSelected((v) => !v)}
+      className="group w-[calc(33.333%-10.667px)] border-0 bg-transparent p-0 font-body text-center transition-transform hover:-translate-y-1.5 hover:scale-105 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:scale-100 sm:w-[calc(25%-12px)]"
+    >
+      <div
+        className={`relative mx-auto mb-2 h-14 w-14 overflow-hidden rounded-full border bg-[#f6f0e7] transition-all ${
+          selected ? "border-2 border-red ring-2 ring-red/25" : "border-line group-hover:border-red"
+        }`}
+      >
         {image && !imageFailed ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -44,8 +56,21 @@ export default function IngredientChip({
         ) : (
           <span className="flex h-full w-full items-center justify-center text-2xl">{icon}</span>
         )}
+        {!disabled && (
+          <span
+            className={`absolute bottom-0 right-0 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white text-white shadow-card transition-all ${
+              selected ? "bg-red scale-100" : "bg-gold scale-90 opacity-90 group-hover:scale-100 group-hover:opacity-100"
+            }`}
+          >
+            {selected ? <CheckIcon className="h-3 w-3" /> : <PlusIcon className="h-3 w-3" />}
+          </span>
+        )}
       </div>
-      <span className="flex items-center justify-center gap-1 font-heading text-[0.68rem] font-semibold uppercase tracking-wide text-ink leading-tight">
+      <span
+        className={`flex items-center justify-center gap-1 font-heading text-[0.68rem] font-semibold uppercase tracking-wide leading-tight transition-colors ${
+          selected ? "text-red" : "text-ink"
+        }`}
+      >
         {name}
         {extraBadge}
       </span>
@@ -70,6 +95,6 @@ export default function IngredientChip({
           Próximamente
         </span>
       )}
-    </div>
+    </button>
   );
 }

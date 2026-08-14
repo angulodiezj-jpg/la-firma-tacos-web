@@ -16,6 +16,22 @@ export function FlameIcon({ className = "" }: IconProps) {
   );
 }
 
+export function CheckIcon({ className = "" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <path d="M5 12.5 9.5 17 19 7" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function PlusIcon({ className = "" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 /** Olla con vapor y cuchara de pie (cuenco abajo, palo hacia arriba) — icono de "Salsa de la Casa". */
 export function CheeseIcon({ className = "" }: IconProps) {
   return (
