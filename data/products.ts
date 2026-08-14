@@ -247,6 +247,14 @@ export const categories: Category[] = [
         description: "Curry y cebolla caramelizada. + Menú patatas y bebida 2,50 €",
         image: "/images/products/f31-bocacurry.jpg",
       },
+      {
+        id: "f32-bocamixto",
+        code: "F32",
+        name: "Bocamixto",
+        price: 6.5,
+        description: "Mezcla de carne picada y pollo, cebolla y salsa La Firma. + Menú patatas y bebida 2,50 €",
+        image: "/images/products/f32-bocamixto.jpg",
+      },
     ],
   },
   {
