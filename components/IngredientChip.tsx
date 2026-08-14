@@ -12,6 +12,11 @@ type IngredientChipProps = {
   priceTag?: string;
   tag?: string;
   spice?: 0 | 1 | 2 | 3;
+  /** Modo controlado (p.ej. carnes/salsas con límite según tamaño). Si se omite, el chip gestiona su propia selección. */
+  selected?: boolean;
+  onToggle?: () => void;
+  /** Bloqueado por haber alcanzado el límite de selección (no confundir con "próximamente"). */
+  locked?: boolean;
 };
 
 export default function IngredientChip({
@@ -23,17 +28,32 @@ export default function IngredientChip({
   priceTag,
   tag,
   spice,
+  selected: controlledSelected,
+  onToggle,
+  locked,
 }: IngredientChipProps) {
   const [imageFailed, setImageFailed] = useState(false);
-  const [selected, setSelected] = useState(false);
-  const disabled = tag === "proximamente";
+  const [internalSelected, setInternalSelected] = useState(false);
+  const isControlled = controlledSelected !== undefined;
+  const selected = isControlled ? controlledSelected : internalSelected;
+  const unavailable = tag === "proximamente";
+  const lockedOut = !selected && !!locked && !unavailable;
+
+  function handleClick() {
+    if (unavailable || lockedOut) return;
+    if (isControlled) {
+      onToggle?.();
+    } else {
+      setInternalSelected((v) => !v);
+    }
+  }
 
   return (
     <button
       type="button"
-      disabled={disabled}
+      disabled={unavailable || lockedOut}
       aria-pressed={selected}
-      onClick={() => setSelected((v) => !v)}
+      onClick={handleClick}
       className="group w-[calc(33.333%-10.667px)] border-0 bg-transparent p-0 font-body text-center transition-transform hover:-translate-y-1.5 hover:scale-105 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:scale-100 sm:w-[calc(25%-12px)]"
     >
       <div
@@ -56,7 +76,7 @@ export default function IngredientChip({
         ) : (
           <span className="flex h-full w-full items-center justify-center text-2xl">{icon}</span>
         )}
-        {!disabled && (
+        {!unavailable && (
           <span
             className={`absolute bottom-0 right-0 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white text-white shadow-card transition-all ${
               selected ? "bg-red scale-100" : "bg-gold scale-90 opacity-90 group-hover:scale-100 group-hover:opacity-100"
