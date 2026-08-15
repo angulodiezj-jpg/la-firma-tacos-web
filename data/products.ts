@@ -63,7 +63,6 @@ export const montaTuTaco = {
       { name: "Cabra", icon: "🐐", image: "/images/ingredients/suplemento-cabra.jpg" },
       { name: "Emmental", icon: "🧀", image: "/images/ingredients/suplemento-emmental.jpg" },
       { name: "Miel", icon: "🍯", image: "/images/ingredients/suplemento-miel.jpg" },
-      { name: "Boursin", icon: "🧈", image: "/images/ingredients/suplemento-boursin.jpg" },
       { name: "Huevo", icon: "🍳", image: "/images/ingredients/suplemento-huevo.jpg" },
       { name: "Pimientos", icon: "🫑", image: "/images/ingredients/suplemento-pimientos.jpg" },
     ] as (IngredientItem & { halal?: boolean })[],
@@ -73,7 +72,7 @@ export const montaTuTaco = {
     { name: "Cheddar", icon: "🧀", image: "/images/ingredients/gratinado-cheddar.jpg", price: 1.0 },
     { name: "Raclette", icon: "🫕", image: "/images/ingredients/gratinado-raclette.jpg", price: 1.0 },
     { name: "Cabra y Miel", icon: "🍯", image: "/images/ingredients/gratinado-cabra-miel.jpg", price: 1.9 },
-    { name: "Bacon Crispy", icon: "🥓", image: "/images/ingredients/gratinado-bacon-crispy.jpg", price: 1.9 },
+    { name: "Cheddar Bacon Crispy", icon: "🥓", image: "/images/ingredients/gratinado-bacon-crispy.jpg", price: 1.9 },
     { name: "Tomate Pimientos", icon: "🍅", image: "/images/ingredients/gratinado-tomate-pimientos.jpg", price: 1.9 },
   ] as (IngredientItem & { price: number })[],
 };
@@ -215,15 +214,6 @@ export const categories: Category[] = [
         price: 2.9,
         description: "Carne smash, queso cheddar, pepinillos y salsa La Firma.",
         image: "/images/products/f24-cheese-firma.jpg",
-      },
-      {
-        id: "f24-menu-cheese-firma",
-        code: "F24",
-        name: "Menú Cheese Firma",
-        price: 4.9,
-        description: "Carne smash, queso cheddar, pepinillos y salsa La Firma. Incluye patatas + bebida.",
-        image: "/images/products/f24-cheese-firma.jpg",
-        tags: ["menu"],
       },
       {
         id: "kids-firma",
