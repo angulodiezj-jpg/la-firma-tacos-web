@@ -29,7 +29,7 @@ export default function HeroSlider() {
   };
 
   return (
-    <section className="relative h-[calc(100vh-96px)] md:h-[80vh] w-full overflow-hidden bg-ink">
+    <section className="relative h-[calc(100vh-132px)] md:h-[80vh] w-full overflow-hidden bg-ink">
       <Swiper
         modules={[EffectFade, Autoplay]}
         effect="fade"
@@ -47,17 +47,13 @@ export default function HeroSlider() {
         {heroSlides.map((slide) => (
           <SwiperSlide key={slide.id}>
             <div className="relative h-full w-full">
-              <MediaBackground video={slide.video} fallbackImage={slide.fallbackImage} alt={slide.title} />
+              <MediaBackground
+                video={slide.video}
+                fallbackImage={slide.fallbackImage}
+                alt={slide.title}
+                className="hero-video-zoom"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-              <div
-                className="ambient-glow hidden md:block h-72 w-72 -top-10 -right-10 mix-blend-screen"
-                aria-hidden="true"
-              />
-              <div
-                className="ambient-glow h-64 w-64 -bottom-16 -left-16 mix-blend-screen"
-                style={{ animationDelay: "2.4s" }}
-                aria-hidden="true"
-              />
 
               <div className="relative z-10 h-full flex flex-col justify-end md:justify-center px-6 md:px-16 pb-32 md:pb-0">
                 <div className="max-w-lg animate-fadeUp">
@@ -70,7 +66,7 @@ export default function HeroSlider() {
                   <p className="text-white/85 text-base md:text-lg mb-6">{slide.subtitle}</p>
                   <Link
                     href={slide.ctaHref}
-                    className="btn-shine neon-cta inline-block rounded-full bg-gradient-to-r from-gold to-orange text-white font-heading font-semibold uppercase tracking-wide text-sm px-8 py-3.5 transition-transform hover:-translate-y-0.5"
+                    className="btn-shine inline-block rounded-full bg-gradient-to-r from-gold to-orange text-white font-heading font-semibold uppercase tracking-wide text-sm px-8 py-3.5 shadow-cardHover transition-transform hover:-translate-y-0.5"
                   >
                     {slide.ctaLabel}
                   </Link>

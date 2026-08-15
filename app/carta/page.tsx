@@ -42,7 +42,7 @@ export default function CartaPage() {
         </div>
       </section>
 
-      <div className="sticky top-[73px] z-30 bg-white/95 backdrop-blur-sm border-b border-line py-4">
+      <div className="sticky top-[123px] z-30 bg-white/95 backdrop-blur-sm border-b border-line py-4">
         <div className="mx-auto max-w-[1180px] px-6 flex gap-3 overflow-x-auto">
           {categories.map((cat) => (
             <a

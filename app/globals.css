@@ -55,6 +55,21 @@ body {
   }
 }
 
+/* Zoom lento y continuo para los vídeos del hero — look cinematográfico,
+   sutil a propósito (nada de pulsos ni parpadeos). */
+.hero-video-zoom {
+  animation: heroVideoZoom 24s ease-in-out infinite alternate;
+}
+
+@keyframes heroVideoZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
 /* Reveal on scroll */
 .reveal {
   opacity: 0;
@@ -78,7 +93,8 @@ body {
   .animate-badgePulse,
   .animate-fabBounce,
   .animate-marquee,
-  .animate-kenburns {
+  .animate-kenburns,
+  .hero-video-zoom {
     animation: none !important;
   }
   /* Textos con reveal escalonado por carga (héroe de campaña): mostrar

@@ -58,7 +58,7 @@ export default function ValenciaLaunch() {
           aria-hidden="true"
         />
 
-        <div className="relative z-10 flex h-full flex-col items-center justify-end px-6 pb-10 text-center md:justify-center md:pb-0">
+        <div className="relative z-10 flex h-full flex-col items-center justify-end px-6 pb-28 text-center md:justify-center md:pb-0">
           <HeroBeat delay={0.1}>
             <span className="eyebrow-neon inline-block rounded-full border border-red/50 bg-black/40 px-5 py-2 pl-7 font-heading text-[0.68rem] font-semibold uppercase tracking-[3px] text-white backdrop-blur-sm">
               Nueva Apertura
