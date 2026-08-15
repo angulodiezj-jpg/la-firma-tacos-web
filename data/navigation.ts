@@ -11,6 +11,7 @@ export const mainNav: NavLink[] = [
   { label: "Inicio", href: "/" },
   { label: "La Carta", href: "/carta" },
   { label: "Monta Tu Taco", href: "/monta-tu-taco" },
+  { label: "Nueva Apertura", href: "/valencia" },
   { label: "Nosotros", href: "/#nosotros" },
   { label: "Nuestro Local", href: "/#local" },
 ];
