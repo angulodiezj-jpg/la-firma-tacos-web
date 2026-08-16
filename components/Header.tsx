@@ -71,12 +71,19 @@ export default function Header({ onMenuOpen }: HeaderProps) {
             ))}
           </nav>
 
+          {/* Por debajo de lg este botón duplica el de la barra fija inferior
+              (StickyMobileCTA), y apretaba el logotipo. Se muestra solo en
+              escritorio, donde esa barra no existe. */}
           <Link
             href="/monta-tu-taco"
-            className="btn-shine neon-cta rounded-full bg-red px-6 py-3 font-heading text-sm font-semibold uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5 hover:bg-red-glow"
+            className="btn-shine neon-cta hidden rounded-full bg-red px-6 py-3 font-heading text-sm font-semibold uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5 hover:bg-red-glow lg:inline-block"
           >
             Monta Tu Tacos
           </Link>
+
+          {/* Contrapeso de la hamburguesa: sin él, al ocultar el botón el
+              logotipo se iría al borde derecho en vez de quedar centrado. */}
+          <span className="w-6 lg:hidden" aria-hidden="true" />
         </div>
       </header>
     </>
