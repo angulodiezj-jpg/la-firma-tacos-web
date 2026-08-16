@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CategoryExtras from "@/components/CategoryExtras";
 import DrinksGrid from "@/components/DrinksGrid";
 import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
-import { categories, type Product } from "@/data/products";
+import { categories, categoryExtras, type Product } from "@/data/products";
 import { siteConfig } from "@/data/siteConfig";
 
 /** Agrupa productos por su campo `group`, preservando el orden de aparición. */
@@ -100,6 +101,12 @@ export default function CartaPage() {
                   </div>
                 </div>
               ))
+            )}
+
+            {categoryExtras[category.slug] && (
+              <Reveal delay={0.2}>
+                <CategoryExtras extras={categoryExtras[category.slug]} />
+              </Reveal>
             )}
 
             {category.slug === "tacos" && (

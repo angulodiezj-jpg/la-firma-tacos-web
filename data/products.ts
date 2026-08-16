@@ -77,6 +77,32 @@ export const montaTuTaco = {
   ] as (IngredientItem & { price: number })[],
 };
 
+/**
+ * Extras que se pueden añadir a una categoría concreta de la carta
+ * (suplementos y gratinados), con su precio.
+ */
+export type CategoryExtra = {
+  label: string;
+  items: string[];
+  price: number;
+};
+
+export const categoryExtras: Record<string, CategoryExtra[]> = {
+  tacos: [
+    // Precio no facilitado por el local: se usa el mismo que los suplementos
+    // de Monta Tu Taco (1,00 €), que son los "compartidos".
+    { label: "Suplementos", items: ["Pepinillos", "Cebolla Caramelizada"], price: 1.0 },
+  ],
+  bocatas: [
+    { label: "Suplementos", items: ["Cheddar", "Cebolla Caramelizada"], price: 1.5 },
+    { label: "Gratinados", items: ["Mozza", "Cheddar", "Raclette"], price: 1.5 },
+  ],
+  crousty: [
+    // Mismo set y precio que los gratinados de bocatas (no se especificó otro).
+    { label: "Gratinados", items: ["Mozza", "Cheddar", "Raclette"], price: 1.5 },
+  ],
+};
+
 export const categories: Category[] = [
   {
     slug: "tacos",
