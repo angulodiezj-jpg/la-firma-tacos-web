@@ -39,6 +39,9 @@ export const montaTuTaco = {
     { name: "Cordon Bleu", icon: "🧀", image: "/images/ingredients/carne-cordon-bleu.jpg" },
     { name: "Tenders", icon: "🍢", image: "/images/ingredients/carne-tenders.jpg" },
     { name: "Nuggets", icon: "🍤", image: "/images/ingredients/carne-nuggets.jpg" },
+    // TODO: falta la foto. En cuanto llegue el póster de carnes, recortar
+    // "Salchicha" igual que el resto y añadir aquí `image:`.
+    { name: "Salchicha", icon: "🌭" },
     { name: "Falafel", icon: "🧆", image: "/images/ingredients/carne-falafel.jpg", tag: "proximamente" },
   ] as IngredientItem[],
   sauces: [
