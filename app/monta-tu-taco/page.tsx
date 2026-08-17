@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import MontaTuTacoBuilder from "@/components/MontaTuTacoBuilder";
 import { siteConfig } from "@/data/siteConfig";
 
@@ -8,5 +9,11 @@ export const metadata: Metadata = {
 };
 
 export default function MontaTuTacoPage() {
-  return <MontaTuTacoBuilder />;
+  // El builder lee ?talla= con useSearchParams, que en Next 14 exige un
+  // límite de Suspense para poder prerenderizar la página como estática.
+  return (
+    <Suspense>
+      <MontaTuTacoBuilder />
+    </Suspense>
+  );
 }

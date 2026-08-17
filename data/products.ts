@@ -13,6 +13,7 @@ export type Product = {
   tags?: ProductTag[];
   image?: string; // ruta en /public/images/products/
   group?: string; // subgrupo dentro de la categoría (ej. "Chill", "Premium" en Bebidas)
+  href?: string; // si existe, la tarjeta se vuelve pulsable y enlaza aquí
 };
 
 export type Category = {
@@ -42,7 +43,7 @@ export const montaTuTaco = {
     // TODO: falta la foto. En cuanto llegue el póster de carnes, recortar
     // "Salchicha" igual que el resto y añadir aquí `image:`.
     { name: "Salchicha", icon: "🌭" },
-    { name: "Falafel", icon: "🧆", image: "/images/ingredients/carne-falafel.jpg", tag: "proximamente" },
+    { name: "Falafel", icon: "🧆", image: "/images/ingredients/carne-falafel.jpg" },
   ] as IngredientItem[],
   sauces: [
     { name: "Algerina", icon: "🌶️", image: "/images/ingredients/salsa-algerina.jpg", spice: 1 },
@@ -68,6 +69,8 @@ export const montaTuTaco = {
       { name: "Miel", icon: "🍯", image: "/images/ingredients/suplemento-miel.jpg" },
       { name: "Huevo", icon: "🍳", image: "/images/ingredients/suplemento-huevo.jpg" },
       { name: "Pimientos", icon: "🫑", image: "/images/ingredients/suplemento-pimientos.jpg" },
+      { name: "Cebolla Caramelizada", icon: "🧅", image: "/images/ingredients/suplemento-cebolla-caramelizada.jpg" },
+      { name: "Pepinillos", icon: "🥒", image: "/images/ingredients/suplemento-pepinillos.jpg" },
     ] as (IngredientItem & { halal?: boolean })[],
   },
   gratins: [
@@ -90,12 +93,9 @@ export type CategoryExtra = {
   price: number;
 };
 
+// Los suplementos de los tacos NO van aquí a propósito: viven solo en la
+// página Monta Tu Taco, donde se eligen con foto.
 export const categoryExtras: Record<string, CategoryExtra[]> = {
-  tacos: [
-    // Precio no facilitado por el local: se usa el mismo que los suplementos
-    // de Monta Tu Taco (1,00 €), que son los "compartidos".
-    { label: "Suplementos", items: ["Pepinillos", "Cebolla Caramelizada"], price: 1.0 },
-  ],
   bocatas: [
     { label: "Suplementos", items: ["Cheddar", "Cebolla Caramelizada"], price: 1.5 },
     { label: "Gratinados", items: ["Mozza", "Cheddar", "Raclette"], price: 1.5 },
@@ -125,24 +125,27 @@ export const categories: Category[] = [
         id: "monta-tu-taco-m",
         name: "Monta tu Taco — Talla M",
         price: 7.5,
-        description: "Elige tu carne y tu salsa, sin coste extra.",
+        description: "1 carne y 1 salsa a elegir, sin coste extra.",
         image: "/images/products/monta-tu-taco-m.jpg",
+        href: "/monta-tu-taco?talla=M",
       },
       {
         id: "monta-tu-taco-l",
         name: "Monta tu Taco — Talla L",
         price: 9.5,
-        description: "Elige tu carne y tu salsa, sin coste extra.",
+        description: "2 carnes y 2 salsas a elegir, sin coste extra.",
         tags: ["popular"],
         image: "/images/products/monta-tu-taco-l.jpg",
+        href: "/monta-tu-taco?talla=L",
       },
       {
         id: "monta-tu-taco-xl",
         name: "Monta tu Taco — Talla XL",
         price: 11.5,
-        description: "Elige tu carne y tu salsa, sin coste extra.",
+        description: "3 carnes y 3 salsas a elegir, sin coste extra.",
         // Misma foto que la L hasta que llegue la foto real distinta para XL.
         image: "/images/products/monta-tu-taco-l.jpg",
+        href: "/monta-tu-taco?talla=XL",
       },
     ],
   },

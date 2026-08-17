@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import type { Product } from "@/data/products";
 import { formatPrice } from "@/data/products";
@@ -21,8 +22,18 @@ const tagLabels: Record<string, string> = {
 export default function ProductCard({ product }: { product: Product }) {
   const [imageFailed, setImageFailed] = useState(false);
 
+  // Productos con `href` (las tallas de Monta Tu Taco) se comportan como
+  // tarjeta pulsable y llevan a su pantalla de reglas.
+  const Wrapper = product.href ? Link : "div";
+  const wrapperProps = product.href ? { href: product.href } : {};
+
   return (
-    <div className="group rounded-xl2 border border-line bg-white shadow-card overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-cardHover">
+    <Wrapper
+      {...(wrapperProps as { href: string })}
+      className={`group block rounded-xl2 border border-line bg-white shadow-card overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-cardHover ${
+        product.href ? "neon-ring-hover cursor-pointer" : ""
+      }`}
+    >
       <div className="relative aspect-[4/5] overflow-hidden border-b border-line bg-[#f6f0e7]">
         {product.image && !imageFailed ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -63,7 +74,12 @@ export default function ProductCard({ product }: { product: Product }) {
             ))}
           </div>
         )}
+        {product.href && (
+          <span className="mt-3 inline-flex items-center gap-1.5 font-heading text-xs font-bold uppercase tracking-wide text-red">
+            Ver reglas de la talla →
+          </span>
+        )}
       </div>
-    </div>
+    </Wrapper>
   );
 }

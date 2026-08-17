@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import IngredientChip from "@/components/IngredientChip";
 import Marquee from "@/components/Marquee";
 import Reveal from "@/components/Reveal";
@@ -20,9 +21,21 @@ const SIZE_PHOTOS: Record<string, string> = {
 const SIZE_LIMITS: Record<string, number> = { M: 1, L: 2, XL: 3 };
 
 export default function MontaTuTacoBuilder() {
-  const [selectedSize, setSelectedSize] = useState(montaTuTaco.sizes[0].size);
+  const searchParams = useSearchParams();
+  // ?talla=M|L|XL — al llegar desde una tarjeta de talla de la carta, se
+  // preselecciona esa talla y se hace scroll hasta sus reglas.
+  const requestedSize = (searchParams.get("talla") ?? "").toUpperCase();
+  const initialSize = SIZE_LIMITS[requestedSize] ? requestedSize : montaTuTaco.sizes[0].size;
+
+  const [selectedSize, setSelectedSize] = useState(initialSize);
   const [selectedMeats, setSelectedMeats] = useState<string[]>([]);
   const [selectedSauces, setSelectedSauces] = useState<string[]>([]);
+  const sizesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!SIZE_LIMITS[requestedSize]) return;
+    sizesRef.current?.scrollIntoView({ block: "center" });
+  }, [requestedSize]);
 
   const limit = SIZE_LIMITS[selectedSize] ?? 1;
 
@@ -66,7 +79,7 @@ export default function MontaTuTacoBuilder() {
       <section className="py-14 md:py-20 bg-[#faf7f2]">
         <div className="mx-auto max-w-[1180px] px-6">
           {/* Tallas */}
-          <div className="grid sm:grid-cols-3 gap-6 mb-10">
+          <div ref={sizesRef} className="grid sm:grid-cols-3 gap-6 mb-10 scroll-mt-40">
             {montaTuTaco.sizes.map((size, i) => {
               const active = selectedSize === size.size;
               return (
