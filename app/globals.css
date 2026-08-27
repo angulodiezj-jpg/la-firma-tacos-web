@@ -29,6 +29,29 @@ body {
   @apply bg-white text-ink font-body;
 }
 
+/* Foco visible al navegar con teclado (no aparece al hacer clic con ratón) */
+:focus-visible {
+  outline: 3px solid theme(colors.red.DEFAULT);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Salto al contenido: oculto hasta que recibe el foco con el tabulador */
+.skip-link {
+  position: absolute;
+  left: 50%;
+  top: -100px;
+  z-index: 60;
+  transform: translateX(-50%);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 12px 12px;
+  transition: top 0.2s ease;
+  @apply bg-red font-heading text-sm font-bold uppercase tracking-wide text-white;
+}
+.skip-link:focus {
+  top: 0;
+}
+
 /* Marcador de posición para fotos/vídeos pendientes */
 .ph-block {
   background-image: repeating-linear-gradient(

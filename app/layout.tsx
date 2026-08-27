@@ -40,8 +40,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <body>
+        {/* Accesibilidad: primer tabulador permite saltarse la navegación */}
+        <a href="#contenido" className="skip-link">
+          Saltar al contenido
+        </a>
         <SplashLoader />
-        <SiteChrome>{children}</SiteChrome>
+        <SiteChrome>
+          <main id="contenido">{children}</main>
+        </SiteChrome>
         <Footer />
       </body>
     </html>

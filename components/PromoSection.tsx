@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { siteConfig } from "@/data/siteConfig";
+import { mapsUrl, siteConfig } from "@/data/siteConfig";
 import OrderButtons from "./OrderButtons";
 import Reveal from "./Reveal";
-import { StarIcon } from "./ValueIcons";
+import { PhoneIcon, PinIcon, StarIcon } from "./ValueIcons";
 
 /**
  * Único bloque promocional full-width (en la referencia había 2: Boss Club +
@@ -52,6 +52,26 @@ export default function PromoSection() {
                   className="inline-flex items-center gap-2 rounded-full border-2 border-white px-7 py-3.5 font-heading text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-white hover:text-red"
                 >
                   Síguenos {siteConfig.social.instagramHandle}
+                </a>
+              </div>
+
+              {/* Acciones directas para quien quiere venir o preguntar ahora */}
+              <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <a
+                  href={mapsUrl(siteConfig.location.address)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-white/15 px-6 py-3 font-heading text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-white/25"
+                >
+                  <PinIcon className="h-4 w-4 shrink-0" />
+                  Cómo llegar
+                </a>
+                <a
+                  href={siteConfig.location.phoneHref}
+                  className="inline-flex items-center gap-2 rounded-full bg-white/15 px-6 py-3 font-heading text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-white/25"
+                >
+                  <PhoneIcon className="h-4 w-4 shrink-0" />
+                  {siteConfig.location.phone}
                 </a>
               </div>
 
