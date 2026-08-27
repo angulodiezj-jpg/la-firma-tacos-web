@@ -8,6 +8,7 @@ const DIAS: Record<string, string> = {
   viernes: "Friday",
   sabado: "Saturday",
   domingo: "Sunday",
+  festivos: "PublicHolidays",
 };
 
 /**
@@ -19,14 +20,15 @@ const DIAS: Record<string, string> = {
 export default function RestaurantSchema() {
   const { location, rating, social, order } = siteConfig;
 
-  const horario = Object.entries(location.schedule)
-    .filter(([, franja]) => franja !== null)
-    .map(([dia, franja]) => ({
+  // Un bloque por turno: los laborables tienen dos (mediodía y noche).
+  const horario = Object.entries(location.schedule).flatMap(([dia, turnos]) =>
+    (turnos ?? []).map((t) => ({
       "@type": "OpeningHoursSpecification",
       dayOfWeek: `https://schema.org/${DIAS[dia]}`,
-      opens: franja!.abre,
-      closes: franja!.cierra,
-    }));
+      opens: t.abre,
+      closes: t.cierra,
+    }))
+  );
 
   const data = {
     "@context": "https://schema.org",

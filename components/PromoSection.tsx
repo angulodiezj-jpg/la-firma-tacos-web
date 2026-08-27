@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { mapsUrl, siteConfig } from "@/data/siteConfig";
+import OpeningHours from "./OpeningHours";
 import OrderButtons from "./OrderButtons";
 import Reveal from "./Reveal";
 import { PhoneIcon, PinIcon, StarIcon } from "./ValueIcons";
@@ -38,11 +39,15 @@ export default function PromoSection() {
                 <br />
                 Castellana
               </h2>
-              <p className="max-w-lg mx-auto text-white/85 mb-8">
-                {siteConfig.location.address} · {siteConfig.location.hours}
+              <p className="max-w-lg mx-auto text-white/85 mb-6">
+                {siteConfig.location.address}
                 <br />
                 {siteConfig.location.amenities.join(" · ")}
               </p>
+
+              <div className="mb-8">
+                <OpeningHours />
+              </div>
               <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                 <OrderButtons />
                 <a

@@ -22,19 +22,26 @@ export const siteConfig = {
     phone: "614 28 09 50",
     phoneHref: "tel:+34614280950",
     email: "jmtacomadrid@gmail.com",
-    hours: "Abre a las 20:00",
-    // Horario semanal completo. `null` = el local no ha confirmado ese día,
-    // y entonces la web no lo muestra en vez de inventarlo.
-    // Formato 24 h, p. ej. { abre: "20:00", cierra: "00:30" }.
+    hours: "L-V 13:00-15:30 y 19:00-00:00 · S, D y festivos 13:30-01:00",
+    // Horario real del local. Cada día admite varios turnos (los laborables
+    // cierran a mediodía). Formato 24 h; si la hora de cierre es menor que la
+    // de apertura, se entiende que cierra pasada la medianoche.
     schedule: {
-      lunes: null,
-      martes: null,
-      miercoles: null,
-      jueves: null,
-      viernes: null,
-      sabado: null,
-      domingo: null,
-    } as Record<string, { abre: string; cierra: string } | null>,
+      lunes: [{ abre: "13:00", cierra: "15:30" }, { abre: "19:00", cierra: "00:00" }],
+      martes: [{ abre: "13:00", cierra: "15:30" }, { abre: "19:00", cierra: "00:00" }],
+      miercoles: [{ abre: "13:00", cierra: "15:30" }, { abre: "19:00", cierra: "00:00" }],
+      jueves: [{ abre: "13:00", cierra: "15:30" }, { abre: "19:00", cierra: "00:00" }],
+      viernes: [{ abre: "13:00", cierra: "15:30" }, { abre: "19:00", cierra: "00:00" }],
+      sabado: [{ abre: "13:30", cierra: "01:00" }],
+      domingo: [{ abre: "13:30", cierra: "01:00" }],
+      festivos: [{ abre: "13:30", cierra: "01:00" }],
+    } as Record<string, { abre: string; cierra: string }[]>,
+    // Agrupación tal y como la muestra el cartel del local.
+    scheduleGroups: [
+      { dias: "Lunes a viernes", turnos: ["13:00 – 15:30", "19:00 – 00:00"] },
+      { dias: "Sábado y domingo", turnos: ["13:30 – 01:00"] },
+      { dias: "Festivos", turnos: ["13:30 – 01:00"] },
+    ],
     amenities: ["Terraza", "Platos veganos", "Wi-Fi"],
     status: "Abierto" as const,
   },

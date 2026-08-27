@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Logo from "./Logo";
 import { footerAboutLinks, footerLegalLinks, footerProductLinks } from "@/data/navigation";
-import { siteConfig } from "@/data/siteConfig";
+import { mapsUrl, siteConfig } from "@/data/siteConfig";
 
 export default function Footer() {
   return (
@@ -46,6 +46,16 @@ export default function Footer() {
             <ul className="space-y-2.5 text-sm text-[#b5aca6]">
               <li>{siteConfig.location.address}</li>
               <li>
+                <a
+                  href={mapsUrl(siteConfig.location.address)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white"
+                >
+                  📍 Cómo llegar
+                </a>
+              </li>
+              <li>
                 <a href={siteConfig.location.phoneHref} className="hover:text-white">
                   📞 {siteConfig.location.phone}
                 </a>
@@ -55,6 +65,15 @@ export default function Footer() {
                   ✉️ {siteConfig.location.email}
                 </a>
               </li>
+            </ul>
+
+            <h5 className="font-heading text-xs uppercase tracking-wide text-white mb-3 mt-6">Horario</h5>
+            <ul className="space-y-1.5 text-sm text-[#b5aca6]">
+              {siteConfig.location.scheduleGroups.map((g) => (
+                <li key={g.dias}>
+                  <span className="text-white/90">{g.dias}:</span> {g.turnos.join(" · ")}
+                </li>
+              ))}
             </ul>
             <div className="flex gap-3 mt-5">
               <a
