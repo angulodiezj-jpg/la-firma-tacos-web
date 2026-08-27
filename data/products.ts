@@ -141,8 +141,7 @@ export const categories: Category[] = [
         name: "Monta tu Taco — Talla XL",
         price: 11.5,
         description: "3 carnes y 3 salsas a elegir, sin coste extra.",
-        // Misma foto que la L hasta que llegue la foto real distinta para XL.
-        image: "/images/products/monta-tu-taco-l.jpg",
+        image: "/images/products/monta-tu-taco-xl.jpg",
         href: "/monta-tu-taco?talla=XL",
       },
     ],

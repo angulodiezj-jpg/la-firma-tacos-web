@@ -9,12 +9,11 @@ import { HalalBadge } from "@/components/SupplementIcons";
 import { CheckIcon, DrinkIcon, FlameIcon, FriesIcon } from "@/components/ValueIcons";
 import { formatPrice, montaTuTaco } from "@/data/products";
 
-// Una foto real por talla. XL comparte foto con la L todavía (pendiente
-// que nos pasen la tercera foto real, distinta, para esa talla).
+// Una foto real y distinta por talla.
 const SIZE_PHOTOS: Record<string, string> = {
   M: "/images/products/monta-tu-taco-m.jpg",
   L: "/images/products/monta-tu-taco-l.jpg",
-  XL: "/images/products/monta-tu-taco-l.jpg",
+  XL: "/images/products/monta-tu-taco-xl.jpg",
 };
 
 // Reglas de la casa: cada tamaño fija cuántas carnes y salsas se pueden elegir.
