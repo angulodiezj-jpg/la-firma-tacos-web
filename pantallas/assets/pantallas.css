@@ -1,0 +1,250 @@
+/* Pantallas de sala de La Firma Tacos — 1920x1080, sin interacción.
+   Pensadas para reproducirse en bucle en un televisor. */
+
+@import url("fuentes.css");
+
+:root {
+  --rojo: #d31f1f;
+  --rojo-osc: #a91414;
+  --rojo-neon: #ff3b30;
+  --oro: #e8a923;
+  --oro-osc: #c8891a;
+  --naranja: #ff7a1a;
+  --tinta: #0d0b0a;
+  --crema: #fff7e8;
+  --display: "Dancing Script", cursive;
+  --titulo: "Oswald", "Arial Narrow", sans-serif;
+  --texto: "Mulish", system-ui, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--tinta);
+  color: #fff;
+  font-family: var(--texto);
+  /* La pantalla se escala para llenar cualquier televisor sin deformarse */
+  transform-origin: top left;
+}
+
+/* ---------- Fondo de marca ---------- */
+.fondo {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(211, 31, 31, 0.28), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(232, 169, 35, 0.16), transparent 45%),
+    var(--tinta);
+}
+.fondo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--patron);
+  background-size: 300px;
+  opacity: 0.05;
+  mix-blend-mode: luminosity;
+}
+
+.halo {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  background: radial-gradient(circle, rgba(255, 59, 48, 0.5), transparent 70%);
+  animation: flota 11s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes flota {
+  from { transform: translate(0, 0) scale(1); opacity: 0.45; }
+  to   { transform: translate(40px, -30px) scale(1.15); opacity: 0.8; }
+}
+
+/* ---------- Cabecera ---------- */
+.cabecera {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 34px 64px 0;
+}
+.marca { display: flex; align-items: center; gap: 22px; }
+.marca img { width: 96px; height: 96px; border-radius: 50%; box-shadow: 0 8px 28px rgba(0,0,0,.55); }
+.marca .nombre { display: flex; flex-direction: column; line-height: 1; }
+.marca .script {
+  font-family: var(--display);
+  font-size: 58px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--oro-osc), var(--oro) 45%, var(--naranja));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.marca .script .ini { font-size: 1.32em; }
+.marca .sub {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--titulo); font-weight: 700; font-size: 15px;
+  letter-spacing: 7px; color: #fff; opacity: .9; margin-top: 4px;
+}
+.marca .sub::before, .marca .sub::after {
+  content: ""; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent);
+}
+
+.rotulo { text-align: right; }
+.rotulo .eyebrow {
+  font-family: var(--titulo); font-size: 19px; font-weight: 500;
+  letter-spacing: 6px; text-transform: uppercase; color: var(--oro);
+}
+.rotulo h1 {
+  font-family: var(--titulo); font-weight: 700; font-size: 66px;
+  text-transform: uppercase; line-height: .95; letter-spacing: 1px;
+}
+
+/* ---------- Rejilla de contenido ---------- */
+.lienzo { position: relative; padding: 22px 64px 0; height: 872px; transform-origin: top center; }
+
+.bloque { margin-bottom: 20px; }
+.bloque > h2 {
+  display: flex; align-items: center; gap: 16px;
+  font-family: var(--titulo); font-weight: 700; font-size: 26px;
+  text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
+}
+.bloque > h2::before {
+  content: ""; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--rojo-neon); box-shadow: 0 0 14px 4px rgba(255,59,48,.75);
+  animation: latido 1.9s ease-in-out infinite;
+}
+.bloque > h2::after {
+  content: ""; flex: 1; height: 2px;
+  background: linear-gradient(90deg, rgba(211,31,31,.85), transparent);
+}
+@keyframes latido {
+  0%,100% { transform: scale(1);   opacity: .85; }
+  50%     { transform: scale(1.3); opacity: 1; }
+}
+
+.rejilla { display: grid; gap: 18px; }
+.c2 { grid-template-columns: repeat(2, 1fr); }
+.c3 { grid-template-columns: repeat(3, 1fr); }
+.c4 { grid-template-columns: repeat(4, 1fr); }
+.c5 { grid-template-columns: repeat(5, 1fr); }
+
+/* ---------- Ficha de producto ---------- */
+.plato {
+  display: flex; align-items: center; gap: 18px;
+  background: linear-gradient(140deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 20px; padding: 14px 18px;
+  backdrop-filter: blur(2px);
+}
+.plato img {
+  width: 96px; height: 96px; border-radius: 16px; object-fit: cover;
+  flex-shrink: 0; box-shadow: 0 6px 18px rgba(0,0,0,.5);
+}
+.plato .txt { flex: 1; min-width: 0; }
+.plato .nom {
+  font-family: var(--titulo); font-weight: 700; font-size: 25px;
+  text-transform: uppercase; line-height: 1.08; letter-spacing: .5px;
+}
+.plato .des {
+  font-size: 15px; color: rgba(255,255,255,.7); line-height: 1.35; margin-top: 4px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.plato .precio {
+  font-family: var(--titulo); font-weight: 700; font-size: 34px;
+  color: var(--oro); white-space: nowrap;
+}
+.plato.destacado { border-color: rgba(255,59,48,.55); box-shadow: 0 0 0 1px rgba(255,59,48,.25) inset; }
+.etq {
+  display: inline-block; margin-top: 6px; padding: 3px 10px; border-radius: 999px;
+  background: var(--rojo); font-family: var(--titulo); font-weight: 700;
+  font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+}
+
+/* ---------- Fichas circulares (ingredientes) ---------- */
+.ingredientes { display: flex; flex-wrap: wrap; gap: 14px 20px; }
+.ing { width: 94px; text-align: center; }
+.ing img {
+  width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
+  border: 2px solid rgba(255,255,255,.22); margin: 0 auto 7px; display: block;
+}
+.ing span {
+  display: block; font-family: var(--titulo); font-weight: 500; font-size: 13px;
+  text-transform: uppercase; letter-spacing: .4px; line-height: 1.15;
+  color: rgba(255,255,255,.9);
+}
+
+/* ---------- Tallas de Monta Tu Taco ---------- */
+.tallas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.talla {
+  position: relative; text-align: center; padding: 18px 20px 16px;
+  border-radius: 26px; border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.02));
+}
+.talla img {
+  width: 132px; height: 132px; border-radius: 50%; object-fit: cover;
+  border: 3px solid var(--oro); margin-bottom: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.55);
+}
+.talla .letra {
+  font-family: var(--titulo); font-weight: 700; font-size: 60px; line-height: .9;
+}
+.talla .precio {
+  display: inline-block; margin-top: 8px; padding: 6px 26px; border-radius: 999px;
+  background: var(--rojo); font-family: var(--titulo); font-weight: 700; font-size: 27px;
+}
+.talla .regla {
+  margin-top: 12px; font-family: var(--titulo); font-size: 17px;
+  letter-spacing: 1px; text-transform: uppercase; color: var(--oro);
+}
+
+/* ---------- Bebidas ---------- */
+.marcas { display: flex; flex-wrap: wrap; gap: 16px; }
+.marca-logo {
+  width: 132px; height: 88px; border-radius: 16px; background: #fff;
+  display: flex; align-items: center; justify-content: center; padding: 12px;
+}
+.marca-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+.lista-bebidas { columns: 3; column-gap: 40px; }
+.lista-bebidas li {
+  list-style: none; break-inside: avoid;
+  display: flex; justify-content: space-between; gap: 12px;
+  padding: 9px 0; border-bottom: 1px dashed rgba(255,255,255,.16);
+  font-size: 25px;
+}
+.lista-bebidas li b { font-family: var(--titulo); font-weight: 500; letter-spacing: .3px; }
+.lista-bebidas li span { font-family: var(--titulo); font-weight: 700; color: var(--oro); }
+
+/* ---------- Pie ---------- */
+.pie {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 74px;
+  display: flex; align-items: center; overflow: hidden;
+  background: linear-gradient(90deg, var(--rojo-osc), var(--rojo));
+}
+.marquesina { display: flex; gap: 60px; white-space: nowrap; animation: correr 34s linear infinite; }
+.marquesina span {
+  font-family: var(--titulo); font-weight: 700; font-size: 24px;
+  letter-spacing: 4px; text-transform: uppercase; padding-right: 60px;
+}
+@keyframes correr { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---------- Entradas animadas ---------- */
+.anim { opacity: 0; animation: entra .75s cubic-bezier(.22,.61,.36,1) forwards; }
+@keyframes entra {
+  from { opacity: 0; transform: translateY(26px) scale(.98); }
+  to   { opacity: 1; transform: none; }
+}
+.brillo { position: relative; overflow: hidden; }
+.brillo::after {
+  content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,.22), transparent);
+  transform: skewX(-18deg); animation: barrido 7s ease-in-out infinite;
+}
+@keyframes barrido {
+  0%, 65% { left: -60%; }
+  100%    { left: 130%; }
+}

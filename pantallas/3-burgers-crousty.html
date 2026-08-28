@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Burgers &amp; Crousty — La Firma Tacos</title>
+<link rel="stylesheet" href="assets/pantallas.css">
+<style>:root { --patron: url("assets/img/firma-pattern.jpg"); }</style>
+</head>
+<body>
+<div class="fondo"></div>
+<div class="halo" style="width:520px;height:520px;top:-140px;left:-120px"></div>
+<div class="halo" style="width:420px;height:420px;bottom:-120px;right:-90px;animation-delay:3.5s"></div>
+
+<header class="cabecera">
+  <div class="marca">
+    <img src="assets/img/logo-badge.jpg" alt="">
+    <div class="nombre">
+      <span class="script"><span class="ini">L</span>a <span class="ini">F</span>irma</span>
+      <span class="sub">TACOS</span>
+    </div>
+  </div>
+  <div class="rotulo">
+    <div class="eyebrow">Crujiente por fuera, brutal por dentro</div>
+    <h1>Burgers &amp; Crousty</h1>
+  </div>
+</header>
+
+<main class="lienzo">
+
+<div class="bloque">
+  <h2>Burgers La Firma</h2>
+  <div class="rejilla c2"><div class="plato anim" style="animation-delay:0.00s">
+      <img src="assets/img/f21-tasty-chicken.jpg" alt="">
+      <div class="txt"><div class="nom">F21 Tasty Chicken</div><div class="des">Pollo crujiente, queso cheddar, lechuga fresca, tomate natural y salsa La Firma.</div></div>
+      <div class="precio">7,90 €</div>
+    </div><div class="plato anim" style="animation-delay:0.08s">
+      <img src="assets/img/f22-doble-crunch.jpg" alt="">
+      <div class="txt"><div class="nom">F22 Doble Crunch</div><div class="des">Hamburguesa y tenders de pollo, cebolla, tomate, lechuga y salsa Tasty</div></div>
+      <div class="precio">8,00 €</div>
+    </div><div class="plato destacado anim" style="animation-delay:0.16s">
+      <img src="assets/img/f23-big-firma.jpg" alt="">
+      <div class="txt"><div class="nom">F23 Big Firma</div><div class="des">Doble carne smash, queso cheddar, lechuga fresca, pepinillos, cebolla y salsa La Firma.</div><span class="etq">Popular</span></div>
+      <div class="precio">7,50 €</div>
+    </div><div class="plato anim" style="animation-delay:0.24s">
+      <img src="assets/img/f24-cheese-firma.jpg" alt="">
+      <div class="txt"><div class="nom">F24 Cheese Firma</div><div class="des">Carne smash, queso cheddar, pepinillos y salsa La Firma.</div></div>
+      <div class="precio">2,90 €</div>
+    </div><div class="plato anim" style="animation-delay:0.32s">
+      <img src="assets/img/kids-firma.jpg" alt="">
+      <div class="txt"><div class="nom">Kids Firma</div><div class="des">Elige: Cheese Firma o 3 Nuggets + zumo infantil (naranja, frutas rojas o Milderman multifrutas).</div></div>
+      <div class="precio">4,90 €</div>
+    </div></div>
+</div>
+
+<div class="bloque">
+  <h2>Crousty La Firma</h2>
+  <div class="rejilla c2"><div class="plato destacado anim" style="animation-delay:0.45s">
+      <img src="assets/img/f40-crousty-sweet.jpg" alt="">
+      <div class="txt"><div class="nom">F40 Crousty Sweet</div><div class="des">Tenders de pollo crujientes, salsa dulce, salsa casera de arroz, arroz y cebolla frita.</div><span class="etq">Popular</span></div>
+      <div class="precio">9,00 €</div>
+    </div><div class="plato destacado anim" style="animation-delay:0.53s">
+      <img src="assets/img/f41-crousty-spicy.jpg" alt="">
+      <div class="txt"><div class="nom">F41 Crousty Spicy</div><div class="des">Tenders de pollo crujientes, salsa picante, salsa casera de arroz, arroz y cebolla frita.</div><span class="etq">Popular</span></div>
+      <div class="precio">9,00 €</div>
+    </div></div>
+</div>
+
+<div class="bloque anim" style="animation-delay:.75s">
+  <h2>Gratinados para tu Crousty · +1,50 €</h2>
+  <div class="ingredientes">
+    <div class="ing"><img src="assets/img/gratinado-mozza.jpg" alt=""><span>Mozza</span></div><div class="ing"><img src="assets/img/gratinado-cheddar.jpg" alt=""><span>Cheddar</span></div><div class="ing"><img src="assets/img/gratinado-raclette.jpg" alt=""><span>Raclette</span></div>
+  </div>
+</div>
+</main>
+
+<footer class="pie"><div class="marquesina"><span>Burgers La Firma</span><span>Crousty La Firma</span><span>Hecho al momento</span><span>La Firma</span><span>Burgers La Firma</span><span>Crousty La Firma</span><span>Hecho al momento</span><span>La Firma</span></div></footer>
+
+<script>
+// Escala la pantalla de 1920x1080 a cualquier televisor sin deformarla.
+function ajustar() {
+  const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+  document.body.style.transform = 'scale(' + s + ')';
+  document.body.style.marginLeft = ((innerWidth - 1920 * s) / 2) + 'px';
+  document.body.style.marginTop = ((innerHeight - 1080 * s) / 2) + 'px';
+}
+addEventListener('resize', ajustar); ajustar();
+
+// Red de seguridad: si algún día se añaden productos y el contenido no cabe,
+// se reduce lo justo para que entre entero, en vez de cortarse por abajo.
+function encajar() {
+  const l = document.querySelector('.lienzo');
+  l.style.transform = '';
+  const disponible = l.clientHeight;
+  const real = l.scrollHeight;
+  if (real > disponible) {
+    l.style.transform = 'scale(' + (disponible / real).toFixed(4) + ')';
+  }
+}
+addEventListener('load', encajar);
+setTimeout(encajar, 400);
+
+// Relanza las animaciones de entrada cada 30 s para que la pantalla no se
+// quede "muerta" si el televisor lleva horas encendido.
+setInterval(function () {
+  document.querySelectorAll('.anim').forEach(function (el) {
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.animation = '';
+  });
+}, 30000);
+</script>
+
+</body>
+</html>

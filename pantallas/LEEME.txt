@@ -1,0 +1,48 @@
+PANTALLAS DE SALA — LA FIRMA TACOS
+==================================
+
+Contenido de esta carpeta
+-------------------------
+  1-monta-tu-taco.html          Tallas, carnes, salsas, suplementos y gratinados
+  2-tacos-bocatas-entrantes.html  Tacos La Firma, Bocatas y Entrantes
+  3-burgers-crousty.html        Burgers y Crousty
+  4-bebidas.html                Marcas y todas las bebidas con precio
+  assets/                       Tipografías, estilos e imágenes
+
+Todo funciona SIN INTERNET: las tipografías van incrustadas dentro del
+archivo de estilos y las imágenes están en assets/img.
+
+
+Cómo ponerlas en el televisor
+-----------------------------
+IMPORTANTE: la mayoría de televisores NO pueden abrir archivos HTML desde
+un pendrive; solo reproducen vídeo y fotos. Comprueba tu caso:
+
+  A) Tienes un mini PC, portátil, Chromecast con Google TV, Fire TV Stick
+     o un reproductor de cartelería digital conectado al televisor:
+     -> Copia esta carpeta entera al pendrive.
+     -> Abre el archivo .html que quieras con el navegador.
+     -> Pulsa F11 (pantalla completa). Listo.
+
+  B) Vas a enchufar el pendrive directamente al televisor:
+     -> El televisor NO abrirá los .html.
+     -> Pídeme que te los exporte a vídeo MP4 y se reproducen sin problema.
+
+Están diseñadas a 1920x1080 (Full HD, horizontal) y se adaptan solas a
+cualquier tamaño de pantalla sin deformarse.
+
+
+Cómo cambiar precios o productos
+--------------------------------
+Estas pantallas se generan a partir de la misma carta que la web, así que
+NO se editan a mano: si cambias un precio en la web, se regeneran y quedan
+las dos igual. Pídemelo y las vuelvo a generar.
+
+
+Detalles pensados para sala
+---------------------------
+- Las animaciones de entrada se repiten cada 30 segundos, para que la
+  pantalla no parezca congelada si lleva horas encendida.
+- Si algún día se añaden productos y no cupieran, el contenido se reduce
+  automáticamente lo justo para que entre entero, en vez de cortarse.
+- Sin botones ni nada que pulsar: están hechas para mirarse, no para usarse.
