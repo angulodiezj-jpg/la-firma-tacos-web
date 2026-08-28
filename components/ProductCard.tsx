@@ -62,6 +62,12 @@ export default function ProductCard({ product }: { product: Product }) {
           <span className="whitespace-nowrap font-heading font-bold text-red">{formatPrice(product.price)}</span>
         </h4>
         {product.description && <p className="text-sm text-ink-soft">{product.description}</p>}
+        {product.menuPrice && (
+          <p className="mt-2 flex items-center gap-1.5 font-heading text-xs font-semibold uppercase tracking-wide text-gold-deep">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold" />
+            Hazlo menú (patatas + bebida) +{formatPrice(product.menuPrice)}
+          </p>
+        )}
         {product.tags && product.tags.length > 0 && (
           <div className="mt-2.5 flex flex-wrap gap-1.5">
             {product.tags.map((tag) => (

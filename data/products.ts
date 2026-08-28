@@ -14,7 +14,14 @@ export type Product = {
   image?: string; // ruta en /public/images/products/
   group?: string; // subgrupo dentro de la categoría (ej. "Chill", "Premium" en Bebidas)
   href?: string; // si existe, la tarjeta se vuelve pulsable y enlaza aquí
+  /** Si se puede pedir como menú (patatas + bebida), el suplemento en euros.
+   *  Se pinta como una línea aparte e igual en todos los productos, en vez
+   *  de ir escrito a mano dentro de la descripción. */
+  menuPrice?: number;
 };
+
+/** Suplemento estándar para convertir cualquier plato en menú. */
+export const MENU_PRICE = 2.5;
 
 export type Category = {
   slug: string;
@@ -115,7 +122,7 @@ export const categories: Category[] = [
         code: "F1",
         name: "Tacos La Firma",
         price: 8.5,
-        description: "Nuestro taco insignia con la receta original de la casa.",
+        description: "Nuestro taco insignia, con la receta original y la salsa de queso de la casa.",
         tags: ["popular"],
         image: "/images/products/f1-tacos-la-firma.jpg",
       },
@@ -156,6 +163,7 @@ export const categories: Category[] = [
         code: "F01",
         name: "Mozza Sticks x6",
         price: 4.5,
+        description: "Seis barritas de mozzarella rebozadas, crujientes por fuera y fundentes por dentro.",
         image: "/images/products/f01-mozza-sticks.jpg",
       },
       {
@@ -163,6 +171,7 @@ export const categories: Category[] = [
         code: "F02",
         name: "Tenders de Pollo x4",
         price: 4.5,
+        description: "Cuatro tiras de pechuga de pollo empanadas y fritas al momento.",
         image: "/images/products/f02-tenders-pollo.jpg",
       },
       {
@@ -170,6 +179,7 @@ export const categories: Category[] = [
         code: "F03",
         name: "Tequeños x4",
         price: 4.5,
+        description: "Cuatro palitos de masa rellenos de queso, fritos hasta quedar dorados.",
         tags: ["popular"],
         image: "/images/products/f03-tequenos.jpg",
       },
@@ -178,14 +188,14 @@ export const categories: Category[] = [
         code: "F04",
         name: "Patatas La Firma",
         price: 4.5,
-        description: "Con bacon y queso cheddar.",
+        description: "Patatas fritas con bacon y queso cheddar fundido.",
         image: "/images/products/f04-patatas-la-firma.jpg",
       },
       {
         id: "patatas-classique",
         name: "Patatas Classique",
         price: 1.5,
-        description: "Patatas fritas clásicas.",
+        description: "Nuestras patatas fritas clásicas, recién hechas.",
         image: "/images/products/patatas-classique.jpg",
       },
       {
@@ -193,6 +203,7 @@ export const categories: Category[] = [
         code: "F05",
         name: "Nuggets x6",
         price: 4.5,
+        description: "Seis nuggets de pollo empanados y crujientes.",
         image: "/images/products/f05-nuggets.jpg",
       },
       {
@@ -200,6 +211,7 @@ export const categories: Category[] = [
         code: "F06",
         name: "Camembert Bites x6",
         price: 4.5,
+        description: "Seis bocados de queso camembert rebozados, cremosos por dentro.",
         image: "/images/products/f06-camembert-bites.jpg",
       },
     ],
@@ -214,27 +226,30 @@ export const categories: Category[] = [
         code: "F21",
         name: "Tasty Chicken",
         price: 7.9,
-        description: "Pollo crujiente, queso cheddar, lechuga fresca, tomate natural y salsa La Firma.",
+        description: "Pollo crujiente, queso cheddar, lechuga, tomate y salsa La Firma.",
         tags: ["menu"],
         image: "/images/products/f21-tasty-chicken.jpg",
+        menuPrice: MENU_PRICE,
       },
       {
-        id: "f22-doble-crunch",
+        id: "f22-fish-firma",
         code: "F22",
-        name: "Doble Crunch",
-        price: 8,
-        description: "Hamburguesa y tenders de pollo, cebolla, tomate, lechuga y salsa Tasty. + Menú patatas y bebida 2,50 €",
+        name: "Fish Firma",
+        price: 3.5,
+        description: "Filete de pescado, queso cheddar y salsa tártara.",
         tags: ["menu"],
-        image: "/images/products/f22-doble-crunch.jpg",
+        image: "/images/products/f22-fish-firma.jpg",
+        menuPrice: MENU_PRICE,
       },
       {
         id: "f23-big-firma",
         code: "F23",
         name: "Big Firma",
         price: 7.5,
-        description: "Doble carne smash, queso cheddar, lechuga fresca, pepinillos, cebolla y salsa La Firma.",
+        description: "Doble carne smash, queso cheddar, lechuga, cebolla, pepinillos y salsa La Firma.",
         tags: ["popular", "menu"],
         image: "/images/products/f23-big-firma.jpg",
+        menuPrice: MENU_PRICE,
       },
       {
         id: "f24-cheese-firma",
@@ -243,13 +258,24 @@ export const categories: Category[] = [
         price: 2.9,
         description: "Carne smash, queso cheddar, pepinillos y salsa La Firma.",
         image: "/images/products/f24-cheese-firma.jpg",
+        menuPrice: MENU_PRICE,
+      },
+      {
+        id: "f25-doble-crunch",
+        code: "F25",
+        name: "Doble Crunch",
+        price: 8,
+        description: "Carne smash y tenders de pollo, lechuga, tomate, cebolla y salsa Tasty.",
+        tags: ["menu"],
+        image: "/images/products/f25-doble-crunch.jpg",
+        menuPrice: MENU_PRICE,
       },
       {
         id: "kids-firma",
         name: "Kids Firma",
         price: 4.9,
-        description:
-          "Elige: Cheese Firma o 3 Nuggets + zumo infantil (naranja, frutas rojas o Milderman multifrutas).",
+        // Ya viene con patatas y bebida, así que no lleva suplemento de menú.
+        description: "Cheese Firma o seis nuggets, con patatas y zumo infantil a elegir.",
         tags: ["menu"],
         image: "/images/products/kids-firma.jpg",
       },
@@ -265,25 +291,28 @@ export const categories: Category[] = [
         code: "F30",
         name: "BocaTandoo",
         price: 6.5,
-        description: "Pollo tandoori. + Menú patatas y bebida 2,50 €",
+        description: "Pollo marinado al estilo tandoori.",
         tags: ["popular"],
         image: "/images/products/f30-bocatandoo.jpg",
+        menuPrice: MENU_PRICE,
       },
       {
         id: "f31-bocacurry",
         code: "F31",
         name: "Bocacurry",
         price: 6.5,
-        description: "Curry. + Menú patatas y bebida 2,50 €",
+        description: "Pollo con nuestra salsa curry.",
         image: "/images/products/f31-bocacurry.jpg",
+        menuPrice: MENU_PRICE,
       },
       {
         id: "f32-bocamixto",
         code: "F32",
         name: "Bocamixto",
         price: 6.5,
-        description: "Mezcla de carne picada y pollo. + Menú patatas y bebida 2,50 €",
+        description: "Mezcla de carne picada y pollo.",
         image: "/images/products/f32-bocamixto.jpg",
+        menuPrice: MENU_PRICE,
       },
     ],
   },
@@ -297,7 +326,7 @@ export const categories: Category[] = [
         code: "F40",
         name: "Crousty Sweet",
         price: 9.0,
-        description: "Tenders de pollo crujientes, salsa dulce, salsa casera de arroz, arroz y cebolla frita.",
+        description: "Tenders de pollo crujientes, arroz, salsa dulce, salsa casera de arroz y cebolla frita.",
         tags: ["popular"],
         image: "/images/products/f40-crousty-sweet.jpg",
       },
@@ -306,7 +335,7 @@ export const categories: Category[] = [
         code: "F41",
         name: "Crousty Spicy",
         price: 9.0,
-        description: "Tenders de pollo crujientes, salsa picante, salsa casera de arroz, arroz y cebolla frita.",
+        description: "Tenders de pollo crujientes, arroz, salsa picante, salsa casera de arroz y cebolla frita.",
         tags: ["popular"],
         image: "/images/products/f41-crousty-spicy.jpg",
       },
