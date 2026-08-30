@@ -73,6 +73,12 @@ const config: Config = {
           from: { width: "0%" },
           to: { width: "100%" },
         },
+        // Rebote corto al elegir una bebida: confirma el toque sin distraer
+        bebidaPop: {
+          "0%": { transform: "scale(1)" },
+          "45%": { transform: "scale(1.06)" },
+          "100%": { transform: "scale(1)" },
+        },
       },
       animation: {
         tacoFloat: "tacoFloat 3.2s ease-in-out infinite",
@@ -83,6 +89,7 @@ const config: Config = {
         fadeUp: "fadeUp 0.7s cubic-bezier(.22,.61,.36,1) forwards",
         slideInLeft: "slideInLeft 0.35s ease-out forwards",
         progressBar: "progressBar 1.4s ease-out 0.4s forwards",
+        bebidaPop: "bebidaPop 0.42s cubic-bezier(.34,1.56,.64,1)",
       },
     },
   },
