@@ -12,7 +12,7 @@ import { PhoneIcon, PinIcon, StarIcon } from "./ValueIcons";
  */
 export default function PromoSection() {
   return (
-    <section className="py-20 md:py-24">
+    <section id="visitanos" className="py-20 md:py-24">
       <div className="mx-auto max-w-[1180px] px-6">
         <Reveal>
           <div className="relative overflow-hidden rounded-xl3 bg-gradient-to-br from-red to-red-dark px-8 py-16 md:px-16 md:py-20 text-center text-white">

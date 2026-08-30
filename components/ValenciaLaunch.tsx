@@ -179,6 +179,9 @@ export default function ValenciaLaunch() {
               <p className="mt-3 font-heading text-lg font-bold uppercase text-ink md:text-xl">
                 {valenciaLaunch.location.street}
               </p>
+              <p className="font-heading text-sm uppercase tracking-wide text-gold-deep md:text-base">
+                {valenciaLaunch.location.area}
+              </p>
               <p className="font-heading text-sm uppercase tracking-wide text-ink-soft md:text-base">
                 {valenciaLaunch.location.postalCode} {valenciaLaunch.city}, {valenciaLaunch.region}
               </p>

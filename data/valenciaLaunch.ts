@@ -11,9 +11,10 @@ export const valenciaLaunch = {
   region: "València",
   location: {
     name: "La Firma Tacos — Paterna",
-    street: "Carrer dels Velluters, 1",
+    street: "Calle de Carboners, 21",
+    area: "Parque Empresarial Táctica",
     postalCode: "46980",
-    fullAddress: "Carrer dels Velluters, 1, 46980 Paterna, València, España",
+    fullAddress: "Calle de Carboners, 21, Parque Empresarial Táctica, 46980 Paterna, València, España",
   },
   // null = todavía no hay fecha confirmada → la web muestra "Próximamente".
   // Cuando se confirme, basta con poner aquí "2026-XX-XX" (ISO) para que
