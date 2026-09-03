@@ -78,16 +78,16 @@ export default function MontaTuTacoBuilder() {
       <section className="py-14 md:py-20 bg-[#faf7f2]">
         <div className="mx-auto max-w-[1180px] px-6">
           {/* Tallas */}
-          <div ref={sizesRef} className="grid sm:grid-cols-3 gap-6 mb-10 scroll-mt-40">
+          <div ref={sizesRef} className="grid items-stretch gap-6 mb-10 scroll-mt-40 sm:grid-cols-3">
             {montaTuTaco.sizes.map((size, i) => {
               const active = selectedSize === size.size;
               return (
-                <Reveal key={size.size} delay={i * 0.1}>
+                <Reveal key={size.size} delay={i * 0.1} className="h-full">
                   <button
                     type="button"
                     aria-pressed={active}
                     onClick={() => handleSizeSelect(size.size)}
-                    className={`group relative w-full rounded-xl2 border bg-white p-8 text-center shadow-card transition-all hover:-translate-y-2 hover:shadow-cardHover ${
+                    className={`group relative flex h-full w-full flex-col items-center rounded-xl2 border bg-white p-8 text-center shadow-card transition-all hover:-translate-y-2 hover:shadow-cardHover ${
                       active ? "border-2 border-red ring-2 ring-red/25" : "border-line"
                     }`}
                   >
@@ -96,18 +96,24 @@ export default function MontaTuTacoBuilder() {
                         <CheckIcon className="h-4 w-4" />
                       </span>
                     )}
-                    <div
-                      className={`mx-auto mb-3 overflow-hidden rounded-full border-2 bg-[#f6f0e7] shadow-card transition-all duration-500 group-hover:scale-105 ${
-                        active ? "border-red" : "border-cream"
-                      }`}
-                      style={{ width: `${88 + i * 16}px`, height: `${88 + i * 16}px` }}
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={SIZE_PHOTOS[size.size]}
-                        alt={`Monta Tu Taco talla ${size.size}`}
-                        className="h-full w-full object-cover"
-                      />
+                    {/* Hueco de alto fijo (el de la talla mayor) con el círculo
+                        centrado dentro: la foto sigue creciendo de M a XL —que
+                        es lo que cuenta la diferencia de tamaño— pero las tres
+                        tarjetas empiezan y acaban a la misma altura. */}
+                    <div className="mb-3 flex h-[120px] w-full items-center justify-center">
+                      <div
+                        className={`overflow-hidden rounded-full border-2 bg-[#f6f0e7] shadow-card transition-all duration-500 group-hover:scale-105 ${
+                          active ? "border-red" : "border-cream"
+                        }`}
+                        style={{ width: `${88 + i * 16}px`, height: `${88 + i * 16}px` }}
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={SIZE_PHOTOS[size.size]}
+                          alt={`Monta Tu Taco talla ${size.size}`}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
                     </div>
                     <span className="block font-heading text-xs uppercase tracking-[2px] text-ink-soft">Tamaño</span>
                     <span className="block font-heading font-bold text-4xl text-ink">{size.size}</span>

@@ -30,11 +30,14 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <Wrapper
       {...(wrapperProps as { href: string })}
-      className={`group block rounded-xl2 border border-line bg-white shadow-card overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-cardHover ${
+      // h-full + flex: todas las tarjetas de una fila acaban a la misma altura
+      // aunque unas lleven etiquetas y otras no, que era lo que descuadraba
+      // el borde inferior de la rejilla.
+      className={`group flex h-full flex-col overflow-hidden rounded-xl2 border border-line bg-white shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-cardHover ${
         product.href ? "neon-ring-hover cursor-pointer" : ""
       }`}
     >
-      <div className="relative aspect-[4/5] overflow-hidden border-b border-line bg-[#f6f0e7]">
+      <div className="relative aspect-[4/5] shrink-0 overflow-hidden border-b border-line bg-[#f6f0e7]">
         {product.image && !imageFailed ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -42,7 +45,7 @@ export default function ProductCard({ product }: { product: Product }) {
             alt={product.name}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.07]"
             onError={() => setImageFailed(true)}
           />
         ) : (
@@ -52,14 +55,24 @@ export default function ProductCard({ product }: { product: Product }) {
             {product.name}
           </div>
         )}
+
+        {/* Velo cálido que entra desde abajo: da profundidad a la foto al
+            pasar el ratón sin llegar a ensuciar el producto. */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-red-dark/35 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        />
+
+        {/* El precio vive sobre la foto, como en una carta de verdad: se lee
+            antes que nada y libera la línea del nombre, que ya no compite. */}
+        <span className="absolute bottom-3 right-3 rounded-full bg-white/95 px-3 py-1.5 font-heading text-sm font-bold text-red shadow-card backdrop-blur-sm transition-transform duration-300 group-hover:scale-105">
+          {formatPrice(product.price)}
+        </span>
       </div>
       <div className="p-5">
-        <h4 className="flex items-center justify-between gap-2 font-heading text-base font-bold uppercase text-ink mb-1.5">
-          <span>
-            {product.code ? `${product.code} ` : ""}
-            {product.name}
-          </span>
-          <span className="whitespace-nowrap font-heading font-bold text-red">{formatPrice(product.price)}</span>
+        <h4 className="mb-1.5 font-heading text-base font-bold uppercase text-ink">
+          {product.code && <span className="mr-1.5 text-red/70">{product.code}</span>}
+          {product.name}
         </h4>
         {product.description && <p className="text-sm text-ink-soft">{product.description}</p>}
         {product.menuPrice && (

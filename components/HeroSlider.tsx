@@ -3,13 +3,13 @@
 import "swiper/css";
 import "swiper/css/effect-fade";
 
-import Link from "next/link";
 import { useRef, useState } from "react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperClass } from "swiper/types";
 import { heroSlides } from "@/data/videos";
 import { siteConfig } from "@/data/siteConfig";
+import { ButtonLink } from "./Button";
 import MediaBackground from "./MediaBackground";
 import { StarIcon } from "./ValueIcons";
 
@@ -79,20 +79,14 @@ export default function HeroSlider() {
                   <p className="text-white/90 text-base md:text-xl mb-7 max-w-md">{slide.subtitle}</p>
 
                   <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                    <Link
-                      href={slide.ctaHref}
-                      className="btn-shine inline-block rounded-full bg-red px-8 py-4 text-center font-heading text-sm font-bold uppercase tracking-wide text-white shadow-cardHover transition-transform hover:-translate-y-0.5 hover:bg-red-glow"
-                    >
+                    <ButtonLink href={slide.ctaHref} variant="primary" size="lg" arrow>
                       {slide.ctaLabel}
-                    </Link>
+                    </ButtonLink>
                     {/* Acción fija y distinta del CTA de cada diapositiva,
                         para que nunca salgan dos botones repetidos. */}
-                    <a
-                      href="#visitanos"
-                      className="inline-block rounded-full border-2 border-white/80 px-8 py-4 text-center font-heading text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-white hover:text-ink"
-                    >
+                    <ButtonLink href="#visitanos" variant="outline" size="lg">
                       Pedir a domicilio
-                    </a>
+                    </ButtonLink>
                   </div>
 
                   {/* Señales de confianza: lo que busca quien no os conoce */}

@@ -49,7 +49,7 @@ export default function CartaPage() {
             <a
               key={cat.slug}
               href={`#${cat.slug}`}
-              className="flex-shrink-0 rounded-full border border-line bg-white px-5 py-2.5 font-heading text-xs font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-red hover:text-white hover:border-red"
+              className="flex-shrink-0 rounded-full border border-line bg-white px-5 py-2.5 font-heading text-xs font-semibold uppercase tracking-wide text-ink transition-[transform,box-shadow,background-color,color,border-color] duration-300 hover:-translate-y-0.5 hover:border-red hover:bg-red hover:text-white hover:shadow-[0_8px_20px_rgba(211,31,31,0.3)] active:translate-y-0 active:scale-[0.96]"
             >
               {cat.title}
             </a>
@@ -61,7 +61,9 @@ export default function CartaPage() {
         <section
           key={category.slug}
           id={category.slug}
-          className={`py-16 md:py-20 ${catIndex % 2 === 1 ? "bg-bgsoft" : ""}`}
+          // scroll-mt: la cabecera y la barra de categorías son fijas; sin este
+          // margen el título de la sección queda escondido debajo al usar los enlaces.
+          className={`scroll-mt-[200px] py-16 md:py-20 ${catIndex % 2 === 1 ? "bg-bgsoft" : ""}`}
         >
           <div className="mx-auto max-w-[1180px] px-6">
             <Reveal>
@@ -77,8 +79,9 @@ export default function CartaPage() {
 
             {category.slug === "bebidas" ? (
               <Reveal delay={0.08}>
-                <p className="mb-6 max-w-lg text-ink-soft">
-                  Refrescos, tés helados, zumos y aguas de las mejores marcas para acompañar tu pedido.
+                <p className="mb-8 max-w-xl text-ink-soft">
+                  Toda nuestra nevera: refrescos, energéticas, tés helados, Chill, agua y zumos. Toca cualquier
+                  bebida para marcarla y llevar tu pedido decidido.
                 </p>
                 <DrinksGrid />
               </Reveal>
@@ -88,7 +91,7 @@ export default function CartaPage() {
                   {block.group && (
                     <h3 className="font-heading font-bold uppercase text-lg text-gold-deep mb-4">{block.group}</h3>
                   )}
-                  <div className="flex flex-wrap justify-center gap-5 md:gap-6">
+                  <div className="flex flex-wrap items-stretch justify-center gap-5 md:gap-6">
                     {block.items.map((product, i) => (
                       <Reveal
                         key={product.id}

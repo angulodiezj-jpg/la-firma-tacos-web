@@ -109,6 +109,18 @@ export function StarIcon({ className = "" }: IconProps) {
   );
 }
 
+/** Estrella maciza — para la valoración, donde el relleno ES el dato. */
+export function StarSolidIcon({ className = "" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      <path
+        d="M12 3.5l2.5 5.3 5.7.8-4.2 4.1 1 5.8L12 16.7l-5 2.8 1-5.8-4.2-4.1 5.7-.8L12 3.5Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 export function ChiliIcon({ className = "" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className}>

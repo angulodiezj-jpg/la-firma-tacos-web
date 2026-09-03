@@ -76,7 +76,7 @@ export default function Header({ onMenuOpen }: HeaderProps) {
               escritorio, donde esa barra no existe. */}
           <Link
             href="/monta-tu-taco"
-            className="btn-shine neon-cta hidden rounded-full bg-red px-6 py-3 font-heading text-sm font-semibold uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5 hover:bg-red-glow lg:inline-block"
+            className="btn-shine group/btn neon-cta hidden rounded-full bg-gradient-to-br from-red to-red-dark px-6 py-3 font-heading text-sm font-bold uppercase tracking-wide text-white shadow-[0_8px_22px_rgba(211,31,31,0.32)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:from-red-glow hover:to-red hover:shadow-[0_12px_34px_rgba(211,31,31,0.48),0_0_26px_4px_rgba(255,59,48,0.42)] active:translate-y-0 active:scale-[0.97] lg:inline-block"
           >
             Monta Tu Tacos
           </Link>

@@ -42,7 +42,7 @@ export default function NotFound() {
             <Link
               key={a.href}
               href={a.href}
-              className="rounded-full border-2 border-white/70 px-6 py-3 font-heading text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-white hover:text-ink"
+              className="btn-shine rounded-full border-2 border-white/85 px-6 py-3 font-heading text-sm font-bold uppercase tracking-wide text-white transition-[transform,box-shadow,background-color,color] duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-ink active:translate-y-0 active:scale-[0.97]"
             >
               {a.label}
             </Link>
@@ -52,7 +52,7 @@ export default function NotFound() {
         <div className="mt-6">
           <Link
             href="/"
-            className="btn-shine neon-cta inline-block rounded-full bg-red px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5"
+            className="btn-shine neon-cta inline-block rounded-full bg-gradient-to-br from-red to-red-dark px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white shadow-[0_8px_22px_rgba(211,31,31,0.32)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:from-red-glow hover:to-red hover:shadow-[0_12px_34px_rgba(211,31,31,0.48),0_0_26px_4px_rgba(255,59,48,0.42)] active:translate-y-0 active:scale-[0.97]"
           >
             Volver al inicio
           </Link>

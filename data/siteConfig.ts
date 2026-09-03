@@ -11,10 +11,17 @@ export const siteConfig = {
   tagline: "Original French Tacos",
   description:
     "La Firma Tacos: el auténtico taco francés hecho al momento. Descubre la carta y monta tu taco a tu manera.",
+  // Valoración agregada. IMPORTANTE: estos dos números deben copiarse tal cual
+  // del perfil de Google Business del local; no se estiman ni se redondean al
+  // alza, porque además alimentan el aggregateRating de los datos
+  // estructurados y una cifra inflada ahí es motivo de penalización en Google.
   rating: {
+    // Verificado en la ficha de Google Maps el 02/09/2026.
     value: 4.8,
-    count: 103,
+    count: 151,
     source: "Google",
+    /** Ficha del local: leer todas las opiniones y dejar la propia. */
+    url: "https://www.google.com/maps/search/?api=1&query=La+Firma+Tacos+Paseo+de+la+Castellana+122+Madrid",
   },
   location: {
     name: "La Firma Tacos — Castellana",

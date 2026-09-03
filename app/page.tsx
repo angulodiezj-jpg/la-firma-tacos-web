@@ -3,6 +3,7 @@ import HeroSlider from "@/components/HeroSlider";
 import Marquee from "@/components/Marquee";
 import PromoSection from "@/components/PromoSection";
 import RestaurantSchema from "@/components/RestaurantSchema";
+import ReviewsSection from "@/components/ReviewsSection";
 import ValuesSection from "@/components/ValuesSection";
 import VibeSection from "@/components/VibeSection";
 import { siteConfig } from "@/data/siteConfig";
@@ -17,6 +18,9 @@ export default function HomePage() {
 
       <CategoryShowcase />
       <ValuesSection />
+      {/* La prueba social va justo antes del bloque de "Visítanos": quien acaba
+          de convencerse leyendo opiniones tiene la dirección a un scroll. */}
+      <ReviewsSection />
       <PromoSection />
       <VibeSection />
 

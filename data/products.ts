@@ -2,6 +2,8 @@
 // Los precios de Uber Eats/Glovo llevan un pequeño incremento por delivery — estos son los de local.
 // Para editar productos o precios, modifica los objetos de abajo. No hace falta tocar ningún componente.
 
+import { drinkGroups, drinkPrice } from "./drinks";
+
 export type ProductTag = "popular" | "menu" | "no-disponible" | "proximamente";
 
 export type Product = {
@@ -232,16 +234,6 @@ export const categories: Category[] = [
         menuPrice: MENU_PRICE,
       },
       {
-        id: "f22-fish-firma",
-        code: "F22",
-        name: "Fish Firma",
-        price: 3.5,
-        description: "Filete de pescado, queso cheddar y salsa tártara.",
-        tags: ["menu"],
-        image: "/images/products/f22-fish-firma.jpg",
-        menuPrice: MENU_PRICE,
-      },
-      {
         id: "f23-big-firma",
         code: "F23",
         name: "Big Firma",
@@ -399,57 +391,22 @@ export const categories: Category[] = [
     ],
   },
   {
-    // Actualizado con el póster oficial de la marca — reemplaza la lista anterior basada en Loyverse.
+    // Lineup real de bebidas con foto de cada referencia. La lista vive en
+    // data/drinks.ts (una sola fuente para la web y para las pantallas del
+    // local); aquí se deriva para que la carta, el buscador y los datos
+    // estructurados no puedan contradecirse.
     slug: "bebidas",
     title: "Bebidas",
     eyebrow: "Para Acompañar",
-    products: [
-      // Refrescos — 2,00 €
-      { id: "coca-cola", name: "Coca-Cola", price: 2.0, group: "Refrescos" },
-      { id: "coca-cola-zero", name: "Coca-Cola Zero", price: 2.0, group: "Refrescos" },
-      { id: "coca-cherry", name: "Coca Cherry", price: 2.0, group: "Refrescos" },
-      { id: "fanta-naranja", name: "Fanta Naranja", price: 2.0, group: "Refrescos" },
-      { id: "fanta-limon", name: "Fanta Limón", price: 2.0, group: "Refrescos" },
-      { id: "fanta-exotica", name: "Fanta Exótica", price: 2.0, group: "Refrescos" },
-      { id: "fanta-fruta-dragon", name: "Fanta Fruta del Dragón", price: 2.0, group: "Refrescos" },
-      { id: "oasis-tropical", name: "Oasis Tropical", price: 2.0, group: "Refrescos" },
-      { id: "oasis-manzana-cassis", name: "Oasis Manzana Cassis", price: 2.0, group: "Refrescos" },
-      { id: "nestea-maracuya", name: "Nestea Maracuyá", price: 2.0, group: "Refrescos" },
-      { id: "aquarius-limon", name: "Aquarius Limón", price: 2.0, group: "Refrescos" },
-      { id: "aquarius-naranja", name: "Aquarius Naranja", price: 2.0, group: "Refrescos" },
-      { id: "7up", name: "7Up", price: 2.0, group: "Refrescos" },
-      { id: "selecto", name: "Selecto", price: 2.0, group: "Refrescos" },
-      { id: "hamoud", name: "Hamoud", price: 2.0, group: "Refrescos" },
-      { id: "hamoud-limon", name: "Hamoud Limón", price: 2.0, group: "Refrescos" },
-      { id: "schweppes-citron", name: "Schweppes Citrón", price: 2.0, group: "Refrescos" },
-      { id: "schweppes-agrum", name: "Schweppes Agrum", price: 2.0, group: "Refrescos" },
-      // Energéticas — 2,00 €
-      { id: "street-tropical", name: "Street Tropical", price: 2.0, group: "Energéticas" },
-      { id: "street-cherry", name: "Street Cherry", price: 2.0, group: "Energéticas" },
-      { id: "street-orange", name: "Street Orange", price: 2.0, group: "Energéticas" },
-      { id: "street-mojito", name: "Street Mojito", price: 2.0, group: "Energéticas" },
-      { id: "izem-classic", name: "Izem Classic", price: 2.0, group: "Energéticas" },
-      { id: "izem-tropical", name: "Izem Tropical", price: 2.0, group: "Energéticas" },
-      { id: "izem-mojito", name: "Izem Mojito", price: 2.0, group: "Energéticas" },
-      { id: "izem-frutos-rojos", name: "Izem Frutos Rojos", price: 2.0, group: "Energéticas" },
-      // Premium
-      { id: "redbull", name: "Red Bull", price: 2.5, group: "Premium" },
-      { id: "redbull-red-edition", name: "Red Bull Red Edition", price: 3.0, group: "Premium" },
-      // Chill — 1,80 €
-      { id: "chill-cosmopolitan", name: "Chill Cosmopolitan", price: 1.8, group: "Chill" },
-      { id: "chill-fresa-sandia", name: "Chill Fresa Sandía", price: 1.8, group: "Chill" },
-      { id: "chill-tropical", name: "Chill Tropical", price: 1.8, group: "Chill" },
-      { id: "chill-mango-pera", name: "Chill Mango Pera", price: 1.8, group: "Chill" },
-      { id: "chill-mojito", name: "Chill Mojito", price: 1.8, group: "Chill" },
-      // Agua — 1,50 €
-      { id: "agua-cortes", name: "Agua Cortes", price: 1.5, group: "Agua" },
-      // Zumos Niños — 1,50 €
-      // Nota: se han retirado los zumos "Hello Kitty" y "Spiderman" — son
-      // personajes con licencia registrada y usarlos sin acuerdo comercial
-      // con el titular de la marca es un riesgo legal real para el negocio.
-      { id: "capri-sun-naranja", name: "Capri Sun Naranja", price: 1.5, group: "Zumos Niños" },
-      { id: "capri-sun-multifrutas", name: "Capri Sun Multifrutas", price: 1.5, group: "Zumos Niños" },
-    ],
+    products: drinkGroups.flatMap((block) =>
+      block.items.map((drink) => ({
+        id: drink.id,
+        name: drink.name,
+        price: drinkPrice(block, drink),
+        group: block.group,
+        image: drink.image,
+      })),
+    ),
   },
 ];
 

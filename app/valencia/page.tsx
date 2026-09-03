@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         url: ogImage,
         width: 1200,
         height: 630,
-        alt: "Mural de La Firma Tacos — Nueva apertura en Paterna, València",
+        alt: "Mural de La Firma Tacos — Nueva apertura en Paterna, Valencia",
       },
     ],
   },

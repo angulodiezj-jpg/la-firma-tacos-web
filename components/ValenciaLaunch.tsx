@@ -40,7 +40,7 @@ export default function ValenciaLaunch() {
           src={HERO_IMAGE}
           srcSet={HERO_SRCSET}
           sizes="100vw"
-          alt="Mural de La Firma Tacos, próxima apertura en Paterna, València"
+          alt="Mural de La Firma Tacos, próxima apertura en Paterna, Valencia"
           className="animate-kenburns absolute inset-0 h-full w-full object-cover object-center"
           loading="eager"
           decoding="async"
@@ -67,7 +67,7 @@ export default function ValenciaLaunch() {
 
           <HeroBeat delay={0.3} className="mt-4">
             <h1 className="font-heading font-bold uppercase leading-[0.92] text-white">
-              <span className="block text-7xl sm:text-8xl md:text-[9rem]">València</span>
+              <span className="block text-7xl sm:text-8xl md:text-[9rem]">Valencia</span>
             </h1>
           </HeroBeat>
 
@@ -82,14 +82,14 @@ export default function ValenciaLaunch() {
               {valenciaLaunch.location.street} · {valenciaLaunch.location.postalCode} {valenciaLaunch.city}
             </p>
             <span className="mt-2 inline-block font-heading text-xs font-bold uppercase tracking-[2px] text-gold">
-              {dateLabel} · Paterna · València
+              {dateLabel} · Paterna · Valencia
             </span>
           </HeroBeat>
 
           <HeroBeat delay={0.86} className="mt-8 flex w-full max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
             <a
               href="#ubicacion"
-              className="btn-shine neon-cta rounded-full bg-red px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5"
+              className="btn-shine group/btn neon-cta rounded-full bg-gradient-to-br from-red to-red-dark px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white shadow-[0_8px_22px_rgba(211,31,31,0.32)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:from-red-glow hover:to-red hover:shadow-[0_12px_34px_rgba(211,31,31,0.48),0_0_26px_4px_rgba(255,59,48,0.42)] active:translate-y-0 active:scale-[0.97]"
             >
               Descubre La Nueva Firma
             </a>
@@ -97,7 +97,7 @@ export default function ValenciaLaunch() {
               href={siteConfig.social.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border-2 border-white/70 px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-white hover:text-ink"
+              className="btn-shine rounded-full border-2 border-white/85 px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white transition-[transform,box-shadow,background-color,color] duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-ink hover:shadow-[0_10px_28px_rgba(0,0,0,0.28)] active:translate-y-0 active:scale-[0.97]"
             >
               Síguenos en Instagram
             </a>
@@ -105,7 +105,7 @@ export default function ValenciaLaunch() {
               href={siteConfig.social.tiktok}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border-2 border-white/70 px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-white hover:text-ink"
+              className="btn-shine rounded-full border-2 border-white/85 px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white transition-[transform,box-shadow,background-color,color] duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-ink hover:shadow-[0_10px_28px_rgba(0,0,0,0.28)] active:translate-y-0 active:scale-[0.97]"
             >
               Síguenos en TikTok
             </a>
@@ -193,7 +193,7 @@ export default function ValenciaLaunch() {
                   href={mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-shine neon-cta inline-flex items-center gap-2 rounded-full bg-red px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5"
+                  className="btn-shine group/btn neon-cta inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-red to-red-dark px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white shadow-[0_8px_22px_rgba(211,31,31,0.32)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:from-red-glow hover:to-red hover:shadow-[0_12px_34px_rgba(211,31,31,0.48),0_0_26px_4px_rgba(255,59,48,0.42)] active:translate-y-0 active:scale-[0.97]"
                 >
                   Cómo llegar
                 </a>
@@ -233,7 +233,7 @@ export default function ValenciaLaunch() {
                 href={siteConfig.social.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-shine inline-flex items-center justify-center gap-2 rounded-full bg-white px-9 py-4 font-heading text-base font-bold uppercase tracking-wide text-ink transition-transform hover:-translate-y-0.5"
+                className="btn-shine inline-flex items-center justify-center gap-2 rounded-full bg-white px-9 py-4 font-heading text-base font-bold uppercase tracking-wide text-ink shadow-[0_8px_22px_rgba(0,0,0,0.25)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_34px_rgba(0,0,0,0.35)] active:translate-y-0 active:scale-[0.97]"
               >
                 TikTok
               </a>
@@ -262,7 +262,7 @@ export default function ValenciaLaunch() {
               href={siteConfig.social.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-shine mt-8 inline-block rounded-full bg-white px-9 py-4 font-heading text-base font-bold uppercase tracking-wide text-red transition-transform hover:-translate-y-0.5"
+              className="btn-shine mt-8 inline-block rounded-full bg-white px-9 py-4 font-heading text-base font-bold uppercase tracking-wide text-red shadow-[0_8px_22px_rgba(0,0,0,0.25)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_34px_rgba(0,0,0,0.35)] active:translate-y-0 active:scale-[0.97]"
             >
               Quiero saber cuándo abrís
             </a>
