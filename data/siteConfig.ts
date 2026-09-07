@@ -1,4 +1,8 @@
-export const SITE_URL = "https://lafirma-tacos.com";
+// Dominio oficial (comprado y confirmado el 03/09/2026). Todo el sitio deriva
+// las URL absolutas de esta única constante: canonical, sitemap, robots,
+// Open Graph y el schema.org del restaurante. www para que coincida con el
+// mismo patrón que .es (la raíz redirige a www).
+export const SITE_URL = "https://www.lafirma-tacos.com";
 
 /** Enlace a Google Maps generado desde una dirección real (sin coordenadas inventadas). */
 export function mapsUrl(address: string): string {
