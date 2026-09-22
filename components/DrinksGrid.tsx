@@ -1,18 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { drinkGroups, drinkPrice, type Drink } from "@/data/drinks";
-import { formatPrice } from "@/data/products";
+import { drinkGroups, type Drink } from "@/data/drinks";
 import { CheckIcon, PlusIcon } from "./ValueIcons";
 
 function DrinkCard({
   drink,
-  price,
   selected,
   onToggle,
 }: {
   drink: Drink;
-  price: number;
   selected: boolean;
   onToggle: () => void;
 }) {
@@ -81,9 +78,6 @@ function DrinkCard({
         >
           {drink.name}
         </span>
-        <span className="font-heading text-sm font-bold text-gold-deep">
-          {price > 0 ? formatPrice(price) : "Consultar"}
-        </span>
       </div>
     </button>
   );
@@ -97,35 +91,23 @@ export default function DrinksGrid() {
 
   return (
     <>
-      {drinkGroups.map((block, blockIndex) => {
-        // El precio solo se enseña junto al título cuando toda la familia
-        // cuesta lo mismo; si hay excepciones, cada ficha lleva el suyo.
-        const precioUnico = block.items.every((d) => drinkPrice(block, d) === block.price);
-
-        return (
-          <div key={block.group} className={blockIndex > 0 ? "mt-10" : ""}>
-            <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <h3 className="font-heading text-lg font-bold uppercase text-gold-deep">{block.group}</h3>
-              {precioUnico && block.price > 0 && (
-                <span className="font-heading text-xs font-semibold uppercase tracking-wide text-ink-soft">
-                  {formatPrice(block.price)}
-                </span>
-              )}
-            </div>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 md:gap-5">
-              {block.items.map((drink) => (
-                <DrinkCard
-                  key={drink.id}
-                  drink={drink}
-                  price={drinkPrice(block, drink)}
-                  selected={elegidas.includes(drink.id)}
-                  onToggle={() => alternar(drink.id)}
-                />
-              ))}
-            </div>
+      {drinkGroups.map((block, blockIndex) => (
+        <div key={block.group} className={blockIndex > 0 ? "mt-10" : ""}>
+          <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h3 className="font-heading text-lg font-bold uppercase text-gold-deep">{block.group}</h3>
           </div>
-        );
-      })}
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 md:gap-5">
+            {block.items.map((drink) => (
+              <DrinkCard
+                key={drink.id}
+                drink={drink}
+                selected={elegidas.includes(drink.id)}
+                onToggle={() => alternar(drink.id)}
+              />
+            ))}
+          </div>
+        </div>
+      ))}
 
       {elegidas.length > 0 && (
         <p className="mt-8 animate-fadeUp text-center font-heading text-sm font-semibold uppercase tracking-wide text-red">

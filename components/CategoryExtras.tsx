@@ -1,4 +1,4 @@
-import { formatPrice, type CategoryExtra } from "@/data/products";
+import type { CategoryExtra } from "@/data/products";
 
 /**
  * Tira de extras bajo una categoría de la carta: suplementos y/o gratinados
@@ -13,9 +13,6 @@ export default function CategoryExtras({ extras }: { extras: CategoryExtra[] }) 
             <div className="mb-2.5 flex items-center gap-2.5">
               <span className="font-heading text-sm font-bold uppercase tracking-wide text-ink">
                 {extra.label}
-              </span>
-              <span className="rounded-full bg-red px-2.5 py-0.5 font-heading text-[0.65rem] font-bold uppercase tracking-wide text-white">
-                +{formatPrice(extra.price)}
               </span>
             </div>
             <ul className="flex flex-wrap gap-x-2 gap-y-1.5">

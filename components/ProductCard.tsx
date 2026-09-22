@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import type { Product } from "@/data/products";
-import { formatPrice } from "@/data/products";
 
 const tagStyles: Record<string, string> = {
   popular: "bg-red text-white",
@@ -62,12 +61,6 @@ export default function ProductCard({ product }: { product: Product }) {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-red-dark/35 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         />
-
-        {/* El precio vive sobre la foto, como en una carta de verdad: se lee
-            antes que nada y libera la línea del nombre, que ya no compite. */}
-        <span className="absolute bottom-3 right-3 rounded-full bg-white/95 px-3 py-1.5 font-heading text-sm font-bold text-red shadow-card backdrop-blur-sm transition-transform duration-300 group-hover:scale-105">
-          {formatPrice(product.price)}
-        </span>
       </div>
       <div className="p-5">
         <h4 className="mb-1.5 font-heading text-base font-bold uppercase text-ink">
@@ -78,7 +71,7 @@ export default function ProductCard({ product }: { product: Product }) {
         {product.menuPrice && (
           <p className="mt-2 flex items-center gap-1.5 font-heading text-xs font-semibold uppercase tracking-wide text-gold-deep">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold" />
-            Hazlo menú (patatas + bebida) +{formatPrice(product.menuPrice)}
+            Hazlo menú (patatas + bebida)
           </p>
         )}
         {product.tags && product.tags.length > 0 && (

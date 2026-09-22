@@ -7,7 +7,7 @@ import Marquee from "@/components/Marquee";
 import Reveal from "@/components/Reveal";
 import { HalalBadge } from "@/components/SupplementIcons";
 import { CheckIcon, DrinkIcon, FlameIcon, FriesIcon } from "@/components/ValueIcons";
-import { formatPrice, montaTuTaco } from "@/data/products";
+import { montaTuTaco } from "@/data/products";
 
 // Una foto real y distinta por talla.
 const SIZE_PHOTOS: Record<string, string> = {
@@ -117,9 +117,6 @@ export default function MontaTuTacoBuilder() {
                     </div>
                     <span className="block font-heading text-xs uppercase tracking-[2px] text-ink-soft">Tamaño</span>
                     <span className="block font-heading font-bold text-4xl text-ink">{size.size}</span>
-                    <span className="mt-2.5 inline-block rounded-full bg-red px-5 py-1.5 font-heading font-bold text-lg text-white">
-                      {formatPrice(size.price)}
-                    </span>
                     <span className="mt-2 block font-heading text-[0.65rem] uppercase tracking-wide text-ink-soft">
                       {SIZE_LIMITS[size.size]} {SIZE_LIMITS[size.size] === 1 ? "carne" : "carnes"} ·{" "}
                       {SIZE_LIMITS[size.size]} {SIZE_LIMITS[size.size] === 1 ? "salsa" : "salsas"}
@@ -137,9 +134,6 @@ export default function MontaTuTacoBuilder() {
                 <FriesIcon className="h-5 w-5 text-gold" />
                 <DrinkIcon className="h-5 w-5 text-gold" />
                 {montaTuTaco.menuSupplement.label}
-              </span>
-              <span className="font-heading font-bold text-2xl text-gold">
-                +{formatPrice(montaTuTaco.menuSupplement.price)}
               </span>
             </div>
           </Reveal>
@@ -187,7 +181,7 @@ export default function MontaTuTacoBuilder() {
             </Reveal>
 
             <Reveal delay={0.16}>
-              <IngredientPanel title="Suplementos" priceTag={`+${formatPrice(montaTuTaco.supplements.price)}`}>
+              <IngredientPanel title="Suplementos">
                 {montaTuTaco.supplements.items.map((s) => (
                   <IngredientChip
                     key={s.name}
@@ -203,13 +197,7 @@ export default function MontaTuTacoBuilder() {
             <Reveal delay={0.24}>
               <IngredientPanel title="Gratinados">
                 {montaTuTaco.gratins.map((g) => (
-                  <IngredientChip
-                    key={g.name}
-                    icon={g.icon}
-                    image={g.image}
-                    name={g.name}
-                    priceTag={`+${formatPrice(g.price)}`}
-                  />
+                  <IngredientChip key={g.name} icon={g.icon} image={g.image} name={g.name} />
                 ))}
               </IngredientPanel>
             </Reveal>
@@ -232,12 +220,10 @@ export default function MontaTuTacoBuilder() {
 
 function IngredientPanel({
   title,
-  priceTag,
   counter,
   children,
 }: {
   title: string;
-  priceTag?: string;
   counter?: string;
   children: React.ReactNode;
 }) {
@@ -246,9 +232,6 @@ function IngredientPanel({
       <h3 className="flex items-center justify-center gap-2.5 text-center font-heading font-bold text-xl text-ink mb-1">
         <span className="text-red text-sm">→</span>
         {title}
-        {priceTag && (
-          <span className="rounded-full bg-red px-3 py-0.5 text-xs font-semibold text-white">{priceTag}</span>
-        )}
         <span className="text-red text-sm">←</span>
       </h3>
       {counter && (

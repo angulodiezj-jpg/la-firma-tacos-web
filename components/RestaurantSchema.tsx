@@ -37,7 +37,6 @@ export default function RestaurantSchema() {
     name: location.name,
     description: siteConfig.description,
     servesCuisine: ["French Tacos", "Comida rápida", "Halal"],
-    priceRange: "€€",
     url: SITE_URL,
     telephone: `+34${location.phoneHref.replace(/\D/g, "").slice(-9)}`,
     email: location.email,

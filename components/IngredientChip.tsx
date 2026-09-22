@@ -9,7 +9,6 @@ type IngredientChipProps = {
   image?: string;
   customIcon?: React.ReactNode;
   extraBadge?: React.ReactNode;
-  priceTag?: string;
   tag?: string;
   spice?: 0 | 1 | 2 | 3;
   /** Modo controlado (p.ej. carnes/salsas con límite según tamaño). Si se omite, el chip gestiona su propia selección. */
@@ -25,7 +24,6 @@ export default function IngredientChip({
   image,
   customIcon,
   extraBadge,
-  priceTag,
   tag,
   spice,
   selected: controlledSelected,
@@ -103,11 +101,6 @@ export default function IngredientChip({
           {Array.from({ length: spice }).map((_, i) => (
             <ChiliIcon key={i} className="h-3 w-3" />
           ))}
-        </span>
-      )}
-      {priceTag && (
-        <span className="mt-1 inline-block rounded bg-red-dark px-1.5 py-0.5 text-[0.55rem] font-heading uppercase text-white">
-          {priceTag}
         </span>
       )}
       {tag === "proximamente" && (

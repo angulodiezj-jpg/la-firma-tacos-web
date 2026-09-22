@@ -1,8 +1,11 @@
-// Dominio oficial (comprado y confirmado el 03/09/2026). Todo el sitio deriva
-// las URL absolutas de esta única constante: canonical, sitemap, robots,
-// Open Graph y el schema.org del restaurante. www para que coincida con el
-// mismo patrón que .es (la raíz redirige a www).
-export const SITE_URL = "https://www.lafirma-tacos.com";
+// El dominio .com ya es del cliente, pero a día de hoy sigue sin enlazarse
+// en Vercel (sin DNS, sin resolver — verificado el 23/09/2026). Mientras
+// tanto SITE_URL se mantiene en .es, que es el dominio que responde de
+// verdad: publicar aquí ya el .com rompería el canonical y el Open Graph
+// del sitio en vivo. En cuanto el DNS esté propagado, este valor vuelve a
+// "https://www.lafirma-tacos.com" (ese cambio ya existe hecho en el
+// commit cdfd2c7, solo hay que traerlo).
+export const SITE_URL = "https://www.lafirma-tacos.es";
 
 /** Enlace a Google Maps generado desde una dirección real (sin coordenadas inventadas). */
 export function mapsUrl(address: string): string {
