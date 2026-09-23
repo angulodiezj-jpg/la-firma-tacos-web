@@ -255,7 +255,7 @@ export const categories: Category[] = [
       {
         id: "f25-doble-crunch",
         code: "F25",
-        name: "Doble Crunch",
+        name: "Big Crunch",
         price: 8,
         description: "Carne smash y tenders de pollo, lechuga, tomate, cebolla y salsa Tasty.",
         tags: ["menu"],
