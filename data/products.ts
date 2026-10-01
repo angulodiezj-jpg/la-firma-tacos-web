@@ -263,6 +263,16 @@ export const categories: Category[] = [
         menuPrice: MENU_PRICE,
       },
       {
+        id: "f22-giant-firma",
+        code: "F22",
+        name: "Giant Firma",
+        price: 7.9,
+        description: "Doble carne smash, queso cheddar, lechuga fresca, tomate natural, cebolla caramelizada y salsa La Firma.",
+        tags: ["menu"],
+        image: "/images/products/f22-giant-firma.jpg",
+        menuPrice: MENU_PRICE,
+      },
+      {
         id: "kids-firma",
         name: "Kids Firma",
         price: 4.9,
