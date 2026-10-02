@@ -1,25 +1,14 @@
 /*
-  Fuentes: la referencia (o-tacos.com) usa "Switzer" y "Puffin Display Black",
-  que son fuentes de pago/licencia propietaria. Usamos equivalentes gratuitos
-  con la misma personalidad tipográfica:
-  - Oswald (condensada, bold, mayúsculas) → sustituye a Puffin Display Black en títulos
-  - Mulish (geométrica, legible) → sustituye a Switzer en cuerpo de texto/UI
-  - Dancing Script → para el logotipo "La Firma" en cursiva
-
-  Nota: @import DEBE ir antes que @tailwind (la especificación CSS exige que
-  los @import precedan a cualquier otra regla, o el navegador los ignora).
+  Fuentes: Oswald (títulos), Mulish (texto) y Dancing Script (logotipo).
+  Se cargan con next/font en app/layout.tsx, que las sirve desde el propio
+  dominio y rellena las variables --font-display, --font-heading y
+  --font-body. Antes iban con @import a Google Fonts, que encadenaba tres
+  descargas (CSS → Google → fuentes) antes de pintar el primer texto.
 */
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Oswald:wght@400;500;600;700&family=Mulish:wght@400;500;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --font-display: "Dancing Script", cursive;
-  --font-heading: "Oswald", "Arial Narrow", sans-serif;
-  --font-body: "Mulish", "Segoe UI", sans-serif;
-}
 
 html {
   scroll-behavior: smooth;

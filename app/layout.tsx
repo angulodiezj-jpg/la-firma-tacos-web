@@ -1,9 +1,32 @@
 import type { Metadata } from "next";
+import { Dancing_Script, Mulish, Oswald } from "next/font/google";
 import Footer from "@/components/Footer";
 import SiteChrome from "@/components/SiteChrome";
 import SplashLoader from "@/components/SplashLoader";
 import { siteConfig, SITE_URL } from "@/data/siteConfig";
 import "./globals.css";
+
+const fontDisplay = Dancing_Script({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "swap",
+  variable: "--font-display",
+  fallback: ["cursive"],
+});
+const fontHeading = Oswald({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-heading",
+  fallback: ["Arial Narrow", "sans-serif"],
+});
+const fontBody = Mulish({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
+  variable: "--font-body",
+  fallback: ["Segoe UI", "sans-serif"],
+});
 
 const title = `${siteConfig.brandFull} | ${siteConfig.tagline} en España`;
 
@@ -38,7 +61,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="es" className={`${fontDisplay.variable} ${fontHeading.variable} ${fontBody.variable}`}>
       <body>
         {/* Accesibilidad: primer tabulador permite saltarse la navegación */}
         <a href="#contenido" className="skip-link">

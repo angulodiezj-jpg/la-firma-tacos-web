@@ -3,7 +3,7 @@
 import "swiper/css";
 import "swiper/css/effect-fade";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperClass } from "swiper/types";
@@ -18,6 +18,26 @@ export default function HeroSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
+  // El vídeo no entra en la primera pintura: primero se ve la foto (rápida),
+  // y solo cuando la página ha terminado de cargar se pide el vídeo de la
+  // diapositiva activa. Sin vídeo con ahorro de datos, red lenta o si el
+  // usuario prefiere menos movimiento.
+  const [loadVideo, setLoadVideo] = useState(false);
+  // Diapositivas cuya foto ya se ha pedido: la primera, y cada una cuando
+  // pasa a ser la siguiente. Así no se descargan las tres fotos de golpe.
+  const [warm, setWarm] = useState<Set<number>>(() => new Set([0, 1]));
+
+  useEffect(() => {
+    const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } })
+      .connection;
+    const slowNet = !!conn && (conn.saveData === true || /(^|-)2g|3g/.test(conn.effectiveType ?? ""));
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (slowNet || reducedMotion) return;
+    const enable = () => setLoadVideo(true);
+    if (document.readyState === "complete") enable();
+    else window.addEventListener("load", enable, { once: true });
+    return () => window.removeEventListener("load", enable);
+  }, []);
 
   const togglePlay = () => {
     const swiper = swiperRef.current;
@@ -32,6 +52,10 @@ export default function HeroSlider() {
 
   return (
     <section className="relative h-[calc(100vh-132px)] md:h-[80vh] w-full overflow-hidden bg-ink">
+      {/* Un único H1 que dice qué es la marca; los títulos de cada diapositiva son H2. */}
+      <h1 className="sr-only">
+        {siteConfig.brandFull} · {siteConfig.tagline} en Madrid
+      </h1>
       <Swiper
         modules={[EffectFade, Autoplay]}
         effect="fade"
@@ -43,10 +67,14 @@ export default function HeroSlider() {
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
-        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+        onSlideChange={(swiper) => {
+          const i = swiper.realIndex;
+          setActiveIndex(i);
+          setWarm((prev) => new Set(prev).add(i).add((i + 1) % heroSlides.length));
+        }}
         onAutoplayTimeLeft={(_swiper, _time, percentage) => setProgress(1 - percentage)}
       >
-        {heroSlides.map((slide) => (
+        {heroSlides.map((slide, i) => (
           <SwiperSlide key={slide.id}>
             <div className="relative h-full w-full">
               <MediaBackground
@@ -54,6 +82,9 @@ export default function HeroSlider() {
                 fallbackImage={slide.fallbackImage}
                 alt={slide.title}
                 className="hero-video-zoom"
+                playVideo={loadVideo && i === activeIndex}
+                deferred={!warm.has(i)}
+                priority={i === 0}
               />
               {/* Velos de legibilidad. Los vídeos tienen zonas muy claras
                   (queso), donde el texto blanco se perdía: en móvil el velo
@@ -73,9 +104,9 @@ export default function HeroSlider() {
                     </span>
                   </span>
 
-                  <h1 className="font-heading font-bold uppercase text-white text-5xl md:text-7xl leading-[0.98] mt-4 mb-3 drop-shadow-[0_3px_12px_rgba(0,0,0,0.6)]">
+                  <h2 className="font-heading font-bold uppercase text-white text-5xl md:text-7xl leading-[0.98] mt-4 mb-3 drop-shadow-[0_3px_12px_rgba(0,0,0,0.6)]">
                     {slide.title}
-                  </h1>
+                  </h2>
                   <p className="text-white/90 text-base md:text-xl mb-7 max-w-md">{slide.subtitle}</p>
 
                   <div className="flex flex-col sm:flex-row sm:items-center gap-3">

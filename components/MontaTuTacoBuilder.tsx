@@ -1,12 +1,12 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import IngredientChip from "@/components/IngredientChip";
 import Marquee from "@/components/Marquee";
+import OrderButtons from "@/components/OrderButtons";
 import Reveal from "@/components/Reveal";
 import { HalalBadge } from "@/components/SupplementIcons";
-import { CheckIcon, DrinkIcon, FlameIcon, FriesIcon } from "@/components/ValueIcons";
+import { CheckIcon, DrinkIcon, FlameIcon, FriesIcon, PlusIcon } from "@/components/ValueIcons";
 import { montaTuTaco } from "@/data/products";
 
 // Una foto real y distinta por talla.
@@ -20,21 +20,25 @@ const SIZE_PHOTOS: Record<string, string> = {
 const SIZE_LIMITS: Record<string, number> = { M: 1, L: 2, XL: 3 };
 
 export default function MontaTuTacoBuilder() {
-  const searchParams = useSearchParams();
-  // ?talla=M|L|XL — al llegar desde una tarjeta de talla de la carta, se
-  // preselecciona esa talla y se hace scroll hasta sus reglas.
-  const requestedSize = (searchParams.get("talla") ?? "").toUpperCase();
-  const initialSize = SIZE_LIMITS[requestedSize] ? requestedSize : montaTuTaco.sizes[0].size;
-
-  const [selectedSize, setSelectedSize] = useState(initialSize);
+  const [selectedSize, setSelectedSize] = useState(montaTuTaco.sizes[0].size);
   const [selectedMeats, setSelectedMeats] = useState<string[]>([]);
   const [selectedSauces, setSelectedSauces] = useState<string[]>([]);
+  const [selectedSupplements, setSelectedSupplements] = useState<string[]>([]);
+  const [selectedGratins, setSelectedGratins] = useState<string[]>([]);
+  const [withMenu, setWithMenu] = useState(false);
+  const [copied, setCopied] = useState(false);
   const sizesRef = useRef<HTMLDivElement>(null);
 
+  // ?talla=M|L|XL — al llegar desde una tarjeta de talla de la carta, se
+  // preselecciona esa talla y se hace scroll hasta sus reglas. Se lee tras
+  // hidratar (y no con useSearchParams) para que Next prerenderice el
+  // configurador completo en el HTML y Google pueda leerlo.
   useEffect(() => {
-    if (!SIZE_LIMITS[requestedSize]) return;
+    const requested = (new URLSearchParams(window.location.search).get("talla") ?? "").toUpperCase();
+    if (!SIZE_LIMITS[requested]) return;
+    setSelectedSize(requested);
     sizesRef.current?.scrollIntoView({ block: "center" });
-  }, [requestedSize]);
+  }, []);
 
   const limit = SIZE_LIMITS[selectedSize] ?? 1;
 
@@ -55,6 +59,35 @@ export default function MontaTuTacoBuilder() {
     setSelectedSauces((prev) =>
       prev.includes(name) ? prev.filter((n) => n !== name) : prev.length < limit ? [...prev, name] : prev
     );
+  }
+
+  const toggleIn = (setter: React.Dispatch<React.SetStateAction<string[]>>) => (name: string) =>
+    setter((prev) => (prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]));
+  const toggleSupplement = toggleIn(setSelectedSupplements);
+  const toggleGratin = toggleIn(setSelectedGratins);
+
+  const missing: string[] = [];
+  if (selectedMeats.length === 0) missing.push("una carne");
+  if (selectedSauces.length === 0) missing.push("una salsa");
+  const ready = missing.length === 0;
+
+  const summaryLines = [
+    `Tacos talla ${selectedSize}`,
+    selectedMeats.length ? `Carne: ${selectedMeats.join(", ")}` : "",
+    selectedSauces.length ? `Salsa: ${selectedSauces.join(", ")}` : "",
+    selectedSupplements.length ? `Suplementos: ${selectedSupplements.join(", ")}` : "",
+    selectedGratins.length ? `Gratinado: ${selectedGratins.join(", ")}` : "",
+    withMenu ? "Menú: patatas + bebida" : "",
+  ].filter(Boolean);
+
+  async function copySummary() {
+    try {
+      await navigator.clipboard.writeText(summaryLines.join("\n"));
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2200);
+    } catch {
+      setCopied(false);
+    }
   }
 
   return (
@@ -127,15 +160,29 @@ export default function MontaTuTacoBuilder() {
             })}
           </div>
 
-          {/* Menú badge */}
+          {/* Hazlo Menú: ahora es una decisión dentro del flujo, no solo un cartel */}
           <Reveal delay={0.2}>
-            <div className="mb-14 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 rounded-2xl bg-red-dark px-6 py-5 text-white shadow-cardHover animate-badgePulse">
+            <button
+              type="button"
+              aria-pressed={withMenu}
+              onClick={() => setWithMenu((v) => !v)}
+              className={`mb-14 flex w-full flex-col items-center justify-center gap-3 rounded-2xl px-6 py-5 text-white shadow-cardHover transition-colors sm:flex-row sm:gap-5 ${
+                withMenu ? "bg-red" : "bg-red-dark animate-badgePulse"
+              }`}
+            >
               <span className="flex items-center justify-center gap-2 font-heading text-sm md:text-base uppercase tracking-wide text-center">
                 <FriesIcon className="h-5 w-5 text-gold" />
                 <DrinkIcon className="h-5 w-5 text-gold" />
                 {montaTuTaco.menuSupplement.label}
               </span>
-            </div>
+              <span
+                className={`flex h-7 w-7 items-center justify-center rounded-full border-2 border-white/80 ${
+                  withMenu ? "bg-white text-red" : "text-white"
+                }`}
+              >
+                {withMenu ? <CheckIcon className="h-4 w-4" /> : <PlusIcon className="h-4 w-4" />}
+              </span>
+            </button>
           </Reveal>
 
           {/* Paneles de ingredientes */}
@@ -181,7 +228,7 @@ export default function MontaTuTacoBuilder() {
             </Reveal>
 
             <Reveal delay={0.16}>
-              <IngredientPanel title="Suplementos">
+              <IngredientPanel title="Suplementos" counter="Opcional">
                 {montaTuTaco.supplements.items.map((s) => (
                   <IngredientChip
                     key={s.name}
@@ -189,18 +236,65 @@ export default function MontaTuTacoBuilder() {
                     image={s.image}
                     name={s.name}
                     extraBadge={s.halal ? <HalalBadge /> : undefined}
+                    selected={selectedSupplements.includes(s.name)}
+                    onToggle={() => toggleSupplement(s.name)}
                   />
                 ))}
               </IngredientPanel>
             </Reveal>
 
             <Reveal delay={0.24}>
-              <IngredientPanel title="Gratinados">
+              <IngredientPanel title="Gratinados" counter="Opcional">
                 {montaTuTaco.gratins.map((g) => (
-                  <IngredientChip key={g.name} icon={g.icon} image={g.image} name={g.name} />
+                  <IngredientChip
+                    key={g.name}
+                    icon={g.icon}
+                    image={g.image}
+                    name={g.name}
+                    selected={selectedGratins.includes(g.name)}
+                    onToggle={() => toggleGratin(g.name)}
+                  />
                 ))}
               </IngredientPanel>
             </Reveal>
+          </div>
+
+          {/* Resumen: el configurador termina en un pedido, no en el vacío */}
+          <div
+            id="tu-taco"
+            className="mt-12 rounded-xl3 border-2 border-red bg-white p-7 shadow-cardHover md:p-9"
+            aria-live="polite"
+          >
+            <div className="flex flex-col gap-8 md:flex-row md:items-start">
+              <div className="flex-1 min-w-0">
+                <span className="font-heading text-xs font-semibold uppercase tracking-[3px] text-red">Tu taco</span>
+                <h2 className="mt-1 font-heading text-3xl font-bold uppercase text-ink">Talla {selectedSize}</h2>
+                <dl className="mt-5 grid gap-3 text-sm">
+                  <SummaryRow label="Carne" values={selectedMeats} empty="Elige al menos una" />
+                  <SummaryRow label="Salsa" values={selectedSauces} empty="Elige al menos una" />
+                  <SummaryRow label="Suplementos" values={selectedSupplements} empty="Sin suplementos" />
+                  <SummaryRow label="Gratinado" values={selectedGratins} empty="Sin gratinado extra" />
+                  <SummaryRow label="Menú" values={withMenu ? ["Patatas + bebida"] : []} empty="Solo el taco" />
+                </dl>
+              </div>
+              <div className="flex flex-col gap-4 md:w-[340px]">
+                <p className="font-heading text-sm font-semibold uppercase tracking-wide text-ink">
+                  {ready ? "¡Listo! Pídelo así:" : `Te falta elegir ${missing.join(" y ")}`}
+                </p>
+                <OrderButtons className="flex-col [&>a]:w-full" />
+                <button
+                  type="button"
+                  onClick={copySummary}
+                  disabled={!ready}
+                  className="rounded-full border-2 border-line px-5 py-3 font-heading text-xs font-semibold uppercase tracking-wide text-ink transition-colors hover:border-red hover:text-red disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {copied ? "Copiado ✓" : "Copiar mi taco para el pedido"}
+                </button>
+                <p className="text-xs text-ink-soft">
+                  O pídelo tal cual en barra: Paseo de la Castellana, 122.
+                </p>
+              </div>
+            </div>
           </div>
 
           <Reveal delay={0.3}>
@@ -240,6 +334,17 @@ function IngredientPanel({
         </p>
       )}
       <div className={`flex flex-wrap justify-center gap-4 ${counter ? "" : "mt-6"}`}>{children}</div>
+    </div>
+  );
+}
+
+function SummaryRow({ label, values, empty }: { label: string; values: string[]; empty: string }) {
+  return (
+    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-line pb-3">
+      <dt className="w-28 shrink-0 font-heading text-xs font-semibold uppercase tracking-wide text-ink-soft">{label}</dt>
+      <dd className="min-w-0 flex-1 font-semibold text-ink">
+        {values.length ? values.join(" · ") : <span className="font-normal text-ink-soft">{empty}</span>}
+      </dd>
     </div>
   );
 }

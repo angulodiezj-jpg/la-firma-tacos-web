@@ -7,6 +7,12 @@ type MediaBackgroundProps = {
   fallbackImage?: string;
   alt: string;
   className?: string;
+  /** Si es false se pinta solo la foto; el vídeo se monta cuando pasa a true. */
+  playVideo?: boolean;
+  /** Foto de la primera diapositiva: se pide con prioridad alta (es el LCP). */
+  priority?: boolean;
+  /** Diapositiva lejana: no se pide nada todavía, solo el fondo de marca. */
+  deferred?: boolean;
 };
 
 /**
@@ -16,7 +22,15 @@ type MediaBackgroundProps = {
  * `poster` = la misma imagen de fallback, para que nunca se vea un
  * fotograma negro mientras el vídeo carga sus primeros bytes.
  */
-export default function MediaBackground({ video, fallbackImage, alt, className = "" }: MediaBackgroundProps) {
+export default function MediaBackground({
+  video,
+  fallbackImage,
+  alt,
+  className = "",
+  playVideo = true,
+  priority = false,
+  deferred = false,
+}: MediaBackgroundProps) {
   const [videoFailed, setVideoFailed] = useState(!video);
   const [imageFailed, setImageFailed] = useState(!fallbackImage);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -26,7 +40,7 @@ export default function MediaBackground({ video, fallbackImage, alt, className =
   // Forzamos play() explícito y lo reintentamos si el navegador lo pausa.
   useEffect(() => {
     const el = videoRef.current;
-    if (!el || videoFailed) return;
+    if (!el || videoFailed || !playVideo) return;
 
     const tryPlay = () => {
       el.play().catch(() => {
@@ -37,9 +51,13 @@ export default function MediaBackground({ video, fallbackImage, alt, className =
     tryPlay();
     el.addEventListener("pause", tryPlay);
     return () => el.removeEventListener("pause", tryPlay);
-  }, [videoFailed, video]);
+  }, [videoFailed, video, playVideo]);
 
-  if (!videoFailed) {
+  if (deferred) {
+    return <div className={`absolute inset-0 bg-ink ${className}`} aria-hidden="true" />;
+  }
+
+  if (!videoFailed && playVideo) {
     return (
       <video
         ref={videoRef}
@@ -50,7 +68,7 @@ export default function MediaBackground({ video, fallbackImage, alt, className =
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         onError={() => setVideoFailed(true)}
       />
     );
@@ -63,6 +81,10 @@ export default function MediaBackground({ video, fallbackImage, alt, className =
         className={`absolute inset-0 w-full h-full object-cover kenburns-img ${className}`}
         src={fallbackImage}
         alt={alt}
+        decoding="async"
+        loading={priority ? "eager" : "lazy"}
+        // @ts-expect-error -- fetchpriority aún no está en los tipos de React 18
+        fetchpriority={priority ? "high" : "auto"}
         onError={() => setImageFailed(true)}
       />
     );
