@@ -225,7 +225,7 @@ export const categories: Category[] = [
     products: [
       {
         id: "f21-tasty-chicken",
-        code: "F21",
+        code: "F22",
         name: "Tasty Chicken",
         price: 7.9,
         description: "Pollo crujiente, queso cheddar, lechuga, tomate y salsa La Firma.",
@@ -235,7 +235,7 @@ export const categories: Category[] = [
       },
       {
         id: "f23-big-firma",
-        code: "F23",
+        code: "F24",
         name: "Big Firma",
         price: 7.5,
         description: "Doble carne smash, queso cheddar, lechuga, cebolla, pepinillos y salsa La Firma.",
@@ -245,7 +245,7 @@ export const categories: Category[] = [
       },
       {
         id: "f24-cheese-firma",
-        code: "F24",
+        code: "F25",
         name: "Cheese Firma",
         price: 2.9,
         description: "Carne smash, queso cheddar, pepinillos y salsa La Firma.",
@@ -254,7 +254,7 @@ export const categories: Category[] = [
       },
       {
         id: "f25-doble-crunch",
-        code: "F25",
+        code: "F21",
         name: "Big Crunch",
         price: 8,
         description: "Carne smash y tenders de pollo, lechuga, tomate, cebolla y salsa Tasty.",
