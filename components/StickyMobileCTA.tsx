@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { siteConfig } from "@/data/siteConfig";
+import { locales } from "@/data/siteConfig";
 
 type StickyMobileCTAProps = {
   onMenuOpen: () => void;
@@ -10,8 +10,8 @@ type StickyMobileCTAProps = {
 
 /**
  * Barra fija inferior solo en móvil: hamburguesa + Monta Tu Tacos + Pedir
- * (el botón "Pedir" despliega un popover con Uber Eats / Glovo, ya que no
- * hay pedido online propio — solo enlaces a plataformas externas).
+ * (el botón "Pedir" despliega un popover con las plataformas de cada local,
+ * ya que no hay pedido online propio — solo enlaces a plataformas externas).
  */
 export default function StickyMobileCTA({ onMenuOpen }: StickyMobileCTAProps) {
   const [orderOpen, setOrderOpen] = useState(false);
@@ -19,27 +19,37 @@ export default function StickyMobileCTA({ onMenuOpen }: StickyMobileCTAProps) {
   return (
     <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30">
       {orderOpen && (
-        <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-[92vw] max-w-sm rounded-2xl bg-white shadow-cardHover border border-line p-4 animate-fadeUp">
-          <p className="font-heading text-xs uppercase tracking-wide text-ink-soft mb-3 text-center">
-            Pide a domicilio con
-          </p>
-          <div className="flex flex-col gap-2">
-            <a
-              href={siteConfig.order.uberEats}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-ink text-white text-center py-3 font-heading text-sm font-semibold uppercase"
-            >
-              Uber Eats
-            </a>
-            <a
-              href={siteConfig.order.glovo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-orange text-white text-center py-3 font-heading text-sm font-semibold uppercase"
-            >
-              Glovo
-            </a>
+        // El centrado va en un contenedor aparte: la animación fadeUp usa
+        // transform y pisaría el -translate-x-1/2, sacando el panel de pantalla.
+        <div className="absolute bottom-full inset-x-0 mb-2 flex justify-center">
+          <div className="w-[92vw] max-w-sm rounded-2xl bg-white shadow-cardHover border border-line p-4 animate-fadeUp">
+            <p className="font-heading text-xs uppercase tracking-wide text-ink-soft mb-3 text-center">
+              ¿Dónde te lo llevamos?
+            </p>
+            <div className="flex flex-col gap-4">
+              {locales.map((local) => (
+                <div key={local.id}>
+                  <p className="mb-2 font-heading text-[0.7rem] font-semibold uppercase tracking-[2px] text-ink">
+                    {local.ciudad} · {local.zona}
+                  </p>
+                  <div className="flex gap-2">
+                    {local.pedir.map((o) => (
+                      <a
+                        key={o.plataforma}
+                        href={o.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex-1 rounded-full text-white text-center py-3 font-heading text-sm font-semibold uppercase ${
+                          o.plataforma === "Glovo" ? "bg-orange" : "bg-ink"
+                        }`}
+                      >
+                        {o.plataforma}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}

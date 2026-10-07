@@ -281,7 +281,7 @@ export default function MontaTuTacoBuilder() {
                 <p className="font-heading text-sm font-semibold uppercase tracking-wide text-ink">
                   {ready ? "¡Listo! Pídelo así:" : `Te falta elegir ${missing.join(" y ")}`}
                 </p>
-                <OrderButtons className="flex-col [&>a]:w-full" />
+                <OrderButtons />
                 <button
                   type="button"
                   onClick={copySummary}
@@ -291,7 +291,7 @@ export default function MontaTuTacoBuilder() {
                   {copied ? "Copiado ✓" : "Copiar mi taco para el pedido"}
                 </button>
                 <p className="text-xs text-ink-soft">
-                  O pídelo tal cual en barra: Paseo de la Castellana, 122.
+                  O pídelo tal cual en barra, en Castellana (Madrid) o en Paterna (Valencia).
                 </p>
               </div>
             </div>

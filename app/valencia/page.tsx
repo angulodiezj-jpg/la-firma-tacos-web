@@ -3,9 +3,9 @@ import ValenciaLaunch from "@/components/ValenciaLaunch";
 import { siteConfig, SITE_URL } from "@/data/siteConfig";
 import { valenciaLaunch } from "@/data/valenciaLaunch";
 
-const title = "La Firma Tacos Valencia | Nueva Apertura en Paterna";
+const title = "La Firma Tacos Valencia | French Tacos en Paterna, ya abierto";
 const description =
-  "La Firma llega a Valencia. El auténtico French Tacos de Lyon abre pronto en Paterna. Descubre la nueva dirección, síguenos y entérate antes que nadie de la fecha de apertura.";
+  "La Firma Tacos ya está abierto en Paterna (Valencia): el auténtico French Tacos de Lyon. Pide a domicilio en Uber Eats o ven al local en Calle de Carboners, 21.";
 const ogImage = "/images/campaign/valencia-og.jpg";
 
 export const metadata: Metadata = {
@@ -21,12 +21,14 @@ export const metadata: Metadata = {
     "tacos de Lyon Valencia",
     "restaurante Paterna",
     "La Firma Paterna",
+    "La Firma Tacos Uber Eats Valencia",
+    "French Tacos a domicilio Valencia",
   ],
   alternates: {
     canonical: "/valencia",
   },
   openGraph: {
-    title: "La Firma Llega a Valencia",
+    title: "La Firma Tacos Valencia, ya abierto",
     description,
     url: `${SITE_URL}/valencia`,
     siteName: siteConfig.brandFull,
@@ -37,13 +39,13 @@ export const metadata: Metadata = {
         url: ogImage,
         width: 1200,
         height: 630,
-        alt: "Mural de La Firma Tacos — Nueva apertura en Paterna, Valencia",
+        alt: "Mural de La Firma Tacos en Paterna, Valencia",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "La Firma Llega a Valencia",
+    title: "La Firma Tacos Valencia, ya abierto",
     description,
     images: [ogImage],
   },
@@ -64,6 +66,9 @@ export default function ValenciaPage() {
       addressCountry: "ES",
     },
     url: `${SITE_URL}/valencia`,
+    image: `${SITE_URL}/images/campaign/valencia-og.jpg`,
+    hasMenu: `${SITE_URL}/carta`,
+    potentialAction: { "@type": "OrderAction", target: [valenciaLaunch.uberEats] },
     sameAs: [siteConfig.social.instagram, siteConfig.social.tiktok],
     parentOrganization: {
       "@type": "Organization",

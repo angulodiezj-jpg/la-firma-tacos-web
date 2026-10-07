@@ -2,6 +2,7 @@ import Link from "next/link";
 import Logo from "./Logo";
 import { footerAboutLinks, footerLegalLinks, footerProductLinks } from "@/data/navigation";
 import { mapsUrl, siteConfig } from "@/data/siteConfig";
+import { valenciaLaunch } from "@/data/valenciaLaunch";
 
 export default function Footer() {
   return (
@@ -42,7 +43,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h5 className="font-heading text-xs uppercase tracking-wide text-white mb-4">Visítanos</h5>
+            <h5 className="font-heading text-xs uppercase tracking-wide text-white mb-4">Madrid · Castellana</h5>
             <ul className="space-y-2.5 text-sm text-[#b5aca6]">
               <li>{siteConfig.location.address}</li>
               <li>
@@ -67,7 +68,17 @@ export default function Footer() {
               </li>
             </ul>
 
-            <h5 className="font-heading text-xs uppercase tracking-wide text-white mb-3 mt-6">Horario</h5>
+            <h5 className="font-heading text-xs uppercase tracking-wide text-white mb-3 mt-6">Valencia · Paterna</h5>
+            <ul className="space-y-2.5 text-sm text-[#b5aca6]">
+              <li>{valenciaLaunch.location.fullAddress.replace(", España", "")}</li>
+              <li>
+                <Link href="/valencia" className="hover:text-white">
+                  📍 Ver local y pedir
+                </Link>
+              </li>
+            </ul>
+
+            <h5 className="font-heading text-xs uppercase tracking-wide text-white mb-3 mt-6">Horario Castellana</h5>
             <ul className="space-y-1.5 text-sm text-[#b5aca6]">
               {siteConfig.location.scheduleGroups.map((g) => (
                 <li key={g.dias}>

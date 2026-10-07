@@ -1,5 +1,6 @@
 import CategoryShowcase from "@/components/CategoryShowcase";
 import HeroSlider from "@/components/HeroSlider";
+import LocalesSection from "@/components/LocalesSection";
 import Marquee from "@/components/Marquee";
 import PromoSection from "@/components/PromoSection";
 import RestaurantSchema from "@/components/RestaurantSchema";
@@ -21,11 +22,12 @@ export default function HomePage() {
       {/* La prueba social va justo antes del bloque de "Visítanos": quien acaba
           de convencerse leyendo opiniones tiene la dirección a un scroll. */}
       <ReviewsSection />
+      <LocalesSection />
       <PromoSection />
       <VibeSection />
 
       <Marquee
-        items={["Monta Tu Taco", "100% Hecho al Momento", `${siteConfig.rating.value}★ en Google`, "La Firma"]}
+        items={["Monta Tu Taco", "Madrid · Valencia", "100% Hecho al Momento", `${siteConfig.rating.value}★ en Google`, "La Firma"]}
       />
     </>
   );

@@ -115,7 +115,7 @@ export default function HeroSlider() {
                     </ButtonLink>
                     {/* Acción fija y distinta del CTA de cada diapositiva,
                         para que nunca salgan dos botones repetidos. */}
-                    <ButtonLink href="#visitanos" variant="outline" size="lg">
+                    <ButtonLink href="#locales" variant="outline" size="lg">
                       Pedir a domicilio
                     </ButtonLink>
                   </div>

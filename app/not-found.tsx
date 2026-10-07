@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const ATAJOS = [
   { href: "/carta", label: "La Carta" },
   { href: "/monta-tu-taco", label: "Monta Tu Taco" },
-  { href: "/valencia", label: "Nueva Apertura" },
+  { href: "/valencia", label: "La Firma Valencia" },
 ];
 
 export default function NotFound() {
