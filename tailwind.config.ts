@@ -30,6 +30,8 @@ const config: Config = {
         display: ["var(--font-display)", "cursive"],
         heading: ["var(--font-heading)", "sans-serif"],
         body: ["var(--font-body)", "sans-serif"],
+        logo: ["var(--font-logo)", "cursive"],
+        "logo-serif": ["var(--font-logo-serif)", "serif"],
       },
       borderRadius: {
         xl2: "18px",
