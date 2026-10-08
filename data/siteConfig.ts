@@ -105,7 +105,7 @@ export const locales: Local[] = [
     ciudad: "Madrid",
     zona: "Castellana",
     direccion: siteConfig.location.address,
-    href: "/#visitanos",
+    href: "/#locales",
     pedir: [
       { plataforma: "Uber Eats", url: siteConfig.order.uberEats },
       { plataforma: "Glovo", url: siteConfig.order.glovo },

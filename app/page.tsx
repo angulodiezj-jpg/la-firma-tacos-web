@@ -1,7 +1,6 @@
 import HeroFirma from "@/components/HeroFirma";
 import LocalesSection from "@/components/LocalesSection";
 import Marquee from "@/components/Marquee";
-import PromoSection from "@/components/PromoSection";
 import RestaurantSchema from "@/components/RestaurantSchema";
 import ReviewsSection from "@/components/ReviewsSection";
 import TopProducts from "@/components/TopProducts";
@@ -27,7 +26,6 @@ export default function HomePage() {
           de convencerse leyendo opiniones tiene la dirección a un scroll. */}
       <ReviewsSection />
       <LocalesSection />
-      <PromoSection />
       <VibeSection />
 
       <Marquee

@@ -15,48 +15,52 @@ const ATAJOS = [
 
 export default function NotFound() {
   return (
-    <section className="relative overflow-hidden bg-ink py-24 md:py-32">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.07]"
-        style={{
-          backgroundImage: "url(/images/brand/firma-pattern.jpg)",
-          backgroundSize: "320px",
-          backgroundRepeat: "repeat",
-        }}
-      />
-      <div className="ambient-glow -top-16 left-1/4 h-72 w-72 mix-blend-screen" aria-hidden="true" />
-
-      <div className="relative mx-auto max-w-xl px-6 text-center">
-        <span className="eyebrow-neon font-heading text-sm font-semibold uppercase tracking-[3px] text-red">
-          Error 404
-        </span>
-        <h1 className="mt-3 font-heading text-5xl font-bold uppercase leading-none text-white md:text-7xl">
-          Aquí no hay taco
-        </h1>
-        <p className="mx-auto mt-5 max-w-md text-white/75">
-          La página que buscas no existe o ha cambiado de sitio. Pero lo bueno sigue donde siempre:
-        </p>
-
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          {ATAJOS.map((a) => (
+    <section className="relative overflow-hidden bg-[#C70C18] bg-[radial-gradient(ellipse_60%_80%_at_70%_50%,#E3151F_0%,rgba(199,12,24,0)_70%),linear-gradient(180deg,#C70C18_0%,#A00812_100%)] text-white">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-6 top-0 select-none font-heading text-[16rem] font-bold leading-none text-white/[0.07] md:text-[24rem]"
+      >
+        404
+      </span>
+      <div className="relative mx-auto grid max-w-[1280px] items-center gap-8 px-5 py-16 sm:px-8 md:py-24 lg:grid-cols-[1.2fr_1fr]">
+        <div className="flex flex-col gap-5">
+          <span className="inline-flex items-center gap-2.5 self-start rounded-full border border-white/45 px-4 py-2 font-heading text-[0.7rem] uppercase tracking-[3px] md:text-xs">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#FFD27A]" aria-hidden="true" />
+            Error 404
+          </span>
+          <h1 className="font-heading text-[3rem] font-bold uppercase leading-[0.9] md:text-7xl">
+            Aquí no hay <span className="text-[#FFD27A]">taco</span>
+          </h1>
+          <p className="max-w-md text-white/85 md:text-lg">
+            La página que buscas no existe o ha cambiado de sitio. Pero lo bueno sigue donde siempre:
+          </p>
+          <div className="flex flex-wrap gap-3">
             <Link
-              key={a.href}
-              href={a.href}
-              className="btn-shine rounded-full border-2 border-white/85 px-6 py-3 font-heading text-sm font-bold uppercase tracking-wide text-white transition-[transform,box-shadow,background-color,color] duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-ink active:translate-y-0 active:scale-[0.97]"
+              href="/"
+              className="rounded-full bg-ink px-7 py-4 font-heading text-sm font-bold uppercase tracking-[1.5px] text-white shadow-[0_12px_26px_rgba(0,0,0,0.3)] transition-transform hover:-translate-y-0.5"
             >
-              {a.label}
+              Volver al inicio →
             </Link>
-          ))}
+            {ATAJOS.map((a) => (
+              <Link
+                key={a.href}
+                href={a.href}
+                className="rounded-full border-2 border-white px-6 py-3.5 font-heading text-sm font-bold uppercase tracking-[1.5px] transition-colors hover:bg-white hover:text-red-dark"
+              >
+                {a.label}
+              </Link>
+            ))}
+          </div>
         </div>
-
-        <div className="mt-6">
-          <Link
-            href="/"
-            className="btn-shine neon-cta inline-block rounded-full bg-gradient-to-br from-red to-red-dark px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white shadow-[0_8px_22px_rgba(211,31,31,0.32)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:from-red-glow hover:to-red hover:shadow-[0_12px_34px_rgba(211,31,31,0.48),0_0_26px_4px_rgba(255,59,48,0.42)] active:translate-y-0 active:scale-[0.97]"
-          >
-            Volver al inicio
-          </Link>
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/hero/cut-f1.webp"
+          alt=""
+          aria-hidden="true"
+          width={565}
+          height={820}
+          className="mx-auto hidden h-[420px] w-auto -rotate-[40deg] drop-shadow-[0_30px_30px_rgba(60,0,0,0.55)] lg:block"
+        />
       </div>
     </section>
   );

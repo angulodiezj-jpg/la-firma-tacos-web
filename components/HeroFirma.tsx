@@ -85,7 +85,7 @@ export default function HeroFirma() {
           </div>
           <div className="grid grid-cols-2 gap-3 sm:flex">
             <Link
-              href="/#visitanos"
+              href="/#locales"
               className="flex items-center gap-2.5 rounded-2xl bg-black/20 px-4 py-3 transition-colors hover:bg-black/30"
             >
               <span className="h-2 w-2 shrink-0 rounded-full bg-[#2FCB6B]" aria-hidden="true" />
