@@ -12,7 +12,7 @@ const tagStyles: Record<string, string> = {
 };
 
 const tagLabels: Record<string, string> = {
-  popular: "★ Popular",
+  popular: "★ Lo más pedido",
   menu: "Menú",
   "no-disponible": "No disponible",
   proximamente: "Próximamente",
@@ -32,11 +32,11 @@ export default function ProductCard({ product }: { product: Product }) {
       // h-full + flex: todas las tarjetas de una fila acaban a la misma altura
       // aunque unas lleven etiquetas y otras no, que era lo que descuadraba
       // el borde inferior de la rejilla.
-      className={`group flex h-full flex-col overflow-hidden rounded-xl2 border border-line bg-white shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-cardHover ${
-        product.href ? "neon-ring-hover cursor-pointer" : ""
+      className={`group flex h-full flex-col overflow-hidden rounded-[26px] bg-white shadow-card ring-1 ring-[#EADFD2] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-cardHover hover:ring-red/40 ${
+        product.href ? "cursor-pointer" : ""
       }`}
     >
-      <div className="relative aspect-[4/5] shrink-0 overflow-hidden border-b border-line bg-[#f6f0e7]">
+      <div className="relative aspect-[4/5] shrink-0 overflow-hidden bg-[#C70C18]">
         {product.image && !imageFailed ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -44,7 +44,7 @@ export default function ProductCard({ product }: { product: Product }) {
             alt={product.name}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.07]"
+            className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.06]"
             onError={() => setImageFailed(true)}
           />
         ) : (
@@ -55,40 +55,38 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
         )}
 
-        {/* Velo cálido que entra desde abajo: da profundidad a la foto al
-            pasar el ratón sin llegar a ensuciar el producto. */}
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-red-dark/35 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        />
-      </div>
-      <div className="p-5">
-        <h4 className="mb-1.5 font-heading text-base font-bold uppercase text-ink">
-          {product.code && <span className="mr-1.5 text-red/70">{product.code}</span>}
-          {product.name}
-        </h4>
-        {product.description && <p className="text-sm text-ink-soft">{product.description}</p>}
-        {product.menuPrice && (
-          <p className="mt-2 flex items-center gap-1.5 font-heading text-xs font-semibold uppercase tracking-wide text-gold-deep">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold" />
-            Hazlo menú (patatas + bebida)
-          </p>
-        )}
         {product.tags && product.tags.length > 0 && (
-          <div className="mt-2.5 flex flex-wrap gap-1.5">
+          <div className="absolute left-4 top-4 flex flex-wrap gap-1.5">
             {product.tags.map((tag) => (
               <span
                 key={tag}
-                className={`inline-block rounded-full px-2.5 py-0.5 text-[0.65rem] font-heading font-semibold uppercase tracking-wide ${tagStyles[tag]} ${tag === "popular" ? "neon-badge" : ""}`}
+                className={`inline-block rounded-full px-3 py-1 font-heading text-[0.65rem] font-semibold uppercase tracking-[1.5px] shadow-card ${
+                  tag === "popular" ? "bg-[#FFD27A] text-ink" : tagStyles[tag]
+                }`}
               >
                 {tagLabels[tag]}
               </span>
             ))}
           </div>
         )}
+        {product.code && (
+          <span className="absolute right-4 top-4 rounded-full bg-black/35 px-3 py-1 font-heading text-xs tracking-[1.5px] text-white backdrop-blur-sm">
+            {product.code}
+          </span>
+        )}
+      </div>
+      <div className="flex flex-1 flex-col gap-2 p-5 md:p-6">
+        <h4 className="font-heading text-xl font-bold uppercase leading-tight text-ink md:text-2xl">{product.name}</h4>
+        {product.description && <p className="text-sm leading-relaxed text-ink-soft">{product.description}</p>}
+        {product.menuPrice && (
+          <p className="mt-auto flex items-center gap-2 pt-2 font-heading text-xs uppercase tracking-[1.5px] text-gold-deep">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold" />
+            Hazlo menú: patatas + bebida
+          </p>
+        )}
         {product.href && (
-          <span className="mt-3 inline-flex items-center gap-1.5 font-heading text-xs font-bold uppercase tracking-wide text-red">
-            Ver reglas de la talla →
+          <span className="mt-auto inline-flex items-center gap-1.5 self-start rounded-full bg-red px-4 py-2 font-heading text-xs font-bold uppercase tracking-wide text-white">
+            Montar esta talla →
           </span>
         )}
       </div>

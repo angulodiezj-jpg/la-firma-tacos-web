@@ -69,17 +69,29 @@ export default function CartaPage() {
           id={category.slug}
           // scroll-mt: la cabecera y la barra de categorías son fijas; sin este
           // margen el título de la sección queda escondido debajo al usar los enlaces.
-          className={`scroll-mt-[140px] py-16 md:py-20 ${catIndex % 2 === 1 ? "bg-bgsoft" : ""}`}
+          className={`scroll-mt-[140px] py-16 md:py-24 ${catIndex % 2 === 1 ? "bg-[#FBF5EC]" : "bg-white"}`}
         >
-          <div className="mx-auto max-w-[1180px] px-6">
+          <div className="mx-auto max-w-[1280px] px-5 sm:px-8">
             <Reveal>
-              <div className="mb-8 text-left">
-                <span className="eyebrow-neon font-heading text-xs font-semibold uppercase tracking-[3px] text-red">
-                  {category.eyebrow}
-                </span>
-                <h2 className="font-heading font-bold uppercase text-2xl md:text-3xl text-ink mt-1">
-                  {category.title}
-                </h2>
+              <div className="mb-10 flex items-end justify-between gap-6 border-b-2 border-ink/10 pb-5">
+                <div className="flex items-end gap-4 md:gap-6">
+                  <span className="font-heading text-5xl font-bold leading-[0.8] text-red md:text-7xl">
+                    {String(catIndex + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <span className="font-heading text-xs uppercase tracking-[3px] text-gold-deep">
+                      {category.eyebrow}
+                    </span>
+                    <h2 className="mt-1 font-heading text-3xl font-bold uppercase leading-none text-ink md:text-5xl">
+                      {category.title}
+                    </h2>
+                  </div>
+                </div>
+                {category.slug !== "bebidas" && (
+                  <span className="hidden shrink-0 rounded-full bg-ink px-4 py-2 font-heading text-xs uppercase tracking-[1.5px] text-white sm:inline">
+                    {category.products.length} {category.products.length === 1 ? "producto" : "productos"}
+                  </span>
+                )}
               </div>
             </Reveal>
 
@@ -95,7 +107,10 @@ export default function CartaPage() {
               groupProducts(category.products).map((block, blockIndex) => (
                 <div key={block.group ?? `ungrouped-${blockIndex}`} className={blockIndex > 0 ? "mt-10" : ""}>
                   {block.group && (
-                    <h3 className="font-heading font-bold uppercase text-lg text-gold-deep mb-4">{block.group}</h3>
+                    <h3 className="mb-5 flex items-center gap-3 font-heading text-lg font-bold uppercase tracking-[1px] text-ink md:text-xl">
+                      <span className="h-0.5 w-8 bg-red" aria-hidden="true" />
+                      {block.group}
+                    </h3>
                   )}
                   <div className="flex flex-wrap items-stretch justify-center gap-5 md:gap-6">
                     {block.items.map((product, i) => (
@@ -122,12 +137,27 @@ export default function CartaPage() {
               <Reveal delay={0.3}>
                 <Link
                   href="/monta-tu-taco"
-                  className="mt-8 flex items-center justify-between gap-4 rounded-2xl bg-red-dark px-6 py-5 text-white shadow-card transition-transform hover:-translate-y-0.5 animate-badgePulse"
+                  className="group relative mt-10 flex min-h-[180px] items-center overflow-hidden rounded-[28px] bg-[#C70C18] bg-[radial-gradient(ellipse_60%_100%_at_80%_50%,#E3151F_0%,rgba(199,12,24,0)_70%)] p-7 text-white transition-transform hover:-translate-y-1 md:p-10"
                 >
-                  <span className="font-heading text-sm md:text-base">
-                    Descubre cómo Montar Tu Taco — tallas, carnes, salsas y extras
-                  </span>
-                  <span className="font-heading text-lg font-bold text-gold whitespace-nowrap">Ver más →</span>
+                  <div className="relative z-10 flex max-w-[60%] flex-col gap-3">
+                    <span className="font-heading text-xs uppercase tracking-[3px] text-[#FFD27A]">M · L · XL</span>
+                    <span className="font-heading text-3xl font-bold uppercase leading-[0.95] md:text-5xl">
+                      Tu taco, <span className="text-[#FFD27A]">tus reglas</span>
+                    </span>
+                    <span className="self-start rounded-full bg-white px-5 py-2.5 font-heading text-xs font-bold uppercase tracking-[1.5px] text-red-dark md:text-sm">
+                      Monta el tuyo →
+                    </span>
+                  </div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/hero/cut-monta-gratinado.webp"
+                    alt=""
+                    aria-hidden="true"
+                    width={657}
+                    height={820}
+                    loading="lazy"
+                    className="absolute -right-6 top-1/2 h-[200px] w-auto -translate-y-1/2 rotate-[62deg] drop-shadow-[0_24px_24px_rgba(60,0,0,0.5)] transition-transform duration-500 group-hover:rotate-[56deg] md:right-10 md:h-[280px]"
+                  />
                 </Link>
               </Reveal>
             )}

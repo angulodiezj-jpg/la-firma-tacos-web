@@ -21,6 +21,8 @@ const FOTOS: Record<string, { src: string; alt: string }> = {
 export default function LocalesSection() {
   return (
     <section id="locales" className="scroll-mt-24 bg-[#FBF5EC] pb-20 md:pb-24">
+      {/* Ancla antigua de "Visítanos", para que los enlaces viejos sigan llegando aquí. */}
+      <span id="visitanos" className="block scroll-mt-24" aria-hidden="true" />
       {/* Banda roja con el titular; las tarjetas montan sobre su borde inferior. */}
       <div className="relative overflow-hidden bg-[#C70C18] bg-[radial-gradient(ellipse_60%_90%_at_75%_40%,#E3151F_0%,rgba(199,12,24,0)_70%)] pb-28 pt-14 text-white md:pb-36 md:pt-20">
         <span
@@ -65,6 +67,11 @@ export default function LocalesSection() {
               <div className="relative flex flex-col gap-3 p-6 md:p-8">
                 <h3 className="font-heading text-5xl font-bold uppercase leading-[0.9] md:text-6xl">{local.ciudad}</h3>
                 <p className="text-sm text-white/85 md:text-base">{local.direccion}</p>
+                {local.id === "madrid" && (
+                  <p className="text-sm text-[#FFD27A]">
+                    {siteConfig.location.scheduleGroups.map((g) => `${g.dias}: ${g.turnos.join(" y ")}`).join(" · ")}
+                  </p>
+                )}
                 <OrderButtons city={local.id} size="sm" className="mt-2" />
                 <div className="flex flex-wrap gap-x-6 gap-y-2 pt-2">
                   <a
