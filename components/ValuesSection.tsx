@@ -39,7 +39,7 @@ export default function ValuesSection() {
               Quiénes Somos
             </span>
             <h2 className="font-heading font-bold uppercase text-4xl md:text-6xl leading-[1.05] text-ink mt-3 mb-10">
-              De Lyon a España.
+              De Lyon a tu barrio.
               <br />
               <span className="text-red">Sabor de calle, hecho con oficio.</span>
             </h2>

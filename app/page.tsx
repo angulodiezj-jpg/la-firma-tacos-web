@@ -18,7 +18,7 @@ export default function HomePage() {
       <Marquee
         variant="gold"
         className="z-10 -mt-7 mb-0"
-        items={["Hecho al Momento", "Salsa de Queso de la Casa", "100 % Halal", "Madrid · Valencia", "Original French Tacos"]}
+        items={["Hecho al Momento", "Se dobla, se plancha, se disfruta", "100 % Halal", "Queso de la casa, hambre de la calle", "Madrid · Valencia", "Original French Tacos"]}
       />
 
       <TopProducts />
@@ -31,7 +31,7 @@ export default function HomePage() {
       <VibeSection />
 
       <Marquee
-        items={["Monta Tu Taco", "Madrid · Valencia", "Crujiente por fuera, fundente por dentro", "Pide en Uber Eats y Glovo", "100 % Halal"]}
+        items={["Un taco que no cabe en una mano", "Pide fuerte", "Crujiente por fuera, fundente por dentro", "Madrid · Valencia", "Pide en Uber Eats y Glovo"]}
       />
     </>
   );
