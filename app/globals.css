@@ -280,3 +280,32 @@ body {
     animation: none !important;
   }
 }
+
+/* Letrero del cartel del local: letra crema con contorno marrón y sombra
+   dura, como los títulos de "Elige tus salsas" y "Gratinados". */
+.cartel-title {
+  color: #fff6dc;
+  text-shadow:
+    3px 0 0 #3b1607,
+    -3px 0 0 #3b1607,
+    0 3px 0 #3b1607,
+    0 -3px 0 #3b1607,
+    2px 2px 0 #3b1607,
+    -2px 2px 0 #3b1607,
+    2px -2px 0 #3b1607,
+    -2px -2px 0 #3b1607,
+    0 7px 0 #3b1607;
+}
+.cartel-label {
+  color: #fff6dc;
+  text-shadow:
+    1.5px 0 0 #3b1607,
+    -1.5px 0 0 #3b1607,
+    0 1.5px 0 #3b1607,
+    0 -1.5px 0 #3b1607,
+    1px 1px 0 #3b1607,
+    -1px 1px 0 #3b1607,
+    1px -1px 0 #3b1607,
+    -1px -1px 0 #3b1607,
+    0 3px 0 #3b1607;
+}

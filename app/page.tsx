@@ -17,20 +17,23 @@ export default function HomePage() {
       <Marquee
         variant="gold"
         className="z-10 -mt-7 mb-0"
-        items={["Hecho al Momento", "Se dobla, se plancha, se disfruta", "100 % Halal", "Queso de la casa, hambre de la calle", "Madrid · Valencia", "Original French Tacos"]}
+        items={[
+          "Hecho al Momento",
+          "Se dobla, se plancha, se disfruta",
+          "100 % Halal",
+          "Queso de la casa, hambre de la calle",
+          "Original French Tacos",
+        ]}
       />
 
       <TopProducts />
       <ValuesSection />
+      <VibeSection />
       {/* La prueba social va justo antes del bloque de "Visítanos": quien acaba
           de convencerse leyendo opiniones tiene la dirección a un scroll. */}
       <ReviewsSection />
+      {/* Cierre de la portada: los locales con sus botones de pedido. */}
       <LocalesSection />
-      <VibeSection />
-
-      <Marquee
-        items={["Un taco que no cabe en una mano", "Pide fuerte", "Crujiente por fuera, fundente por dentro", "Madrid · Valencia", "Pide en Uber Eats y Glovo"]}
-      />
     </>
   );
 }
