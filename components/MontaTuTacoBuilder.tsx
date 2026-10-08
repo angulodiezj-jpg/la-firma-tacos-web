@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import IngredientChip from "@/components/IngredientChip";
 import Marquee from "@/components/Marquee";
 import OrderButtons from "@/components/OrderButtons";
+import PageHeroRed from "@/components/PageHeroRed";
 import Reveal from "@/components/Reveal";
 import { HalalBadge } from "@/components/SupplementIcons";
 import { CheckIcon, DrinkIcon, FlameIcon, FriesIcon, PlusIcon } from "@/components/ValueIcons";
@@ -92,21 +93,36 @@ export default function MontaTuTacoBuilder() {
 
   return (
     <>
-      <section className="pt-16 pb-4 md:pt-20 text-center bg-[#faf7f2]">
-        <div className="mx-auto max-w-[1180px] px-6">
-          <Reveal>
-            <span className="eyebrow-neon font-heading text-sm font-semibold uppercase tracking-[3px] text-red">
-              A Tu Manera
-            </span>
-            <h1 className="font-heading font-bold uppercase text-4xl md:text-6xl text-ink mt-2 mb-4">
-              <span className="text-red">★</span> Monta Tu Taco <span className="text-red">★</span>
-            </h1>
-            <span className="inline-block -rotate-[1.5deg] rounded bg-red px-6 py-2 font-heading text-sm font-semibold uppercase tracking-wide text-white shadow-card">
-              ¡Tú lo eliges, tú lo haces único!
-            </span>
-          </Reveal>
-        </div>
-      </section>
+      <PageHeroRed
+        eyebrow="Monta tu taco · M · L · XL"
+        title={
+          <>
+            Tu taco, <span className="text-[#FFD27A]">tus reglas</span>
+          </>
+        }
+        text="Tú eliges la talla, las carnes, las salsas y si va gratinado. Nosotros lo hacemos al momento."
+        image={{
+          src: "/images/hero/cut-monta-gratinado.webp",
+          alt: "Monta tu taco gratinado",
+          width: 657,
+          height: 820,
+          className: "h-[220px] w-auto rotate-[58deg] sm:h-[300px] lg:h-[400px]",
+        }}
+      >
+        <ol className="mt-2 flex flex-wrap gap-2.5">
+          {["Elige talla", "Elige carnes", "Elige salsas"].map((paso, i) => (
+            <li
+              key={paso}
+              className="flex items-center gap-2 rounded-full bg-black/20 py-2 pl-2 pr-4 font-heading text-xs uppercase tracking-[1.5px] md:text-sm"
+            >
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#FFD27A] text-xs font-bold text-ink">
+                {i + 1}
+              </span>
+              {paso}
+            </li>
+          ))}
+        </ol>
+      </PageHeroRed>
 
       <section className="py-14 md:py-20 bg-[#faf7f2]">
         <div className="mx-auto max-w-[1180px] px-6">

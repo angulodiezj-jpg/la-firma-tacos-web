@@ -7,7 +7,6 @@ import ReviewsSection from "@/components/ReviewsSection";
 import TopProducts from "@/components/TopProducts";
 import ValuesSection from "@/components/ValuesSection";
 import VibeSection from "@/components/VibeSection";
-import { siteConfig } from "@/data/siteConfig";
 
 export default function HomePage() {
   return (
@@ -32,7 +31,7 @@ export default function HomePage() {
       <VibeSection />
 
       <Marquee
-        items={["Monta Tu Taco", "Madrid · Valencia", "100% Hecho al Momento", `${siteConfig.rating.value}★ en Google`, "La Firma"]}
+        items={["Monta Tu Taco", "Madrid · Valencia", "Crujiente por fuera, fundente por dentro", "Pide en Uber Eats y Glovo", "100 % Halal"]}
       />
     </>
   );

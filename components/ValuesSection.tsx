@@ -12,7 +12,7 @@ const values = [
   {
     Icon: CheeseIcon,
     title: "Salsa de la Casa",
-    text: "Nuestra salsa de queso especialidad, la firma que nadie más tiene.",
+    text: "Nuestra salsa de queso especialidad, la que no vas a encontrar en otro sitio.",
     accent: "from-gold to-gold-deep",
   },
   {
@@ -41,7 +41,7 @@ export default function ValuesSection() {
             <h2 className="font-heading font-bold uppercase text-4xl md:text-6xl leading-[1.05] text-ink mt-3 mb-10">
               De Lyon a España.
               <br />
-              <span className="text-red">Una historia firmada por la pasión.</span>
+              <span className="text-red">Sabor de calle, hecho con oficio.</span>
             </h2>
 
             <div className="space-y-5 text-left text-ink-soft text-base md:text-lg leading-relaxed">

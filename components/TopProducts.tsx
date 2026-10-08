@@ -2,7 +2,7 @@ import Link from "next/link";
 import Reveal from "./Reveal";
 
 /**
- * "Los 4 que firman la casa": escaparate de lo más pedido justo debajo de la
+ * "Los que más salen de cocina": escaparate de lo más pedido justo debajo de la
  * portada. Mosaico de 4 columnas en escritorio (F1 y Monta Tu Taco a doble
  * alto, burger y crousty a doble ancho) y de 2 columnas en móvil.
  */
@@ -15,7 +15,7 @@ export default function TopProducts() {
             <div>
               <span className="font-heading text-xs uppercase tracking-[3px] text-red md:text-sm">Lo más pedido</span>
               <h2 className="mt-1 font-heading text-4xl font-bold uppercase leading-none text-ink md:text-6xl">
-                Los 4 que firman la casa
+                Los que más salen de cocina
               </h2>
             </div>
             <Link
