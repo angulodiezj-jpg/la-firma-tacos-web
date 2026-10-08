@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Dancing_Script, Mulish, Oswald } from "next/font/google";
+import ClosingCTA from "@/components/ClosingCTA";
 import Footer from "@/components/Footer";
 import SiteChrome from "@/components/SiteChrome";
 import SplashLoader from "@/components/SplashLoader";
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteChrome>
           <main id="contenido">{children}</main>
         </SiteChrome>
+        <ClosingCTA />
         <Footer />
       </body>
     </html>

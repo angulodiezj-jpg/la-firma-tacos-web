@@ -22,9 +22,10 @@ export default function Header({ onMenuOpen }: HeaderProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // En la portada, arriba del todo, la cabecera se funde con el rojo de la
-  // portada; al hacer scroll vuelve a la versión blanca de siempre.
-  const onRed = pathname === "/" && !scrolled;
+  // En las páginas que abren con banda roja (portada, carta y Monta Tu Taco),
+  // arriba del todo la cabecera se funde con ese rojo; al hacer scroll vuelve
+  // a la versión blanca de siempre.
+  const onRed = ["/", "/carta", "/monta-tu-taco"].includes(pathname) && !scrolled;
 
   return (
     <>
