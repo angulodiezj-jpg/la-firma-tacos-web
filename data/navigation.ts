@@ -11,9 +11,9 @@ export const mainNav: NavLink[] = [
   { label: "Inicio", href: "/" },
   { label: "La Carta", href: "/carta" },
   { label: "Monta Tu Taco", href: "/monta-tu-taco" },
-  { label: "Nueva Apertura", href: "/valencia" },
+  { label: "Valencia", href: "/valencia" },
   { label: "Nosotros", href: "/#nosotros" },
-  { label: "Nuestro Local", href: "/#local" },
+  { label: "Locales", href: "/#locales" },
 ];
 
 export const footerProductLinks: NavLink[] = [
@@ -27,7 +27,8 @@ export const footerProductLinks: NavLink[] = [
 
 export const footerAboutLinks: NavLink[] = [
   { label: "Nuestra Historia", href: "/#nosotros" },
-  { label: "Nuestro Local", href: "/#local" },
+  { label: "Nuestros Locales", href: "/#locales" },
+  { label: "La Firma Valencia", href: "/valencia" },
   { label: "Monta Tu Taco", href: "/monta-tu-taco" },
 ];
 

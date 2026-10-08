@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { siteConfig } from "@/data/siteConfig";
 import { formatOpeningDate, getGoogleMapsUrl, valenciaLaunch } from "@/data/valenciaLaunch";
 import Reveal from "./Reveal";
@@ -27,9 +28,8 @@ function HeroBeat({
 
 export default function ValenciaLaunch() {
   const mapsUrl = getGoogleMapsUrl();
-  const dateLabel = valenciaLaunch.openingDate
-    ? `Apertura — ${formatOpeningDate(valenciaLaunch.openingDate)}`
-    : "Próximamente";
+  const dateLabel = `Abierto desde el ${formatOpeningDate(valenciaLaunch.openingDate)}`;
+  const uber = valenciaLaunch.uberEats;
 
   return (
     <>
@@ -40,7 +40,7 @@ export default function ValenciaLaunch() {
           src={HERO_IMAGE}
           srcSet={HERO_SRCSET}
           sizes="100vw"
-          alt="Mural de La Firma Tacos, próxima apertura en Paterna, Valencia"
+          alt="Mural de La Firma Tacos en Paterna, Valencia"
           className="animate-kenburns absolute inset-0 h-full w-full object-cover object-center"
           loading="eager"
           decoding="async"
@@ -61,7 +61,7 @@ export default function ValenciaLaunch() {
         <div className="relative z-10 flex h-full flex-col items-center justify-end px-6 pb-28 text-center md:justify-center md:pb-0">
           <HeroBeat delay={0.1}>
             <span className="eyebrow-neon inline-block rounded-full border border-red/50 bg-black/40 px-5 py-2 pl-7 font-heading text-[0.68rem] font-semibold uppercase tracking-[3px] text-white backdrop-blur-sm">
-              Nueva Apertura
+              Ya abierto
             </span>
           </HeroBeat>
 
@@ -73,7 +73,7 @@ export default function ValenciaLaunch() {
 
           <HeroBeat delay={0.5} className="mt-2">
             <p className="text-red-glow font-heading text-xl font-bold uppercase tracking-wide md:text-3xl">
-              La Firma llega a Paterna
+              La Firma ya está en Paterna
             </p>
           </HeroBeat>
 
@@ -88,32 +88,32 @@ export default function ValenciaLaunch() {
 
           <HeroBeat delay={0.86} className="mt-8 flex w-full max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
             <a
-              href="#ubicacion"
+              href={uber}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-shine group/btn neon-cta rounded-full bg-gradient-to-br from-red to-red-dark px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white shadow-[0_8px_22px_rgba(211,31,31,0.32)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:from-red-glow hover:to-red hover:shadow-[0_12px_34px_rgba(211,31,31,0.48),0_0_26px_4px_rgba(255,59,48,0.42)] active:translate-y-0 active:scale-[0.97]"
             >
-              Descubre La Nueva Firma
+              Pedir en Uber Eats
             </a>
             <a
-              href={siteConfig.social.instagram}
+              href={mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-shine rounded-full border-2 border-white/85 px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white transition-[transform,box-shadow,background-color,color] duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-ink hover:shadow-[0_10px_28px_rgba(0,0,0,0.28)] active:translate-y-0 active:scale-[0.97]"
             >
-              Síguenos en Instagram
+              Cómo llegar
             </a>
-            <a
-              href={siteConfig.social.tiktok}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/carta"
               className="btn-shine rounded-full border-2 border-white/85 px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wide text-white transition-[transform,box-shadow,background-color,color] duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-ink hover:shadow-[0_10px_28px_rgba(0,0,0,0.28)] active:translate-y-0 active:scale-[0.97]"
             >
-              Síguenos en TikTok
-            </a>
+              Ver la carta
+            </Link>
           </HeroBeat>
         </div>
       </section>
 
-      {/* ===== EXPECTACIÓN ===== */}
+      {/* ===== EXPANSIÓN ===== */}
       <section className="bg-ink py-20 text-center md:py-28">
         <div className="mx-auto max-w-[900px] px-6">
           <Reveal>
@@ -121,12 +121,11 @@ export default function ValenciaLaunch() {
               Expansión La Firma
             </span>
             <h2 className="mt-2 font-heading text-3xl font-bold uppercase leading-tight text-white md:text-5xl">
-              Algo grande está llegando.
+              Ya estamos en Valencia.
             </h2>
             <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-white/75 md:text-lg">
-              La Firma sigue creciendo. Después de Madrid, damos el siguiente paso.
-              <br />
-              <strong className="text-white">Paterna</strong> será la próxima dirección de La Firma.
+              Después de Madrid, La Firma abre su segundo local. El mismo taco francés y la misma salsa de queso
+              de la casa, ahora en <strong className="text-white">Paterna</strong>.
             </p>
           </Reveal>
 
@@ -144,16 +143,51 @@ export default function ValenciaLaunch() {
                       >
                         {city}
                       </span>
-                      {isLast && (
-                        <span className="relative mt-2 block h-[3px] w-full overflow-hidden rounded-full bg-white/10">
-                          <span className="animate-progressBar absolute inset-y-0 left-0 bg-red" />
-                        </span>
-                      )}
+                      {isLast && <span className="mt-2 block h-[3px] w-full rounded-full bg-red" />}
                     </div>
                     {!isLast && <span className="text-xl text-white/25 md:text-2xl">→</span>}
                   </div>
                 );
               })}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ===== PEDIDO A DOMICILIO ===== */}
+      <section id="pedir" className="bg-white py-20 md:py-24">
+        <div className="mx-auto max-w-[900px] px-6">
+          <Reveal>
+            <div className="relative overflow-hidden rounded-xl3 bg-ink px-8 py-14 text-center text-white md:px-16">
+              <div className="ambient-glow -top-16 right-0 h-64 w-64 mix-blend-screen" aria-hidden="true" />
+              <div className="relative">
+                <span className="eyebrow-neon font-heading text-sm font-semibold uppercase tracking-[3px] text-red">
+                  A domicilio en Valencia
+                </span>
+                <h2 className="mt-2 font-heading text-3xl font-bold uppercase leading-tight md:text-5xl">
+                  Pide La Firma Valencia en Uber Eats
+                </h2>
+                <p className="mx-auto mt-4 max-w-md text-white/75">
+                  Tacos, crousty, burgers y bocatas del local de Paterna, recién hechos y directos a tu puerta.
+                </p>
+                <a
+                  href={uber}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-shine group/btn mt-8 inline-flex items-center gap-2 rounded-full bg-white px-9 py-4 font-heading text-base font-bold uppercase tracking-wide text-ink shadow-[0_8px_22px_rgba(0,0,0,0.25)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_34px_rgba(0,0,0,0.35)] active:translate-y-0 active:scale-[0.97]"
+                >
+                  Pedir en Uber Eats
+                  <span aria-hidden="true" className="transition-transform duration-300 group-hover/btn:translate-x-1">
+                    →
+                  </span>
+                </a>
+                <p className="mt-6 text-sm text-white/60">
+                  ¿Estás en Madrid?{" "}
+                  <Link href="/#locales" className="font-semibold text-white underline underline-offset-2">
+                    Pide en La Firma Castellana
+                  </Link>
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>
@@ -165,10 +199,10 @@ export default function ValenciaLaunch() {
           <Reveal>
             <div className="mb-10 text-center">
               <span className="eyebrow-neon font-heading text-sm font-semibold uppercase tracking-[3px] text-red">
-                Nueva Dirección
+                Nuestro local
               </span>
               <h2 className="mt-2 font-heading text-3xl font-bold uppercase text-ink md:text-5xl">
-                Nos vemos en Paterna
+                Te esperamos en Paterna
               </h2>
             </div>
           </Reveal>
@@ -185,7 +219,7 @@ export default function ValenciaLaunch() {
               <p className="font-heading text-sm uppercase tracking-wide text-ink-soft md:text-base">
                 {valenciaLaunch.location.postalCode} {valenciaLaunch.city}, {valenciaLaunch.region}
               </p>
-              <span className="mt-4 inline-block rounded-full bg-red-dark px-4 py-1.5 font-heading text-xs font-bold uppercase tracking-wide text-white">
+              <span className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-[#1fa855] px-4 py-1.5 font-heading text-xs font-bold uppercase tracking-wide text-white">
                 {dateLabel}
               </span>
               <div className="mt-7">
@@ -215,7 +249,7 @@ export default function ValenciaLaunch() {
               Esto acaba de empezar.
             </h2>
             <p className="mx-auto mt-4 max-w-md text-white/75">
-              La fecha de apertura, los primeros anuncios y todas las novedades se publicarán en nuestras redes.
+              Novedades, promos y todo lo que viene para La Firma Valencia, primero en nuestras redes.
             </p>
           </Reveal>
 
@@ -253,18 +287,18 @@ export default function ValenciaLaunch() {
         <div className="relative mx-auto max-w-[700px] px-6">
           <Reveal>
             <h2 className="font-heading text-3xl font-bold uppercase text-white md:text-5xl">
-              ¿Vas a ser de los primeros?
+              ¿Hambre en Valencia?
             </h2>
             <p className="mx-auto mt-4 max-w-md text-white/90">
-              Síguenos y descubre antes que nadie cuándo abrimos las puertas de La Firma en Paterna.
+              Ven a La Firma Paterna o pídelo ahora a domicilio.
             </p>
             <a
-              href={siteConfig.social.instagram}
+              href={uber}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-shine mt-8 inline-block rounded-full bg-white px-9 py-4 font-heading text-base font-bold uppercase tracking-wide text-red shadow-[0_8px_22px_rgba(0,0,0,0.25)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_34px_rgba(0,0,0,0.35)] active:translate-y-0 active:scale-[0.97]"
             >
-              Quiero saber cuándo abrís
+              Pedir en Uber Eats
             </a>
           </Reveal>
         </div>

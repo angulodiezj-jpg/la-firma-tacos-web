@@ -38,10 +38,10 @@ export default function Header({ onMenuOpen }: HeaderProps) {
               <span className="absolute inset-0 animate-ping rounded-full bg-red-glow opacity-75" />
             </span>
             <span className="font-heading text-[0.68rem] font-semibold uppercase tracking-[1.5px] text-white sm:text-xs">
-              Nueva Apertura: La Firma llega a Valencia
+              Ya abierto: La Firma Valencia · Paterna
             </span>
             <span className="hidden font-heading text-[0.68rem] font-bold uppercase tracking-wide text-gold sm:inline">
-              Descúbrelo →
+              Pide en Uber Eats →
             </span>
           </Link>
         )}

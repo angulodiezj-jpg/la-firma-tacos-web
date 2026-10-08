@@ -17,7 +17,7 @@ export const siteConfig = {
   brandFull: "La Firma Tacos",
   tagline: "Original French Tacos",
   description:
-    "La Firma Tacos: el auténtico taco francés hecho al momento. Descubre la carta y monta tu taco a tu manera.",
+    "La Firma Tacos: el auténtico taco francés hecho al momento, en Madrid y Valencia. Descubre la carta, monta tu taco y pídelo a domicilio.",
   // Valoración agregada. IMPORTANTE: estos dos números deben copiarse tal cual
   // del perfil de Google Business del local; no se estiman ni se redondean al
   // alza, porque además alimentan el aggregateRating de los datos
@@ -59,11 +59,12 @@ export const siteConfig = {
     amenities: ["Terraza", "Platos veganos", "Wi-Fi"],
     status: "Abierto" as const,
   },
-  // Expansión: sin dirección/fecha reales todavía — solo teaser de apertura futura.
+  // Expansión: Valencia (Paterna) abrió el 04/10/2026. Los datos del local
+  // viven en data/valenciaLaunch.ts; aquí solo el aviso corto de la web.
   expansion: {
     city: "Valencia",
-    status: "Próximamente" as const,
-    message: "La Firma sigue creciendo: nueva apertura muy pronto en Valencia.",
+    status: "Ya abierto" as const,
+    message: "La Firma Valencia ya está abierta en Paterna. Pide a domicilio en Uber Eats.",
   },
   social: {
     instagram: "https://instagram.com/lafirmatacos",
@@ -72,10 +73,52 @@ export const siteConfig = {
     tiktokHandle: "@lafirmaoff",
   },
   // Pedido online: SOLO a través de plataformas externas (no hay pedido propio).
+  // `order` es el de Madrid (Castellana); el de cada local está en `locales`.
   order: {
     uberEats: "https://www.ubereats.com/es/store/la-firma-tacos-castellana/dM1nGYO7Rg-g77HPRUD_ew",
     glovo: "https://glovoapp.com/es/es/madrid/stores/la-firma-tacos-madrid",
   },
 } as const;
+
+export type OrderLink = { plataforma: "Uber Eats" | "Glovo"; url: string };
+
+export type Local = {
+  id: "madrid" | "valencia";
+  ciudad: string;
+  zona: string;
+  direccion: string;
+  /** Página o ancla con la información del local. */
+  href: string;
+  pedir: OrderLink[];
+};
+
+// Enlace del local de Valencia en Uber Eats. PENDIENTE: pegar aquí el enlace
+// directo a la tienda (ubereats.com/es/store/...) en cuanto lo tengamos;
+// mientras tanto lleva a la búsqueda de Uber Eats con el nombre del local.
+export const UBER_EATS_VALENCIA =
+  "https://www.ubereats.com/es/search?q=La%20Firma%20Tacos%20Paterna";
+
+/** Todos los locales abiertos, en el orden en que se muestran. */
+export const locales: Local[] = [
+  {
+    id: "madrid",
+    ciudad: "Madrid",
+    zona: "Castellana",
+    direccion: siteConfig.location.address,
+    href: "/#visitanos",
+    pedir: [
+      { plataforma: "Uber Eats", url: siteConfig.order.uberEats },
+      { plataforma: "Glovo", url: siteConfig.order.glovo },
+    ],
+  },
+  {
+    id: "valencia",
+    ciudad: "Valencia",
+    zona: "Paterna",
+    direccion: "Calle de Carboners, 21, Parque Empresarial Táctica, 46980 Paterna, Valencia",
+    href: "/valencia",
+    pedir: [{ plataforma: "Uber Eats", url: UBER_EATS_VALENCIA }],
+  },
+];
 
 export type SiteConfig = typeof siteConfig;

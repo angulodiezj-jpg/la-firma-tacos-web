@@ -50,7 +50,7 @@ export default function PromoSection() {
                 <OpeningHours />
               </div>
               <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-                <OrderButtons />
+                <OrderButtons city="madrid" />
                 <ButtonLink href={siteConfig.social.instagram} variant="outline">
                   Síguenos {siteConfig.social.instagramHandle}
                 </ButtonLink>
@@ -82,7 +82,7 @@ export default function PromoSection() {
                 </span>
                 <span className="text-sm text-white/90">{siteConfig.expansion.message}</span>
                 <span className="font-heading text-xs font-bold uppercase tracking-wide text-white underline underline-offset-2">
-                  Ver más →
+                  Ver local →
                 </span>
               </Link>
             </div>
