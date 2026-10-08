@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cinzel, Dancing_Script, Kaushan_Script, Mulish, Oswald } from "next/font/google";
 import ClosingCTA from "@/components/ClosingCTA";
+import ClosingCTAGate from "@/components/ClosingCTAGate";
 import Footer from "@/components/Footer";
 import SiteChrome from "@/components/SiteChrome";
 import SplashLoader from "@/components/SplashLoader";
@@ -77,7 +78,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${fontDisplay.variable} ${fontHeading.variable} ${fontBody.variable} ${fontLogo.variable} ${fontLogoSerif.variable}`}>
+    <html
+      lang="es"
+      className={`${fontDisplay.variable} ${fontHeading.variable} ${fontBody.variable} ${fontLogo.variable} ${fontLogoSerif.variable}`}
+    >
       <body>
         {/* Accesibilidad: primer tabulador permite saltarse la navegación */}
         <a href="#contenido" className="skip-link">
@@ -87,7 +91,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteChrome>
           <main id="contenido">{children}</main>
         </SiteChrome>
-        <ClosingCTA />
+        <ClosingCTAGate>
+          <ClosingCTA />
+        </ClosingCTAGate>
         <Footer />
       </body>
     </html>

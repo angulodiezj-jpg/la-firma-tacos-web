@@ -64,7 +64,7 @@ export default function HeroFirma() {
           />
         </div>
 
-        {/* Texto, botones y locales */}
+        {/* Texto y botones */}
         <div className="mt-6 flex flex-col gap-5 lg:col-start-1 lg:row-start-2 lg:mt-6 lg:self-start lg:gap-6">
           <p className="max-w-[480px] text-base leading-relaxed text-white/90 md:text-xl">
             Hecho al momento con tu carne, tus salsas y nuestra salsa de queso de la casa.
@@ -81,28 +81,6 @@ export default function HeroFirma() {
               className="rounded-full border-2 border-white px-8 py-[14px] text-center font-heading text-base font-bold uppercase tracking-[1.5px] text-white transition-colors hover:bg-white hover:text-red-dark md:py-[18px]"
             >
               Ver la carta
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:flex">
-            <Link
-              href="/#locales"
-              className="flex items-center gap-2.5 rounded-2xl bg-black/20 px-4 py-3 transition-colors hover:bg-black/30"
-            >
-              <span className="h-2 w-2 shrink-0 rounded-full bg-[#2FCB6B]" aria-hidden="true" />
-              <span className="flex flex-col leading-tight">
-                <span className="font-heading text-sm uppercase tracking-wide">Madrid</span>
-                <span className="text-xs text-white/75">Castellana, 122</span>
-              </span>
-            </Link>
-            <Link
-              href="/valencia"
-              className="flex items-center gap-2.5 rounded-2xl bg-black/20 px-4 py-3 transition-colors hover:bg-black/30"
-            >
-              <span className="h-2 w-2 shrink-0 rounded-full bg-[#2FCB6B]" aria-hidden="true" />
-              <span className="flex flex-col leading-tight">
-                <span className="font-heading text-sm uppercase tracking-wide">Valencia</span>
-                <span className="text-xs text-white/75">Paterna · nuevo</span>
-              </span>
             </Link>
           </div>
         </div>

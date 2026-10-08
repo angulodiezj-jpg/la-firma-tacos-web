@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import CartelChip from "@/components/CartelChip";
 import IngredientChip from "@/components/IngredientChip";
 import Marquee from "@/components/Marquee";
 import PageHeroRed from "@/components/PageHeroRed";
@@ -217,21 +218,23 @@ export default function MontaTuTacoBuilder() {
             hint={`Talla ${selectedSize}: hasta ${limit} ${limit === 1 ? "salsa" : "salsas"}. Los chiles marcan el picante.`}
             counter={{ value: selectedSauces.length, max: limit }}
             done={selectedSauces.length > 0}
+            cartel
           >
-            <ChipGrid>
+            <div className="flex flex-wrap justify-center gap-x-1 gap-y-3 sm:gap-x-2">
               {montaTuTaco.sauces.map((sauce) => (
-                <IngredientChip
-                  key={sauce.name}
-                  icon={sauce.icon}
-                  image={sauce.image}
-                  name={sauce.name}
-                  spice={sauce.spice}
-                  selected={selectedSauces.includes(sauce.name)}
-                  onToggle={() => toggleSauce(sauce.name)}
-                  locked={selectedSauces.length >= limit}
-                />
+                <div key={sauce.name} className="w-[31%] sm:w-[23%] lg:w-[15.6%]">
+                  <CartelChip
+                    shape="bowl"
+                    image={sauce.image ?? ""}
+                    name={sauce.name}
+                    spice={sauce.spice}
+                    selected={selectedSauces.includes(sauce.name)}
+                    onToggle={() => toggleSauce(sauce.name)}
+                    locked={selectedSauces.length >= limit}
+                  />
+                </div>
               ))}
-            </ChipGrid>
+            </div>
           </StepCard>
 
           <StepCard
@@ -258,23 +261,24 @@ export default function MontaTuTacoBuilder() {
 
           <StepCard
             n={5}
-            title="Gratinado"
+            title="Gratinados"
             hint="Opcional. Queso fundido por encima, al horno."
             done={selectedGratins.length > 0}
             optional
+            cartel
           >
-            <ChipGrid>
+            <div className="grid grid-cols-3 gap-x-1 gap-y-3 sm:gap-x-3 lg:grid-cols-6">
               {montaTuTaco.gratins.map((g) => (
-                <IngredientChip
+                <CartelChip
                   key={g.name}
-                  icon={g.icon}
-                  image={g.image}
+                  shape="gratin"
+                  image={g.image ?? ""}
                   name={g.name}
                   selected={selectedGratins.includes(g.name)}
                   onToggle={() => toggleGratin(g.name)}
                 />
               ))}
-            </ChipGrid>
+            </div>
           </StepCard>
 
           <StepCard
@@ -424,6 +428,7 @@ function StepCard({
   counter,
   done,
   optional,
+  cartel,
   children,
 }: {
   id?: string;
@@ -433,12 +438,18 @@ function StepCard({
   counter?: { value: number; max: number };
   done?: boolean;
   optional?: boolean;
+  /** Panel amarillo con letrero, como el cartel del local (salsas y gratinados). */
+  cartel?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <section
       id={id}
-      className="scroll-mt-28 rounded-[26px] border border-line bg-white p-5 shadow-card sm:p-7 md:rounded-[30px] md:p-8"
+      className={`scroll-mt-28 rounded-[26px] p-5 shadow-card sm:p-7 md:rounded-[30px] md:p-8 ${
+        cartel
+          ? "bg-[#F8D93A] bg-[radial-gradient(ellipse_at_20%_10%,rgba(255,250,200,0.75)_0%,rgba(255,250,200,0)_45%),radial-gradient(ellipse_at_85%_90%,rgba(224,160,0,0.35)_0%,rgba(224,160,0,0)_55%)] shadow-[0_18px_40px_rgba(150,90,0,0.22)] ring-1 ring-[#E4B814]"
+          : "border border-line bg-white"
+      }`}
     >
       <header className="mb-6 flex items-center gap-4 md:mb-8">
         <span
@@ -450,8 +461,14 @@ function StepCard({
           {done ? <CheckIcon className="h-5 w-5" /> : n}
         </span>
         <div className="min-w-0 flex-1">
-          <h3 className="font-heading text-2xl font-bold uppercase leading-none text-ink md:text-3xl">{title}</h3>
-          <p className="mt-1.5 text-sm text-ink-soft">{hint}</p>
+          {cartel ? (
+            <h3 className="cartel-title -rotate-1 font-heading text-[1.6rem] sm:text-[1.9rem] font-bold uppercase leading-none tracking-[0.5px] md:text-[2.6rem]">
+              {title}
+            </h3>
+          ) : (
+            <h3 className="font-heading text-2xl font-bold uppercase leading-none text-ink md:text-3xl">{title}</h3>
+          )}
+          <p className={`text-sm ${cartel ? "mt-3 font-semibold text-[#5A3A06]" : "mt-1.5 text-ink-soft"}`}>{hint}</p>
         </div>
         {counter ? (
           <span className="flex shrink-0 flex-col items-center gap-1.5">
@@ -460,12 +477,15 @@ function StepCard({
             </span>
             <span className="flex gap-1" aria-hidden="true">
               {Array.from({ length: counter.max }).map((_, i) => (
-                <span key={i} className={`h-1.5 w-4 rounded-full ${i < counter.value ? "bg-red" : "bg-line"}`} />
+                <span
+                  key={i}
+                  className={`h-1.5 w-4 rounded-full ${i < counter.value ? "bg-red" : cartel ? "bg-[#3B1607]/20" : "bg-line"}`}
+                />
               ))}
             </span>
           </span>
         ) : optional ? (
-          <span className="hidden shrink-0 rounded-full bg-[#FBF5EC] px-3 py-1.5 font-heading text-[0.65rem] uppercase tracking-[1.5px] text-gold-deep sm:inline">
+          <span className="hidden shrink-0 rounded-full bg-white/80 px-3 py-1.5 font-heading text-[0.65rem] uppercase tracking-[1.5px] text-gold-deep sm:inline">
             Opcional
           </span>
         ) : null}
