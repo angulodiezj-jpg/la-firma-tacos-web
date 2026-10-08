@@ -34,22 +34,6 @@ export default function Header({ onMenuOpen }: HeaderProps) {
           onRed ? "bg-[#C70C18] border-transparent" : "bg-white/95 border-line"
         } ${scrolled ? "shadow-card" : ""}`}
       >
-        {pathname !== "/valencia" && (
-          <Link
-            href="/valencia"
-            className="flex h-9 items-center justify-center gap-2 bg-ink px-4 text-center transition-colors hover:bg-black"
-          >
-            <span className="relative flex h-1.5 w-1.5 shrink-0 rounded-full bg-red">
-              <span className="absolute inset-0 animate-ping rounded-full bg-red-glow opacity-75" />
-            </span>
-            <span className="font-heading text-[0.68rem] font-semibold uppercase tracking-[1.5px] text-white sm:text-xs">
-              Ya abierto: La Firma Valencia · Paterna
-            </span>
-            <span className="hidden font-heading text-[0.68rem] font-bold uppercase tracking-wide text-gold sm:inline">
-              Pide en Uber Eats →
-            </span>
-          </Link>
-        )}
         <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-4 px-6 transition-all">
           <button
             aria-label="Abrir menú"
@@ -78,6 +62,16 @@ export default function Header({ onMenuOpen }: HeaderProps) {
             ))}
           </nav>
 
+          <Link
+            href="/#locales"
+            className={`hidden items-center gap-2 rounded-full border px-3.5 py-2 font-heading text-xs uppercase tracking-[1.5px] transition-colors xl:flex ${
+              onRed ? "border-white/40 text-white hover:bg-white/10" : "border-line text-ink hover:border-red"
+            }`}
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-[#2FCB6B]" aria-hidden="true" />
+            Madrid · Valencia
+          </Link>
+
           {/* Por debajo de lg este botón duplica el de la barra fija inferior
               (StickyMobileCTA), y apretaba el logotipo. Se muestra solo en
               escritorio, donde esa barra no existe. */}
@@ -92,9 +86,22 @@ export default function Header({ onMenuOpen }: HeaderProps) {
             Monta Tu Tacos
           </Link>
 
-          {/* Contrapeso de la hamburguesa: sin él, al ocultar el botón el
-              logotipo se iría al borde derecho en vez de quedar centrado. */}
-          <span className="w-6 lg:hidden" aria-hidden="true" />
+          {/* En móvil, las ciudades hacen de contrapeso a la hamburguesa y
+              dejan el logotipo centrado. */}
+          <Link
+            href="/#locales"
+            aria-label="Nuestros locales en Madrid y Valencia"
+            className={`flex flex-col gap-1 font-heading text-[0.6rem] uppercase leading-none tracking-[1.5px] lg:hidden ${
+              onRed ? "text-white" : "text-ink"
+            }`}
+          >
+            {["Madrid", "Valencia"].map((c) => (
+              <span key={c} className="flex items-center gap-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#2FCB6B]" aria-hidden="true" />
+                {c}
+              </span>
+            ))}
+          </Link>
         </div>
       </header>
     </>

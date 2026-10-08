@@ -49,7 +49,7 @@ export default function CartaPage() {
         }}
       />
 
-      <div className="sticky top-[123px] z-30 bg-ink py-4">
+      <div className="sticky top-[57px] z-30 bg-ink py-4">
         <div className="mx-auto max-w-[1180px] px-6 flex gap-3 overflow-x-auto">
           {categories.map((cat) => (
             <a
@@ -69,7 +69,7 @@ export default function CartaPage() {
           id={category.slug}
           // scroll-mt: la cabecera y la barra de categorías son fijas; sin este
           // margen el título de la sección queda escondido debajo al usar los enlaces.
-          className={`scroll-mt-[200px] py-16 md:py-20 ${catIndex % 2 === 1 ? "bg-bgsoft" : ""}`}
+          className={`scroll-mt-[140px] py-16 md:py-20 ${catIndex % 2 === 1 ? "bg-bgsoft" : ""}`}
         >
           <div className="mx-auto max-w-[1180px] px-6">
             <Reveal>

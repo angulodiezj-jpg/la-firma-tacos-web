@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Dancing_Script, Mulish, Oswald } from "next/font/google";
+import { Cinzel, Dancing_Script, Kaushan_Script, Mulish, Oswald } from "next/font/google";
 import ClosingCTA from "@/components/ClosingCTA";
 import Footer from "@/components/Footer";
 import SiteChrome from "@/components/SiteChrome";
@@ -20,6 +20,21 @@ const fontHeading = Oswald({
   display: "swap",
   variable: "--font-heading",
   fallback: ["Arial Narrow", "sans-serif"],
+});
+// Rotulado del logotipo: pincel para "LaFirma" y romana para "TACOS".
+const fontLogo = Kaushan_Script({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  variable: "--font-logo",
+  fallback: ["cursive"],
+});
+const fontLogoSerif = Cinzel({
+  subsets: ["latin"],
+  weight: ["700"],
+  display: "swap",
+  variable: "--font-logo-serif",
+  fallback: ["Georgia", "serif"],
 });
 const fontBody = Mulish({
   subsets: ["latin"],
@@ -62,7 +77,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${fontDisplay.variable} ${fontHeading.variable} ${fontBody.variable}`}>
+    <html lang="es" className={`${fontDisplay.variable} ${fontHeading.variable} ${fontBody.variable} ${fontLogo.variable} ${fontLogoSerif.variable}`}>
       <body>
         {/* Accesibilidad: primer tabulador permite saltarse la navegación */}
         <a href="#contenido" className="skip-link">

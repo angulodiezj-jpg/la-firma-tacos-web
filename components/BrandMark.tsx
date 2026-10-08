@@ -5,54 +5,44 @@ type BrandMarkProps = {
   className?: string;
 };
 
-// Las iniciales van a mayor cuerpo, así que el lockup es más ancho que un
-// texto normal: en móvil se compone un punto más pequeño para que no choque
-// con el botón del header.
 const sizes = {
-  sm: { script: "text-xl sm:text-2xl", sub: "text-[0.45rem] sm:text-[0.5rem] tracking-[3px]", gap: "gap-1.5" },
-  md: { script: "text-2xl sm:text-3xl", sub: "text-[0.5rem] sm:text-[0.55rem] tracking-[3px] sm:tracking-[4px]", gap: "gap-1.5 sm:gap-2" },
-  lg: { script: "text-4xl sm:text-5xl", sub: "text-[0.6rem] sm:text-[0.7rem] tracking-[4px] sm:tracking-[5px]", gap: "gap-2 sm:gap-2.5" },
+  sm: { script: "text-[1.55rem]", swash: "h-[2px] -mt-1", sub: "text-[0.5rem] tracking-[3px]", dash: "w-3" },
+  md: { script: "text-[1.8rem] sm:text-[2.1rem]", swash: "h-[2px] -mt-1", sub: "text-[0.55rem] sm:text-[0.62rem] tracking-[3px] sm:tracking-[4px]", dash: "w-3 sm:w-4" },
+  lg: { script: "text-5xl sm:text-6xl", swash: "h-[3px] -mt-2", sub: "text-[0.8rem] sm:text-sm tracking-[5px]", dash: "w-5" },
 };
 
 /**
- * Lockup tipográfico de marca: "La Firma" en cursiva dorada + "TACOS" en
- * condensada debajo, replicando la composición del logotipo real.
- *
- * Las iniciales (L, F) se componen a mayor cuerpo que el resto — recurso
- * clásico de rotulación — alineadas por línea base para que no "bailen".
- * Los tamaños van en `em`, así el conjunto escala con la prop `size`.
- * theme="dark" se usa sobre fondos oscuros (footer, splash), donde el rojo
- * oscuro no tendría contraste suficiente.
+ * Rotulado de marca copiado del logotipo: "LaFirma" de pincel con degradado
+ * dorado, el subrayado naranja que lo cruza y "TACOS" en romana entre dos
+ * guiones. theme="dark" es para fondos rojos u oscuros (como en el logo);
+ * en fondo blanco "TACOS" pasa a granate para no perder contraste.
  */
 export default function BrandMark({ size = "md", theme = "light", align = "center", className = "" }: BrandMarkProps) {
   const s = sizes[size];
-  const ruleTone = theme === "dark" ? "via-white/45" : "via-red-dark/35";
 
   return (
     <span
       className={`inline-flex flex-col leading-none ${align === "center" ? "items-center" : "items-start"} ${className}`}
     >
       <span
-        className={`font-display font-bold bg-gradient-to-br from-gold-deep via-gold to-orange bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.18)] ${s.script}`}
+        className={`bg-[linear-gradient(180deg,#FFF1B8_0%,#F9CF5A_45%,#E39A1C_100%)] bg-clip-text px-1 font-logo text-transparent ${
+          theme === "dark" ? "drop-shadow-[0_2px_0_rgba(70,8,8,0.85)]" : "drop-shadow-[0_1.5px_0_rgba(122,58,10,0.9)]"
+        } ${s.script}`}
       >
-        {/* Spans en línea (no flex) para que "La Firma" siga siendo una sola
-            cadena de texto seleccionable y legible por lectores de pantalla;
-            los tamaños distintos ya se alinean solos por línea base. */}
-        <span className="text-[1.32em]">L</span>a<span className="ml-[0.14em] text-[1.32em]">F</span>irma
+        LaFirma
       </span>
-
       <span
-        className={`mt-0.5 flex w-full items-center ${s.gap} ${
-          align === "center" ? "justify-center" : "justify-start"
+        aria-hidden="true"
+        className={`w-[105%] -rotate-[2deg] rounded-full bg-[linear-gradient(90deg,rgba(227,154,28,0)_0%,#F9B233_40%,#E35A1C_100%)] ${s.swash}`}
+      />
+      <span
+        className={`mt-1 flex items-center gap-1.5 font-logo-serif font-bold ${s.sub} ${
+          theme === "dark" ? "text-[#F6E3B4]" : "text-[#7A1E10]"
         }`}
       >
-        <span className={`h-px flex-1 bg-gradient-to-r from-transparent ${ruleTone} to-transparent`} aria-hidden="true" />
-        <span
-          className={`font-heading font-bold ${s.sub} ${theme === "dark" ? "text-white/90" : "text-red-dark"}`}
-        >
-          TACOS
-        </span>
-        <span className={`h-px flex-1 bg-gradient-to-r from-transparent ${ruleTone} to-transparent`} aria-hidden="true" />
+        <span className={`h-px ${s.dash} bg-current opacity-70`} aria-hidden="true" />
+        TACOS
+        <span className={`h-px ${s.dash} bg-current opacity-70`} aria-hidden="true" />
       </span>
     </span>
   );

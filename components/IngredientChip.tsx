@@ -52,10 +52,10 @@ export default function IngredientChip({
       disabled={unavailable || lockedOut}
       aria-pressed={selected}
       onClick={handleClick}
-      className="group w-[calc(33.333%-10.667px)] border-0 bg-transparent p-0 font-body text-center transition-transform hover:-translate-y-1.5 hover:scale-105 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:scale-100 sm:w-[calc(25%-12px)]"
+      className="group w-[96px] border-0 bg-transparent p-0 font-body text-center transition-transform hover:-translate-y-1.5 hover:scale-105 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:scale-100 sm:w-[118px]"
     >
       <div
-        className={`relative mx-auto mb-2 h-14 w-14 overflow-hidden rounded-full border bg-[#f6f0e7] transition-all ${
+        className={`relative mx-auto mb-2.5 h-[72px] w-[72px] overflow-hidden rounded-full shadow-card sm:h-[88px] sm:w-[88px] border bg-[#f6f0e7] transition-all ${
           selected ? "border-2 border-red ring-2 ring-red/25" : "border-line group-hover:border-red"
         }`}
       >
@@ -76,7 +76,7 @@ export default function IngredientChip({
         )}
         {!unavailable && (
           <span
-            className={`absolute bottom-0 right-0 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white text-white shadow-card transition-all ${
+            className={`absolute bottom-0.5 right-0.5 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white text-white shadow-card transition-all ${
               selected ? "bg-red scale-100" : "bg-gold scale-90 opacity-90 group-hover:scale-100 group-hover:opacity-100"
             }`}
           >
@@ -85,7 +85,7 @@ export default function IngredientChip({
         )}
       </div>
       <span
-        className={`flex items-center justify-center gap-1 font-heading text-[0.68rem] font-semibold uppercase tracking-wide leading-tight transition-colors ${
+        className={`flex items-center justify-center gap-1 font-heading text-[0.72rem] font-semibold uppercase tracking-wide leading-tight sm:text-xs transition-colors ${
           selected ? "text-red" : "text-ink"
         }`}
       >
