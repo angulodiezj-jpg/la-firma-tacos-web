@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import CartelChip from "@/components/CartelChip";
-import IngredientChip from "@/components/IngredientChip";
 import Marquee from "@/components/Marquee";
 import PageHeroRed from "@/components/PageHeroRed";
 import Reveal from "@/components/Reveal";
@@ -194,21 +193,22 @@ export default function MontaTuTacoBuilder() {
             hint={`Talla ${selectedSize}: hasta ${limit} ${limit === 1 ? "carne" : "carnes"}.`}
             counter={{ value: selectedMeats.length, max: limit }}
             done={selectedMeats.length > 0}
+            cartel
           >
-            <ChipGrid>
+            <CartelGrid>
               {montaTuTaco.meats.map((m) => (
-                <IngredientChip
-                  key={m.name}
-                  icon={m.icon}
-                  image={m.image}
-                  name={m.name}
-                  tag={m.tag}
-                  selected={selectedMeats.includes(m.name)}
-                  onToggle={() => toggleMeat(m.name)}
-                  locked={selectedMeats.length >= limit}
-                />
+                <CartelCell key={m.name}>
+                  <CartelChip
+                    shape="item"
+                    image={m.image ?? ""}
+                    name={m.name}
+                    selected={selectedMeats.includes(m.name)}
+                    onToggle={() => toggleMeat(m.name)}
+                    locked={selectedMeats.length >= limit}
+                  />
+                </CartelCell>
               ))}
-            </ChipGrid>
+            </CartelGrid>
           </StepCard>
 
           <StepCard
@@ -220,9 +220,9 @@ export default function MontaTuTacoBuilder() {
             done={selectedSauces.length > 0}
             cartel
           >
-            <div className="flex flex-wrap justify-center gap-x-1 gap-y-3 sm:gap-x-2">
+            <CartelGrid>
               {montaTuTaco.sauces.map((sauce) => (
-                <div key={sauce.name} className="w-[31%] sm:w-[23%] lg:w-[15.6%]">
+                <CartelCell key={sauce.name}>
                   <CartelChip
                     shape="bowl"
                     image={sauce.image ?? ""}
@@ -232,9 +232,9 @@ export default function MontaTuTacoBuilder() {
                     onToggle={() => toggleSauce(sauce.name)}
                     locked={selectedSauces.length >= limit}
                   />
-                </div>
+                </CartelCell>
               ))}
-            </div>
+            </CartelGrid>
           </StepCard>
 
           <StepCard
@@ -243,20 +243,22 @@ export default function MontaTuTacoBuilder() {
             hint="Opcional. Añade todos los que quieras."
             done={selectedSupplements.length > 0}
             optional
+            cartel
           >
-            <ChipGrid>
+            <CartelGrid>
               {montaTuTaco.supplements.items.map((sup) => (
-                <IngredientChip
-                  key={sup.name}
-                  icon={sup.icon}
-                  image={sup.image}
-                  name={sup.name}
-                  extraBadge={sup.halal ? <HalalBadge /> : undefined}
-                  selected={selectedSupplements.includes(sup.name)}
-                  onToggle={() => toggleSupplement(sup.name)}
-                />
+                <CartelCell key={sup.name}>
+                  <CartelChip
+                    shape="item"
+                    image={sup.image ?? ""}
+                    name={sup.name}
+                    extraBadge={sup.halal ? <HalalBadge /> : undefined}
+                    selected={selectedSupplements.includes(sup.name)}
+                    onToggle={() => toggleSupplement(sup.name)}
+                  />
+                </CartelCell>
               ))}
-            </ChipGrid>
+            </CartelGrid>
           </StepCard>
 
           <StepCard
@@ -495,9 +497,13 @@ function StepCard({
   );
 }
 
-/** Rejilla centrada de ancho fijo por chip: las filas incompletas quedan centradas y simétricas. */
-function ChipGrid({ children }: { children: React.ReactNode }) {
-  return <div className="flex flex-wrap justify-center gap-x-2 gap-y-6 sm:gap-x-4">{children}</div>;
+/** Rejilla del cartel: ancho fijo por producto, filas incompletas centradas. */
+function CartelGrid({ children }: { children: React.ReactNode }) {
+  return <div className="flex flex-wrap justify-center gap-x-1 gap-y-3 sm:gap-x-2">{children}</div>;
+}
+
+function CartelCell({ children }: { children: React.ReactNode }) {
+  return <div className="w-[31%] sm:w-[23%] lg:w-[15.6%]">{children}</div>;
 }
 
 function TicketRow({

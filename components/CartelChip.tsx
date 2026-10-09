@@ -3,8 +3,10 @@ import { CheckIcon } from "./ValueIcons";
 type CartelChipProps = {
   name: string;
   image: string;
-  /** "bowl" para los cuencos de salsa, "gratin" para las bandejas de gratinado. */
-  shape: "bowl" | "gratin";
+  /** "bowl" cuencos de salsa, "item" carnes y suplementos, "gratin" bandejas de gratinado. */
+  shape: "bowl" | "item" | "gratin";
+  /** Sello junto al nombre (p. ej. halal). */
+  extraBadge?: React.ReactNode;
   spice?: 0 | 1 | 2 | 3;
   selected: boolean;
   locked?: boolean;
@@ -15,9 +17,20 @@ type CartelChipProps = {
  * Producto recortado sobre el panel amarillo, como en el cartel del local:
  * foto sin fondo, nombre con letra de letrero y chiles si pica. Sin precios.
  */
-export default function CartelChip({ name, image, shape, spice, selected, locked, onToggle }: CartelChipProps) {
+export default function CartelChip({
+  name,
+  image,
+  shape,
+  extraBadge,
+  spice,
+  selected,
+  locked,
+  onToggle,
+}: CartelChipProps) {
   const lockedOut = !selected && !!locked;
-  const bowl = shape === "bowl";
+  const bowl = shape !== "gratin";
+  // Producto sin recorte del cartel: foto redonda para que no quede un cuadrado.
+  const photo = !image.includes("/cartel/");
 
   return (
     <button
@@ -32,7 +45,13 @@ export default function CartelChip({ name, image, shape, spice, selected, locked
       }`}
     >
       <span
-        className={`flex w-full items-end justify-center ${bowl ? "h-[64px] sm:h-[84px]" : "h-[118px] sm:h-[150px]"}`}
+        className={`flex w-full items-end justify-center ${
+          shape === "bowl"
+            ? "h-[64px] sm:h-[84px]"
+            : shape === "item"
+              ? "h-[74px] sm:h-[96px]"
+              : "h-[118px] sm:h-[150px]"
+        }`}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -40,8 +59,10 @@ export default function CartelChip({ name, image, shape, spice, selected, locked
           alt={name}
           loading="lazy"
           decoding="async"
-          className={`max-h-full w-auto object-contain drop-shadow-[0_10px_10px_rgba(90,50,0,0.3)] transition-transform duration-300 group-hover:scale-105 ${
-            bowl ? "max-w-[92%]" : "max-w-[96%]"
+          className={`transition-transform duration-300 group-hover:scale-105 ${
+            photo
+              ? "aspect-square h-full rounded-full object-cover shadow-[0_10px_18px_rgba(90,50,0,0.3)] ring-4 ring-white/80"
+              : `max-h-full w-auto object-contain drop-shadow-[0_10px_10px_rgba(90,50,0,0.3)] ${bowl ? "max-w-[92%]" : "max-w-[96%]"}`
           }`}
         />
       </span>
@@ -51,6 +72,7 @@ export default function CartelChip({ name, image, shape, spice, selected, locked
         }`}
       >
         {name}
+        {extraBadge}
         {!!spice && (
           <span className="flex" title={`Picante: ${spice}/3`} aria-label={`Picante nivel ${spice} de 3`} role="img">
             {Array.from({ length: spice }).map((_, i) => (
