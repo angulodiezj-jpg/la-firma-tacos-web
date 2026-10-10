@@ -150,7 +150,14 @@ export default function Footer() {
             <p className="text-sm leading-relaxed text-white/70">
               {valenciaLaunch.location.fullAddress.replace(", España", "")}
             </p>
-            <p className="mt-4 text-sm text-white/70">Pedidos a domicilio en Uber Eats.</p>
+            <ul className="mt-4 space-y-1.5 text-sm text-white/70">
+              {valenciaLaunch.scheduleGroups.map((g) => (
+                <li key={g.dias} className="flex justify-between gap-3">
+                  <span className="text-white/90">{g.dias}</span>
+                  <span className="text-right">{g.turnos.join(" · ")}</span>
+                </li>
+              ))}
+            </ul>
             <div className="mt-5 flex flex-wrap gap-2">
               <Link
                 href="/valencia"

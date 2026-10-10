@@ -3,7 +3,7 @@ import { UBER_EATS_VALENCIA, siteConfig } from "./siteConfig";
 /**
  * Datos del local de Valencia — La Firma Tacos Paterna.
  * Dirección real confirmada por el cliente; abrió el 04/10/2026.
- * El horario no se publica hasta que el local lo confirme.
+ * Horario confirmado por el local (ficha de Google, 10/10/2026).
  */
 export const valenciaLaunch = {
   city: "Paterna",
@@ -15,6 +15,38 @@ export const valenciaLaunch = {
     postalCode: "46980",
     fullAddress: "Calle de Carboners, 21, Parque Empresarial Táctica, 46980 Paterna, Valencia, España",
   },
+  // Horario real. Formato 24 h; si cierra antes de abrir, cierra pasada la
+  // medianoche (viernes y sábado hasta la 01:30).
+  schedule: {
+    lunes: [
+      { abre: "12:00", cierra: "16:00" },
+      { abre: "19:30", cierra: "23:30" },
+    ],
+    martes: [
+      { abre: "12:00", cierra: "16:00" },
+      { abre: "19:30", cierra: "23:30" },
+    ],
+    miercoles: [
+      { abre: "12:00", cierra: "16:00" },
+      { abre: "19:30", cierra: "23:30" },
+    ],
+    jueves: [
+      { abre: "12:00", cierra: "16:00" },
+      { abre: "19:30", cierra: "23:30" },
+    ],
+    viernes: [
+      { abre: "12:00", cierra: "16:00" },
+      { abre: "19:30", cierra: "01:30" },
+    ],
+    sabado: [{ abre: "19:30", cierra: "01:30" }],
+    domingo: [{ abre: "18:00", cierra: "23:30" }],
+  } as Record<string, { abre: string; cierra: string }[]>,
+  scheduleGroups: [
+    { dias: "Lunes a jueves", turnos: ["12:00 – 16:00", "19:30 – 23:30"] },
+    { dias: "Viernes", turnos: ["12:00 – 16:00", "19:30 – 01:30"] },
+    { dias: "Sábado", turnos: ["19:30 – 01:30"] },
+    { dias: "Domingo", turnos: ["18:00 – 23:30"] },
+  ],
   // Fecha real de apertura (ISO).
   openingDate: "2026-10-04",
   // Pedido a domicilio en Valencia: de momento solo Uber Eats.

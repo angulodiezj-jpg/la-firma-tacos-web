@@ -229,6 +229,14 @@ export default function ValenciaLaunch() {
                   <br />
                   {valenciaLaunch.location.postalCode} {valenciaLaunch.city}, {valenciaLaunch.region}
                 </p>
+                <ul className="space-y-1.5 border-t border-line pt-4 text-sm">
+                  {valenciaLaunch.scheduleGroups.map((g) => (
+                    <li key={g.dias} className="flex justify-between gap-4">
+                      <span className="font-heading uppercase tracking-wide text-ink">{g.dias}</span>
+                      <span className="text-right text-ink-soft">{g.turnos.join(" · ")}</span>
+                    </li>
+                  ))}
+                </ul>
                 <a
                   href={mapsUrl}
                   target="_blank"
