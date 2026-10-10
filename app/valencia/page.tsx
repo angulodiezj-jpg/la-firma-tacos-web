@@ -51,6 +51,16 @@ export const metadata: Metadata = {
   },
 };
 
+const DIAS_SCHEMA: Record<string, string> = {
+  lunes: "Monday",
+  martes: "Tuesday",
+  miercoles: "Wednesday",
+  jueves: "Thursday",
+  viernes: "Friday",
+  sabado: "Saturday",
+  domingo: "Sunday",
+};
+
 export default function ValenciaPage() {
   const structuredData = {
     "@context": "https://schema.org",
@@ -69,6 +79,14 @@ export default function ValenciaPage() {
     image: `${SITE_URL}/images/campaign/valencia-og.jpg`,
     hasMenu: `${SITE_URL}/carta`,
     potentialAction: { "@type": "OrderAction", target: [valenciaLaunch.uberEats] },
+    openingHoursSpecification: Object.entries(valenciaLaunch.schedule).flatMap(([dia, turnos]) =>
+      turnos.map((t) => ({
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: `https://schema.org/${DIAS_SCHEMA[dia]}`,
+        opens: t.abre,
+        closes: t.cierra,
+      })),
+    ),
     sameAs: [siteConfig.social.instagram, siteConfig.social.tiktok],
     parentOrganization: {
       "@type": "Organization",

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { locales, mapsUrl, siteConfig } from "@/data/siteConfig";
+import { valenciaLaunch } from "@/data/valenciaLaunch";
 import OrderButtons from "./OrderButtons";
 import Reveal from "./Reveal";
 import { PinIcon } from "./ValueIcons";
@@ -67,11 +68,11 @@ export default function LocalesSection() {
               <div className="relative flex flex-col gap-3 p-6 md:p-8">
                 <h3 className="font-heading text-5xl font-bold uppercase leading-[0.9] md:text-6xl">{local.ciudad}</h3>
                 <p className="text-sm text-white/85 md:text-base">{local.direccion}</p>
-                {local.id === "madrid" && (
-                  <p className="text-sm text-[#FFD27A]">
-                    {siteConfig.location.scheduleGroups.map((g) => `${g.dias}: ${g.turnos.join(" y ")}`).join(" · ")}
-                  </p>
-                )}
+                <p className="text-sm text-[#FFD27A]">
+                  {(local.id === "madrid" ? siteConfig.location.scheduleGroups : valenciaLaunch.scheduleGroups)
+                    .map((g) => `${g.dias}: ${g.turnos.join(" y ")}`)
+                    .join(" · ")}
+                </p>
                 <OrderButtons city={local.id} size="sm" className="mt-2" />
                 <div className="flex flex-wrap gap-x-6 gap-y-2 pt-2">
                   <a
@@ -102,9 +103,12 @@ export default function LocalesSection() {
           className="flex flex-col items-center justify-center gap-1 rounded-[22px] border-2 border-dashed border-[#D9C9B6] px-6 py-5 text-center transition-colors hover:border-red sm:flex-row sm:gap-3"
         >
           <span className="font-heading text-sm uppercase tracking-[2px] text-[#8A7866]">Próxima ciudad</span>
-          <span className="hidden text-red sm:inline" aria-hidden="true">★</span>
+          <span className="hidden text-red sm:inline" aria-hidden="true">
+            ★
+          </span>
           <span className="text-sm text-ink">
-            ¿Quieres abrir uno en tu ciudad? <span className="font-bold text-red underline underline-offset-2">Escríbenos</span>
+            ¿Quieres abrir uno en tu ciudad?{" "}
+            <span className="font-bold text-red underline underline-offset-2">Escríbenos</span>
           </span>
         </a>
       </div>
