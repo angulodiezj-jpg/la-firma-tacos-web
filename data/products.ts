@@ -90,29 +90,6 @@ export const montaTuTaco = {
   ] as (IngredientItem & { price: number })[],
 };
 
-/**
- * Extras que se pueden añadir a una categoría concreta de la carta
- * (suplementos y gratinados), con su precio.
- */
-export type CategoryExtra = {
-  label: string;
-  items: string[];
-  price: number;
-};
-
-// Los suplementos de los tacos NO van aquí a propósito: viven solo en la
-// página Monta Tu Taco, donde se eligen con foto.
-export const categoryExtras: Record<string, CategoryExtra[]> = {
-  bocatas: [
-    { label: "Suplementos", items: ["Cheddar", "Cebolla Caramelizada"], price: 1.5 },
-    { label: "Gratinados", items: ["Mozza", "Cheddar", "Raclette"], price: 1.5 },
-  ],
-  crousty: [
-    // Mismo set y precio que los gratinados de bocatas (no se especificó otro).
-    { label: "Gratinados", items: ["Mozza", "Cheddar", "Raclette"], price: 1.5 },
-  ],
-};
-
 export const categories: Category[] = [
   {
     slug: "tacos",
@@ -248,7 +225,8 @@ export const categories: Category[] = [
         code: "F23",
         name: "Giant Firma",
         price: 7.9,
-        description: "Doble carne smash, queso cheddar, lechuga fresca, tomate natural, cebolla caramelizada y salsa La Firma.",
+        description:
+          "Doble carne smash, queso cheddar, lechuga fresca, tomate natural, cebolla caramelizada y salsa La Firma.",
         tags: ["menu"],
         image: "/images/products/f23-giant-firma.jpg",
         menuPrice: MENU_PRICE,
