@@ -83,7 +83,7 @@ export default function Header({ onMenuOpen }: HeaderProps) {
                 : "btn-shine group/btn neon-cta hidden rounded-full bg-gradient-to-br from-red to-red-dark px-6 py-3 font-heading text-sm font-bold uppercase tracking-wide text-white shadow-[0_8px_22px_rgba(211,31,31,0.32)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:from-red-glow hover:to-red hover:shadow-[0_12px_34px_rgba(211,31,31,0.48),0_0_26px_4px_rgba(255,59,48,0.42)] active:translate-y-0 active:scale-[0.97] lg:inline-block"
             }
           >
-            Monta Tu Tacos
+            Monta Tu Taco
           </Link>
 
           {/* En móvil, las ciudades hacen de contrapeso a la hamburguesa y

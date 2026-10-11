@@ -9,7 +9,7 @@ type StickyMobileCTAProps = {
 };
 
 /**
- * Barra fija inferior solo en móvil: hamburguesa + Monta Tu Tacos + Pedir
+ * Barra fija inferior solo en móvil: hamburguesa + Monta Tu Taco + Pedir
  * (el botón "Pedir" despliega un popover con las plataformas de cada local,
  * ya que no hay pedido online propio — solo enlaces a plataformas externas).
  */
@@ -66,7 +66,7 @@ export default function StickyMobileCTA({ onMenuOpen }: StickyMobileCTAProps) {
           href="/monta-tu-taco"
           className="flex-1 text-center rounded-full bg-gold text-white font-heading text-xs font-semibold uppercase tracking-wide py-3"
         >
-          Monta Tu Tacos
+          Monta Tu Taco
         </Link>
         <button
           onClick={() => setOrderOpen((v) => !v)}

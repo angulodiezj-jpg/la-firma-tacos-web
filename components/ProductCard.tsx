@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import type { Product } from "@/data/products";
+import MontaTallaVisual from "./MontaTallaVisual";
 
 const tagStyles: Record<string, string> = {
   popular: "bg-red text-white",
@@ -24,6 +25,8 @@ export default function ProductCard({ product }: { product: Product }) {
   // Productos con `href` (las tallas de Monta Tu Taco) se comportan como
   // tarjeta pulsable y llevan a su pantalla de reglas.
   const Wrapper = product.href ? Link : "div";
+  // Tallas de Monta Tu Taco: bodegón compuesto en vez de la foto plana.
+  const talla = product.id.match(/^monta-tu-taco-(m|l|xl)$/)?.[1]?.toUpperCase() as "M" | "L" | "XL" | undefined;
   const wrapperProps = product.href ? { href: product.href } : {};
 
   return (
@@ -37,7 +40,9 @@ export default function ProductCard({ product }: { product: Product }) {
       }`}
     >
       <div className="relative aspect-[4/5] shrink-0 overflow-hidden bg-[#C70C18]">
-        {product.image && !imageFailed ? (
+        {talla ? (
+          <MontaTallaVisual talla={talla} />
+        ) : product.image && !imageFailed ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={product.image}
