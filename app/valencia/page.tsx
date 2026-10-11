@@ -67,6 +67,7 @@ export default function ValenciaPage() {
     "@type": "Restaurant",
     name: valenciaLaunch.location.name,
     servesCuisine: "French Tacos",
+    telephone: valenciaLaunch.phones.map((t) => t.href.replace("tel:", "")),
     address: {
       "@type": "PostalAddress",
       streetAddress: valenciaLaunch.location.street,
