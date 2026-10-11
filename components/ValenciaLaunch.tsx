@@ -237,14 +237,25 @@ export default function ValenciaLaunch() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href={mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="self-start rounded-full bg-red px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-[1.5px] text-white transition-transform hover:-translate-y-0.5"
-                >
-                  Cómo llegar →
-                </a>
+                <div className="flex flex-wrap gap-2">
+                  <a
+                    href={mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full bg-red px-6 py-3 font-heading text-sm font-bold uppercase tracking-[1.5px] text-white transition-transform hover:-translate-y-0.5"
+                  >
+                    Cómo llegar →
+                  </a>
+                  {valenciaLaunch.phones.map((t) => (
+                    <a
+                      key={t.href}
+                      href={t.href}
+                      className="rounded-full border-2 border-ink/15 px-5 py-2.5 font-heading text-sm tracking-wide text-ink transition-colors hover:border-red hover:text-red"
+                    >
+                      {t.label}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </Reveal>

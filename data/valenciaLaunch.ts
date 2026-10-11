@@ -15,6 +15,11 @@ export const valenciaLaunch = {
     postalCode: "46980",
     fullAddress: "Calle de Carboners, 21, Parque Empresarial Táctica, 46980 Paterna, Valencia, España",
   },
+  // Teléfonos del local (fijo y móvil), confirmados por el cliente.
+  phones: [
+    { label: "960 415 617", href: "tel:+34960415617" },
+    { label: "613 507 405", href: "tel:+34613507405" },
+  ],
   // Horario real. Formato 24 h; si cierra antes de abrir, cierra pasada la
   // medianoche (viernes y sábado hasta la 01:30).
   schedule: {

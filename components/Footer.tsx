@@ -173,6 +173,15 @@ export default function Footer() {
               >
                 Cómo llegar
               </a>
+              {valenciaLaunch.phones.map((t) => (
+                <a
+                  key={t.href}
+                  href={t.href}
+                  className="rounded-full border border-white/25 px-4 py-2 font-heading text-xs uppercase tracking-wide transition-colors hover:border-white"
+                >
+                  {t.label}
+                </a>
+              ))}
             </div>
           </div>
         </div>
