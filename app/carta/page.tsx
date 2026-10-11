@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeroRed from "@/components/PageHeroRed";
-import CategoryExtras from "@/components/CategoryExtras";
 import DrinksGrid from "@/components/DrinksGrid";
 import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
-import { categories, categoryExtras, type Product } from "@/data/products";
+import { categories, type Product } from "@/data/products";
 import { siteConfig } from "@/data/siteConfig";
 
 /** Agrupa productos por su campo `group`, preservando el orden de aparición. */
@@ -98,8 +97,8 @@ export default function CartaPage() {
             {category.slug === "bebidas" ? (
               <Reveal delay={0.08}>
                 <p className="mb-8 max-w-xl text-ink-soft">
-                  Toda nuestra nevera: refrescos, energéticas, tés helados, Chill, agua y zumos. Toca cualquier
-                  bebida para marcarla y llevar tu pedido decidido.
+                  Toda nuestra nevera: refrescos, energéticas, tés helados, Chill, agua y zumos. Toca cualquier bebida
+                  para marcarla y llevar tu pedido decidido.
                 </p>
                 <DrinksGrid />
               </Reveal>
@@ -125,12 +124,6 @@ export default function CartaPage() {
                   </div>
                 </div>
               ))
-            )}
-
-            {categoryExtras[category.slug] && (
-              <Reveal delay={0.2}>
-                <CategoryExtras extras={categoryExtras[category.slug]} />
-              </Reveal>
             )}
 
             {category.slug === "tacos" && (
