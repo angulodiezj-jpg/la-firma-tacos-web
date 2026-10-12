@@ -63,7 +63,6 @@ export const montaTuTaco = {
     { name: "Mayonesa", icon: "🥚", image: "/images/cartel/salsa-mayonesa.webp", spice: 0 },
     { name: "Blanca", icon: "🥛", image: "/images/cartel/salsa-blanca.webp", spice: 0 },
     { name: "Harissa", icon: "🌶️", image: "/images/cartel/salsa-harissa.webp", spice: 3 },
-    { name: "Miel", icon: "🍯", image: "/images/cartel/salsa-miel.webp", spice: 0 },
   ] as SauceItem[],
   supplements: {
     price: 1.0,
@@ -313,42 +312,42 @@ export const categories: Category[] = [
     ],
   },
   {
-    // Actualizado con el póster oficial de la marca (Mycan Tiramisú + Tartas).
+    // Actualizado con el póster oficial de la marca (Tiramisús + Tartas, nombres como en caja).
     slug: "postres",
     title: "Postres La Firma",
     eyebrow: "Para Terminar por Todo lo Alto",
     products: [
       {
         id: "mycan-pistachiose",
-        name: "Mycan Pistachiose",
+        name: "Tiramisú Pistachiose",
         price: 3.5,
         group: "Tiramisús Kreamy's",
         image: "/images/products/mycan-pistachiose.jpg",
       },
       {
         id: "mycan-choco-bomb",
-        name: "Mycan Choco Bomb",
+        name: "Tiramisú Choco Bomb",
         price: 3.5,
         group: "Tiramisús Kreamy's",
         image: "/images/products/mycan-choco-bomb.jpg",
       },
       {
         id: "mycan-tropical-island",
-        name: "Mycan Tropical Island",
+        name: "Tiramisú Tropical Island",
         price: 3.5,
         group: "Tiramisús Kreamy's",
         image: "/images/products/mycan-tropical-island.jpg",
       },
       {
         id: "mycan-magic-red",
-        name: "Mycan Magic Red",
+        name: "Tiramisú Magic Red",
         price: 3.5,
         group: "Tiramisús Kreamy's",
         image: "/images/products/mycan-magic-red.jpg",
       },
       {
         id: "mycan-paris-brest",
-        name: "Mycan Paris-Brest",
+        name: "Tiramisú Paris-Brest",
         price: 3.5,
         group: "Tiramisús Kreamy's",
         image: "/images/products/mycan-paris-brest.jpg",
