@@ -267,7 +267,7 @@ export const categories: Category[] = [
     products: [
       {
         id: "f30-bocatandoo",
-        code: "F30",
+        code: "F31",
         name: "BocaTandoo",
         price: 6.5,
         description: "Pollo marinado al estilo tandoori.",
@@ -277,7 +277,7 @@ export const categories: Category[] = [
       },
       {
         id: "f31-bocacurry",
-        code: "F31",
+        code: "F32",
         name: "Bocacurry",
         price: 6.5,
         description: "Pollo con nuestra salsa curry.",
